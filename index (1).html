@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>my magma — What's happening below the surface.</title>
+<meta name="description" content="my magma is a wearable biosensor that continuously monitors your blood biomarkers — building your personal baseline so you see what's changing before you feel it. Starting with B12.">
+
+<link rel="preconnect" href="https://api.fontshare.com">
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --crimson: #C02035;
+    --fire-orange: #D84A10;
+    --rose: #C84870;
+    --white: #FFFFFF;
+    --text-primary: #1A1212;
+    --text-secondary: #4A3838;
+    --text-muted: #8A7070;
+    --surface-subtle: #FDF5F5;
+    --border: #F0E0E0;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Satoshi', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--white);
+    color: var(--text-primary);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Hero: the video carries the wordmark + tagline already */
+  .hero {
+    width: 100%;
+    line-height: 0;
+    background: var(--white);
+  }
+
+  .hero video {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* Content below the hero */
+  .content {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 64px 24px 80px;
+    text-align: center;
+  }
+
+  .eyebrow {
+    font-family: 'Satoshi', sans-serif;
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+  }
+
+  .pitch {
+    font-size: 19px;
+    line-height: 1.55;
+    font-weight: 500;
+    color: var(--text-primary);
+    max-width: 480px;
+    margin: 0 auto 24px;
+  }
+
+  .subpitch {
+    font-size: 16px;
+    line-height: 1.6;
+    font-weight: 400;
+    color: var(--text-secondary);
+    max-width: 480px;
+    margin: 0 auto 16px;
+  }
+
+  .subpitch:last-of-type {
+    margin-bottom: 40px;
+  }
+
+  .signup-btn {
+    font-family: 'Satoshi', sans-serif;
+    font-weight: 500;
+    font-size: 15px;
+    color: var(--white);
+    background: var(--crimson);
+    border: none;
+    border-radius: 8px;
+    padding: 14px 32px;
+    cursor: pointer;
+    transition: opacity 0.15s ease;
+  }
+
+  .signup-btn:hover {
+    opacity: 0.9;
+  }
+
+  .signup-btn:focus-visible {
+    outline: 2px solid var(--crimson);
+    outline-offset: 2px;
+  }
+
+  footer {
+    text-align: center;
+    padding: 32px 24px;
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+
+  @media (max-width: 480px) {
+    .pitch {
+      font-size: 18px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero video {
+      display: none;
+    }
+    .hero {
+      background: var(--surface-subtle);
+    }
+  }
+</style>
+</head>
+<body>
+
+  <div class="hero">
+    <video
+      autoplay
+      muted
+      playsinline
+      poster="assets/hero-poster.jpg"
+      id="heroVideo"
+    >
+      <source src="assets/mymagma_hero_intro.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <main class="content">
+    <p class="eyebrow">Coming soon</p>
+    <p class="pitch">
+      my magma is a wearable biosensor that continuously monitors your blood
+      biomarkers — building your personal baseline so you see what's changing
+      before you feel it.
+    </p>
+    <p class="subpitch">
+      When you feel healthy, you don't book a GP. You're busy, it feels
+      unnecessary, and honestly, it's just a lot of effort for something
+      you're not sure you need. So you skip it.
+    </p>
+    <p class="subpitch">
+      The things that slowly drain you — low B12, shifting iron, high
+      inflammation — happen exactly while you still feel fine.
+    </p>
+    <p class="subpitch">
+      That's why we exist. To understand what's beneath the surface.
+      No appointments. No waiting rooms.
+    </p>
+
+    <button type="button" class="signup-btn" data-tally-open="MejxYM" data-tally-layout="modal" data-tally-emoji-text="👋" data-tally-emoji-animation="wave">
+      Notify me
+    </button>
+  </main>
+
+  <footer>
+    &copy; 2026 my magma
+  </footer>
+
+  <script>
+    // Hold on the final frame once the intro finishes — no loop, no jump.
+    const video = document.getElementById('heroVideo');
+    video.addEventListener('ended', () => {
+      video.pause();
+    });
+  </script>
+
+  <!-- Tally popup form embed -->
+  <script async src="https://tally.so/widgets/embed.js"></script>
+
+</body>
+</html>
