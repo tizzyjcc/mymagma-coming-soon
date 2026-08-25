@@ -35,14 +35,14 @@
     -webkit-font-smoothing: antialiased;
   }
 
-  /* Hero: the video carries the wordmark + tagline already */
+  /* Hero: the static image carries the wordmark + tagline already */
   .hero {
     width: 100%;
     line-height: 0;
     background: var(--white);
   }
 
-  .hero video {
+  .hero-img {
     width: 100%;
     height: auto;
     display: block;
@@ -121,29 +121,12 @@
       font-size: 18px;
     }
   }
-
-  @media (prefers-reduced-motion: reduce) {
-    .hero video {
-      display: none;
-    }
-    .hero {
-      background: var(--surface-subtle);
-    }
-  }
 </style>
 </head>
 <body>
 
   <div class="hero">
-    <video
-      autoplay
-      muted
-      playsinline
-      poster="assets/hero-poster.jpg"
-      id="heroVideo"
-    >
-      <source src="assets/mymagma_hero_intro.mp4" type="video/mp4">
-    </video>
+    <img src="assets/hero-static.png" alt="my magma — What's happening below the surface." class="hero-img">
   </div>
 
   <main class="content">
@@ -179,19 +162,6 @@
   <footer>
     &copy; 2026 my magma
   </footer>
-
-  <script>
-    // Start the hero video immediately on load.
-    const video = document.getElementById('heroVideo');
-    video.play().catch(() => {
-      // If the browser still blocks it, the poster image holds until the user taps.
-    });
-
-    // Hold on the final frame once the intro finishes — no loop, no jump.
-    video.addEventListener('ended', () => {
-      video.pause();
-    });
-  </script>
 
   <!-- Tally popup form embed -->
   <script async src="https://tally.so/widgets/embed.js"></script>
