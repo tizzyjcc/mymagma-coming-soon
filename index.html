@@ -46,8 +46,8 @@
     top: 0;
     z-index: 10;
     display: flex;
-    justify-content: center;
-    padding: 18px 24px;
+    justify-content: flex-end;
+    padding: 18px 32px;
     background: rgba(255, 255, 255, 0.9);
     backdrop-filter: blur(6px);
     border-bottom: 1px solid var(--border);
@@ -57,17 +57,17 @@
     font-family: 'Satoshi', sans-serif;
     font-weight: 500;
     font-size: 14px;
-    color: var(--text-primary);
+    color: var(--crimson);
     background: none;
     border: none;
     cursor: pointer;
     padding: 4px 16px;
-    margin: 0 16px;
-    transition: color 0.15s ease;
+    margin: 0 8px;
+    transition: opacity 0.15s ease;
   }
 
   .topnav button:hover {
-    color: var(--crimson);
+    opacity: 0.7;
   }
 
   /* Hero: video with wordmark + tagline overlaid on top */
@@ -102,6 +102,7 @@
     font-family: 'Baloo 2', sans-serif;
     font-weight: 800;
     font-size: clamp(32px, 7vw, 64px);
+    line-height: 1;
     color: var(--white);
     text-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
   }
@@ -112,7 +113,7 @@
     font-size: clamp(13px, 2vw, 18px);
     color: var(--white);
     text-shadow: 0 1px 8px rgba(0, 0, 0, 0.25);
-    margin-top: 4px;
+    margin-top: 14px;
   }
 
   /* Content below the hero */
@@ -194,12 +195,12 @@
 
   <nav class="topnav">
     <button type="button" onclick="document.getElementById('about').scrollIntoView({behavior: 'smooth'})">About</button>
-    <button type="button" data-tally-open="MejxYM" data-tally-layout="modal" data-tally-emoji-text="👋" data-tally-emoji-animation="wave">Learn more</button>
+    <button type="button" data-tally-open="MejxYM" data-tally-layout="modal" data-tally-emoji-text="👋" data-tally-emoji-animation="wave">More</button>
   </nav>
 
   <div class="hero">
     <video class="hero-video" id="heroVideo" autoplay muted playsinline poster="assets/hero-poster.jpg">
-      <source src="assets/magma_flow_hero.mp4" type="video/mp4">
+      <source src="assets/magma_flow_hero_hq.mp4" type="video/mp4">
     </video>
     <div class="hero-overlay">
       <div class="hero-wordmark">my magma</div>
@@ -245,13 +246,16 @@
   <script async src="https://tally.so/widgets/embed.js"></script>
 
   <script>
-    // Play once on load, then hold on the final frame -- no loop.
+    // Stop just before the true end (avoids a browser flicker/jump that can
+    // happen right at end-of-stream), and hold there -- no loop.
     const heroVideo = document.getElementById('heroVideo');
     heroVideo.play().catch(() => {
       // Falls back to the poster image if still blocked
     });
-    heroVideo.addEventListener('ended', () => {
-      heroVideo.pause();
+    heroVideo.addEventListener('timeupdate', () => {
+      if (heroVideo.duration && heroVideo.currentTime >= heroVideo.duration - 0.15) {
+        heroVideo.pause();
+      }
     });
   </script>
 
