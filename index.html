@@ -6,8 +6,13 @@
 <title>my magma, What's happening below the surface.</title>
 <meta name="description" content="my magma is a wearable biosensor that continuously monitors your blood biomarkers, building your personal baseline so you see what's changing before you feel it. Starting with B12.">
 
+<link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+
 <link rel="preconnect" href="https://api.fontshare.com">
 <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&display=swap" rel="stylesheet">
 
 <style>
   :root {
@@ -35,17 +40,79 @@
     -webkit-font-smoothing: antialiased;
   }
 
-  /* Hero: the static image carries the wordmark + tagline already */
+  /* Top navigation */
+  .topnav {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    padding: 18px 24px;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .topnav button {
+    font-family: 'Satoshi', sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    color: var(--text-primary);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px 16px;
+    margin: 0 16px;
+    transition: color 0.15s ease;
+  }
+
+  .topnav button:hover {
+    color: var(--crimson);
+  }
+
+  /* Hero: video with wordmark + tagline overlaid on top */
   .hero {
+    position: relative;
     width: 100%;
     line-height: 0;
     background: var(--white);
   }
 
-  .hero-img {
+  .hero-video {
     width: 100%;
     height: auto;
     display: block;
+  }
+
+  .hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    pointer-events: none;
+  }
+
+  .hero-wordmark {
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 800;
+    font-size: clamp(32px, 7vw, 64px);
+    color: var(--white);
+    text-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+  }
+
+  .hero-tagline {
+    font-family: 'Satoshi', sans-serif;
+    font-weight: 400;
+    font-size: clamp(13px, 2vw, 18px);
+    color: var(--white);
+    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.25);
+    margin-top: 4px;
   }
 
   /* Content below the hero */
@@ -125,11 +192,22 @@
 </head>
 <body>
 
+  <nav class="topnav">
+    <button type="button" onclick="document.getElementById('about').scrollIntoView({behavior: 'smooth'})">About</button>
+    <button type="button" data-tally-open="MejxYM" data-tally-layout="modal" data-tally-emoji-text="👋" data-tally-emoji-animation="wave">Learn more</button>
+  </nav>
+
   <div class="hero">
-    <img src="assets/hero-static.png" alt="my magma — What's happening below the surface." class="hero-img">
+    <video class="hero-video" id="heroVideo" autoplay muted playsinline poster="assets/hero-poster.jpg">
+      <source src="assets/magma_flow_hero.mp4" type="video/mp4">
+    </video>
+    <div class="hero-overlay">
+      <div class="hero-wordmark">my magma</div>
+      <div class="hero-tagline">What's happening below the surface.</div>
+    </div>
   </div>
 
-  <main class="content">
+  <main class="content" id="about">
     <p class="eyebrow">Coming soon</p>
     <p class="pitch">
       my magma is a wearable biosensor<br>
@@ -165,6 +243,17 @@
 
   <!-- Tally popup form embed -->
   <script async src="https://tally.so/widgets/embed.js"></script>
+
+  <script>
+    // Play once on load, then hold on the final frame -- no loop.
+    const heroVideo = document.getElementById('heroVideo');
+    heroVideo.play().catch(() => {
+      // Falls back to the poster image if still blocked
+    });
+    heroVideo.addEventListener('ended', () => {
+      heroVideo.pause();
+    });
+  </script>
 
 </body>
 </html>
