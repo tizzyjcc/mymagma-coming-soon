@@ -198,7 +198,7 @@
   </nav>
 
   <div class="hero">
-    <video class="hero-video" id="heroVideo" autoplay muted playsinline poster="assets/kling-poster-v2.jpg">
+    <video class="hero-video" id="heroVideo" autoplay muted loop playsinline poster="assets/kling-poster-v2.jpg">
       <source src="assets/kling-magma-hero-v2.mp4" type="video/mp4">
     </video>
     <div class="hero-overlay">
@@ -245,16 +245,10 @@
   <script async src="https://tally.so/widgets/embed.js"></script>
 
   <script>
-    // Stop just before the true end (avoids a browser flicker/jump that can
-    // happen right at end-of-stream), and hold there -- no loop.
+    // Ensure autoplay actually starts (some browsers silently block the attribute alone)
     const heroVideo = document.getElementById('heroVideo');
     heroVideo.play().catch(() => {
       // Falls back to the poster image if still blocked
-    });
-    heroVideo.addEventListener('timeupdate', () => {
-      if (heroVideo.duration && heroVideo.currentTime >= heroVideo.duration - 0.15) {
-        heroVideo.pause();
-      }
     });
   </script>
 
