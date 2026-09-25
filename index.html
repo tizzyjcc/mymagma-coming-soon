@@ -70,49 +70,60 @@
     opacity: 0.7;
   }
 
-  /* Hero: video with wordmark + tagline overlaid on top */
+  /* Hero: logo + headline + subtext above, flowing video below */
   .hero {
-    position: relative;
+    width: 100%;
+    background: var(--white);
+    padding-top: clamp(32px, 6vw, 64px);
+  }
+
+  .hero-header {
+    text-align: center;
+    padding: 0 24px;
+  }
+
+  .hero-logo {
+    width: clamp(220px, 30vw, 340px);
+    height: auto;
+    display: inline-block;
+  }
+
+  .hero-headline {
+    font-family: 'Satoshi', sans-serif;
+    font-weight: 400;
+    font-size: clamp(22px, 3.6vw, 34px);
+    color: var(--text-muted);
+    margin-top: 8px;
+  }
+
+  .hero-subtext {
+    font-family: 'Satoshi', sans-serif;
+    font-weight: 500;
+    font-size: clamp(11px, 1.3vw, 13px);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-top: 22px;
+  }
+
+  .hero-rule {
+    width: 32px;
+    height: 2px;
+    background: var(--crimson);
+    border: none;
+    margin: 14px auto 0;
+  }
+
+  .hero-video-wrap {
     width: 100%;
     line-height: 0;
-    background: var(--white);
+    margin-top: clamp(20px, 4vw, 48px);
   }
 
   .hero-video {
     width: 100%;
     height: auto;
     display: block;
-  }
-
-  .hero-overlay {
-    position: absolute;
-    top: 42.9%;
-    left: 0;
-    right: 0;
-    transform: translateY(-50%);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    pointer-events: none;
-  }
-
-  .hero-wordmark {
-    font-family: 'Baloo 2', sans-serif;
-    font-weight: 800;
-    font-size: clamp(32px, 7vw, 64px);
-    line-height: 1;
-    color: var(--white);
-    text-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
-  }
-
-  .hero-tagline {
-    font-family: 'Satoshi', sans-serif;
-    font-weight: 400;
-    font-size: clamp(13px, 2vw, 18px);
-    color: var(--white);
-    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.25);
-    margin-top: 14px;
   }
 
   /* Content below the hero */
@@ -198,12 +209,16 @@
   </nav>
 
   <div class="hero">
-    <video class="hero-video" id="heroVideo" autoplay muted loop playsinline poster="assets/kling-poster-v2.jpg">
-      <source src="assets/kling-magma-hero-v2.mp4" type="video/mp4">
-    </video>
-    <div class="hero-overlay">
-      <div class="hero-wordmark">my magma</div>
-      <div class="hero-tagline">What's happening below the surface.</div>
+    <div class="hero-header">
+      <img src="assets/magma-logo.png" alt="magma" class="hero-logo">
+      <p class="hero-headline">Catch the crash before it happens.</p>
+      <p class="hero-subtext">Continuous biomarker monitoring</p>
+      <hr class="hero-rule">
+    </div>
+    <div class="hero-video-wrap">
+      <video class="hero-video" id="heroVideo" autoplay muted loop playsinline poster="assets/magma-flow-poster-v3.jpg">
+        <source src="assets/magma-flow-hero-v3.mp4" type="video/mp4">
+      </video>
     </div>
   </div>
 
