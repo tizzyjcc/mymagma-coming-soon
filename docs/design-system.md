@@ -43,6 +43,7 @@ applies wherever the brand guidelines are silent or marked [PENDING].
 - Hero and section flow: the magma visual (brand guidelines 4.3 and 8.2) on pristine white, organic edges, no box.
 - Story sections: full-bleed warm, bright, golden-hour photography with empty space on one side where text sits directly on the image. No scrims, no dark photos.
 - Photos melt into white: no visible rectangle edge where a photo meets the page.
+- No faces, ever. Show hands, forearms, or people from behind or cropped below the face.
 
 ## Voice (on-page)
 - Name is always "my magma", lowercase. The device is "mymagma".
