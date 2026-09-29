@@ -44,6 +44,9 @@ applies wherever the brand guidelines are silent or marked [PENDING].
 - Story sections: full-bleed warm, bright, golden-hour photography with empty space on one side where text sits directly on the image. No scrims, no dark photos.
 - Photos melt into white: no visible rectangle edge where a photo meets the page.
 - No faces, ever. Show hands, forearms, or people from behind or cropped below the face.
+- Like Superpower, the product is the hero and people are secondary: for now the product is the my magma app on a phone. The mymagma device is never shown before launch.
+- App screens are composited onto a plain black phone screen so UI text stays sharp.
+- Scenes: at home or active moments. Each image matches the copy beside it.
 
 ## Voice (on-page)
 - Name is always "my magma", lowercase. The device is "mymagma".
