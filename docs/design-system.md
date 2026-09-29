@@ -46,7 +46,9 @@ applies wherever the brand guidelines are silent or marked [PENDING].
 - No faces, ever. Show hands, forearms, or people from behind or cropped below the face.
 - Like Superpower, the product is the hero and people are secondary: for now the product is the my magma app on a phone. The mymagma device is never shown before launch.
 - App screens are composited onto a plain black phone screen so UI text stays sharp.
-- Scenes: at home or active moments. Each image matches the copy beside it.
+- Scenes: ordinary life at home and out (breakfast, a trip, dinner with friends). Never fitness: no running, gyms, sportswear, sweat, steps or performance. The feeling is living life with a safety net.
+- App screens are calm: reassurance first ("All steady"), trends inside a personal range, no scores or big performance numbers.
+- Each image matches the copy beside it.
 
 ## Voice (on-page)
 - Name is always "my magma", lowercase. The device is "mymagma".
