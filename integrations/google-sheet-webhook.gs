@@ -14,8 +14,8 @@ const HEADERS = [
   'Submitted at',
   'Visitor ID',
   'Q1: Would you want to know if something in your body was shifting before you felt it?',
-  'Q2: Have you ever felt drained for weeks without knowing why?',
-  'Q3: When did you last check your iron or B12?',
+  "Q2: Have you ever found out about something in your health later than you'd have liked?",
+  'Q3: When was the last time you had a health check?',
   'Waitlist email',
   'Page',
 ];
@@ -31,7 +31,8 @@ function doPost(e) {
     if (!visitorId) return json({ ok: false, error: 'missing visitorId' });
 
     const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheets()[0];
-    if (sheet.getLastRow() === 0) sheet.appendRow(HEADERS);
+    // Keep the header row in step with the questions the site asks.
+    sheet.getRange(1, 1, 1, HEADERS.length).setValues([HEADERS]);
 
     let row = findRow(sheet, visitorId);
     if (!row) {

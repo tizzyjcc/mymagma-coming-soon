@@ -24,30 +24,30 @@ A single mobile app screen, flat UI design, portrait 9:19.5, shown straight on w
 Use the approved magma image (`assets/magma-hero-reference.png`). Optional higher-resolution version:
 Photorealistic flowing molten magma viewed from above, a horizontal band crossing the middle third of a pure white 3:2 frame, entering at the left edge and leaving at the right edge. Viscous liquid lava with visible surface tension and hair-thin bright golden fissure lines. Colour runs from deep crimson on the left, to vivid orange-red in the middle, to warm luminous rose-pink on the right. No black or dark tones; the darkest value is deep red. Organic irregular edges with small rounded bubble-like protrusions and drips. Top and bottom thirds are pristine pure white #FFFFFF with no shadow, no texture, no gradient. Highest resolution.
 
-## 2. "Your body leaves signals" + quiz (home)
-Copy beside it: the body is constantly working and leaving traces we can measure.
-Scene A: [scene style] [phone rule] A slow weekend breakfast at a sunlit kitchen table: one hand holding a phone, the other resting beside a cup of coffee and a half-eaten piece of toast on a ceramic plate. Only hands and forearms visible. Relaxed, unhurried.
-Screen B: [app screen style] Top label "This week" and date "Tue 14 Oct". A large calm line: "All steady." Below it two small cards side by side: "Iron" and "B12", each with a tiny smooth crimson line inside a pale rose band and the words "Within your range". Small grey text at the bottom: "We'll let you know if anything shifts."
-
-## 3. Story step 01: the old way (waiting room)
+## 2. Story step 01: the old way (waiting room)
 Copy beside it: checking used to mean appointments, waiting rooms and a blood test. No need for that anymore.
 Scene: [scene style] A quiet doctor's waiting room in soft afternoon light, warm timber and beige chairs, not clinical. Close-up of a person's hands resting on their lap holding a small paper queue ticket, one foot tapping, a wall clock blurred in the background. Only hands, lap and shoes visible. The feeling is patient boredom, not illness.
 (No phone in this one. It is the "before".)
 
-## 4. Story step 02: Iron (life, getting away)
+## 3. Story step 02: life, watched over (home)
+Copy beside it: get on with your life; my magma keeps watch and stays quiet while everything is steady.
+(The "signals + quiz" section itself is white, text left and quiz right, no photo.)
+Scene A: [scene style] [phone rule] A slow weekend breakfast at a sunlit kitchen table: one hand holding a phone, the other resting beside a cup of coffee and a half-eaten piece of toast on a ceramic plate. Only hands and forearms visible. Relaxed, unhurried.
+Screen B: [app screen style] Top label "This week" and date "Tue 14 Oct". A large calm line: "All steady." Below it two small cards side by side: "Iron" and "B12", each with a tiny smooth crimson line inside a pale rose band and the words "Within your range". Small grey text at the bottom: "We'll let you know if anything shifts."
+
+## 4. Story step 03: Iron (life, getting away)
 Copy beside it: iron, what it does, why it drifts without you noticing. [stat placeholder]
 Scene A: [scene style] [phone rule] Packing for a weekend away: an open canvas bag on a bed with folded linen shirts, a paperback and sunglasses, one hand holding a phone just above the bag. Only hands and forearms visible. Afternoon sun through the window.
 Screen B: [app screen style] Title "Iron". A smooth crimson line over three months inside a pale rose band labelled "Your range", gently easing toward the lower edge. X-axis labels "Aug", "Sep", "Oct". A calm card below: "Your iron has been easing lower for 3 weeks. Might be worth a chat with your GP." No big numbers.
 
-## 5. Story step 03: B12 (home, dinner with friends)
+## 5. Story step 04: B12 (home, dinner with friends)
 Copy beside it: B12, the vitamin your body uses for energy and nerve function; what you eat shapes it. [stat placeholder]
 Scene A: [scene style] [phone rule] A long wooden dinner table set for friends in warm evening light: several hands passing dishes of salmon, eggs and greens, glasses of wine, a linen napkin, and a phone lying face-up on the table near a plate. Only hands and forearms visible. Convivial and relaxed.
 Screen B: [app screen style] Title "B12". A smooth crimson line inside the pale rose "Your range" band, easing slightly lower at the end. A card: "A small shift in your B12 this week." Under it "Foods that can help" and three rounded pills: "Eggs", "Salmon", "Yoghurt". Small grey note at the bottom: "my magma flags trends. Your GP confirms."
 
 ## 6. The moonshot (no phone, no device)
 Copy beside it: one device that can measure all your biomarkers, passively.
-Option 1 (recommended, brand visual): Photorealistic molten magma seen from above on a pure white 3:2 frame: a single glowing flow on the left that branches into many thin luminous veins spreading to the right, like a river delta or branching blood vessels. Hair-thin golden fissure lines, deep crimson to orange-red to luminous rose. No black. Pristine pure white #FFFFFF background, no shadow.
-Option 2 (life, no phone): [scene style] Seen from far behind: two people sitting side by side on a picnic blanket on a grassy hill above the sea at golden hour, shoulders relaxed, a basket beside them. Small in the right third of the frame; the left 40% is soft sky and sea. The feeling: nothing holding them back.
+Chosen (brand visual): Photorealistic molten magma seen from above on a pure white 3:2 frame: a single glowing flow on the left that branches into many thin luminous veins spreading to the right, like a river delta or branching blood vessels. Hair-thin golden fissure lines, deep crimson to orange-red to luminous rose. No black. Pristine pure white #FFFFFF background, no shadow.
 
 ## 7. Waitlist close (at home)
 Copy beside it: coming soon, leave your email.
