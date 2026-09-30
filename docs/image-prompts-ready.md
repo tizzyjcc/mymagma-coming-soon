@@ -4,6 +4,13 @@
 
 Copy each block as it is. For app shots make two images: the scene with a black phone, then the app screen on its own. Save them with the file names shown and upload them here (or to `assets/photos/`). Choose the largest landscape size for scenes and the tallest portrait size for app screens.
 
+## 0. Hero: the magma store wall (new, replaces the magma band)
+Attach the storefront image in ChatGPT as the style reference.
+**Image**, save as `00-hero-wall.png`
+```
+Use the attached image as the style reference for the walls, light and magma. Photorealistic architectural photograph, 16:9 landscape, highest resolution. A close, straight-on view of a smooth, softly curved cream plaster store wall, warm and bright, lit by soft indirect light from a hidden cove at the top. A single glowing ribbon of molten magma is set into the wall and flows across the lower third, entering at the left edge and leaving at the right edge in one slow, gentle wave, with hair-thin golden fissure lines, deep crimson to orange-red to warm rose. The upper two thirds of the wall are calm, empty cream plaster with no objects, signs, logos or text, so a logo and headline can sit there. No people, no doors, no plants, no floor visible. Calm, premium, warm, never dark.
+```
+
 ## 1. Waiting room (story 01, the old way). Done; add the magma detail with this edit.
 **Edit** (attach `01-waiting-room.jpg` in ChatGPT), save as `01-waiting-room.png`
 ```

@@ -165,55 +165,48 @@
     object-position: 50% 50%;
   }
 
-  /* ---------- Section 2: signals + quiz ---------- */
-  .signals { position: relative; padding: 120px 0 140px; isolation: isolate; }
-  .signals::before {
-    content: "";
-    position: absolute;
-    z-index: -1;
-    top: 0; bottom: 0; right: 0;
-    left: calc(50% + min(50vw, var(--max) / 2) - var(--gutter) - 520px - 56px);
-    background: linear-gradient(#fff, var(--blush) 18%, var(--blush) 78%, #fff);
-  }
-  .signals-grid {
-    display: grid;
-    grid-template-columns: 1fr minmax(0, 520px);
-    gap: 72px;
-    align-items: center;
-  }
-  .signals .heading-lg { margin: 16px 0 24px; max-width: 12em; }
+  /* ---------- Your body is always talking ---------- */
+  .body-talk { padding: 140px 0; }
+  .body-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 560px); gap: 72px; align-items: start; }
+  .body-grid .heading-lg { margin-top: 16px; max-width: 11em; }
+  .points { list-style: none; display: grid; gap: 40px; counter-reset: pt; }
+  .points li { display: grid; grid-template-columns: 40px 1fr; gap: 8px; padding-top: 20px; border-top: 1px solid var(--line); }
+  .points li::before { counter-increment: pt; content: "0" counter(pt); font-size: var(--t-small); color: var(--ink-3); font-variant-numeric: tabular-nums; padding-top: 4px; }
+  .points p { font-size: var(--t-sub); line-height: 1.3; letter-spacing: -0.012em; text-wrap: pretty; }
 
+  /* The quiz sits inside "the old way", on the soft side of the photo */
   .quiz {
     position: relative;
     isolation: isolate;
-    min-height: 440px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    margin-top: 28px;
+    max-width: 440px;
   }
   .quiz-top { display: flex; justify-content: flex-end; align-items: center; }
   .quiz-count { font-size: var(--t-small); color: var(--ink-3); }
   .quiz-bar { height: 2px; background: var(--line); border-radius: 2px; margin-top: 14px; overflow: hidden; }
   .quiz-bar span { display: block; height: 100%; width: 33.33%; background: var(--ink); transition: width 600ms var(--ease); }
-  .quiz-step { margin-top: 28px; display: none; animation: rise 600ms var(--ease) both; }
+  .quiz-step { margin-top: 20px; display: none; animation: rise 600ms var(--ease) both; }
   .quiz-step.is-active { display: block; }
   .quiz-q {
-    font-size: var(--t-sub);
-    font-weight: 400;
-    line-height: 1.2;
-    letter-spacing: -0.012em;
-    margin-bottom: 22px;
+    font-size: var(--t-body);
+    font-weight: 500;
+    line-height: 1.35;
+    letter-spacing: -0.009em;
+    margin-bottom: 14px;
   }
-  .quiz-options { display: flex; flex-direction: column; gap: 10px; }
+  .quiz-options { display: flex; flex-direction: column; gap: 8px; }
   .pill {
     width: 100%;
     text-align: left;
     background: #fff;
     border: 1px solid var(--line);
     border-radius: 9999px;
-    padding: 13px 20px;
+    padding: 11px 20px;
     font-size: var(--t-body);
     cursor: pointer;
+    background: rgba(255, 255, 255, 0.92);
     transition: border-color 150ms ease, background 150ms ease;
   }
   .pill:hover { border-color: var(--ink-3); }
@@ -236,7 +229,8 @@
   .thanks-title { font-size: var(--t-sub); line-height: 1.2; letter-spacing: -0.012em; }
 
   /* ---------- Section 3: the pinned story ---------- */
-  .story { position: relative; height: 300vh; }
+  .story { position: relative; height: 220vh; }
+  .frame--quiz .frame-text { top: 15vh; }
   .story-sticky {
     position: sticky;
     top: 0;
@@ -277,7 +271,6 @@
     left: auto;
     right: max(var(--gutter), calc((100vw - var(--max)) / 2 + var(--gutter)));
   }
-  .frame--split .frame-text { width: min(360px, 28vw); }
   .frame--mirror .frame-media img { transform: scaleX(-1); }
   .ph.ph--left {
     justify-content: flex-start;
@@ -360,24 +353,95 @@
     padding: 6px 10px;
   }
 
-  /* ---------- Section 4: the moonshot ---------- */
-  .moonshot { padding: 140px 0 80px; text-align: center; }
-  .moonshot .heading-lg { margin: 16px auto 20px; max-width: 16em; }
-  .moonshot .body-lg { margin: 0 auto; }
-  /* The shelf wall melts into the white page above and below */
-  .moonshot-visual {
-    position: relative;
-    margin-top: 16px;
-    width: 100%;
-    aspect-ratio: 1376 / 768;
-    max-height: 100vh;
-    overflow: hidden;
+  /* ---------- Enter magma: the storefront, and a walk through the door ---------- */
+  .enter { position: relative; height: 260vh; }
+  .enter-sticky { position: sticky; top: 0; height: 100vh; overflow: hidden; background: #fff; }
+  /* The stage is sized like object-fit: cover, so text can be placed on the image in % */
+  .enter-stage {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: max(100vw, calc(100vh * 1376 / 768));
+    height: max(100vh, calc(100vw * 768 / 1376));
+    transform: translate(-50%, -50%) scale(var(--zoom, 1));
+    transform-origin: 50% 59.4%;
+    will-change: transform;
   }
-  .moonshot-visual img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 60%; }
-  .moonshot-visual::before {
+  .enter-stage img { width: 100%; height: 100%; }
+  .enter-word {
+    position: absolute; left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    color: var(--ink);
+    opacity: var(--words, 1);
+  }
+  .enter-how { top: 9%; font-size: var(--t-display); font-weight: 400; letter-spacing: -0.02em; }
+  .enter-door { top: 32.3%; font-size: var(--t-small); font-weight: 500; letter-spacing: 0.24em; text-transform: uppercase; color: var(--ink-2); }
+  .enter-sticky::before {
+    content: ""; position: absolute; z-index: 2; left: 0; right: 0; top: 0; height: 120px; pointer-events: none;
+    background: linear-gradient(#fff, rgba(255,255,255,0));
+  }
+  .enter-white { position: absolute; inset: 0; z-index: 3; background: #fff; opacity: var(--white, 0); pointer-events: none; }
+
+  /* ---------- Iron and vitamin B12 ---------- */
+  .markers { position: relative; min-height: 100vh; overflow: hidden; }
+  .markers-media { position: absolute; inset: 0; }
+  .markers-media img { width: 100%; height: 100%; object-fit: cover; }
+  .markers::before, .markers::after {
+    content: ""; position: absolute; z-index: 1; left: 0; right: 0; height: 120px; pointer-events: none;
+  }
+  .markers::before { top: 0; background: linear-gradient(#fff, rgba(255,255,255,0)); }
+  .markers::after { bottom: 0; background: linear-gradient(rgba(255,255,255,0), #fff); }
+  .markers-inner { position: relative; z-index: 2; min-height: 100vh; display: grid; grid-template-rows: auto 1fr; padding-top: 120px; padding-bottom: 96px; }
+  .markers-title { text-align: center; margin: 0 auto; }
+  .markers-title .heading-lg { margin-top: 12px; }
+  .markers-cols { display: flex; justify-content: space-between; align-items: center; gap: 40px; }
+  .marker-col { width: min(360px, 30vw); }
+  .marker-col h3 { font-size: var(--t-sub); font-weight: 400; line-height: 1.2; letter-spacing: -0.012em; margin: 12px 0 14px; text-wrap: balance; }
+  .marker-col > p:not(.label) { color: var(--ink-2); }
+
+  /* ---------- The moonshot: the product wall, one shelf at a time ---------- */
+  .moonshot { position: relative; height: 380vh; }
+  .moon-sticky {
+    position: sticky; top: 0; height: 100vh; overflow: hidden;
+    display: flex; flex-direction: column; align-items: center;
+    padding-top: 104px; text-align: center;
+  }
+  .moon-head .heading-lg { margin-top: 12px; }
+  /* The frame crops the photo to the shelves (12–88% across, 22–86% down), so they fill the width */
+  .moon-frame { --w: min(92vw, calc((100vh - 340px) * 2.13)); width: var(--w); }
+  .moon-cards { position: relative; height: 150px; margin-top: 20px; }
+  .moon-card {
+    position: absolute; bottom: 12px;
+    text-align: left;
+    background: rgba(255, 255, 255, 0.96);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 14px 16px;
+    opacity: 0; transform: translateY(12px);
+    transition: opacity 500ms var(--ease), transform 500ms var(--ease);
+  }
+  .moon-card .label { color: var(--crimson); }
+  .moon-card p:not(.label) { margin-top: 6px; font-size: var(--t-small); line-height: 1.45; color: var(--ink-2); }
+  .moon-card.is-on { opacity: 0.5; transform: none; }
+  .moon-card.is-current { opacity: 1; }
+  .moon-card[data-step="1"] { left: 3.8%; width: 30.7%; }
+  .moon-card[data-step="2"] { left: 34.9%; width: 30%; }
+  .moon-card[data-step="3"] { left: 65.3%; width: 30.8%; }
+  .moon-visual { position: relative; aspect-ratio: 2.13; overflow: hidden; }
+  .moon-visual img { position: absolute; width: 131.6%; max-width: none; height: auto; left: -15.8%; top: -34.4%; }
+  .moon-visual::after {
     content: ""; position: absolute; inset: 0; pointer-events: none;
-    background: linear-gradient(#fff, rgba(255,255,255,0) 22%, rgba(255,255,255,0) 82%, #fff);
+    background: linear-gradient(90deg, #fff, rgba(255,255,255,0) 3%, rgba(255,255,255,0) 97%, #fff), linear-gradient(rgba(255,255,255,0) 88%, #fff);
   }
+  .shelf-hl { position: absolute; top: 7.4%; height: 83%; background: rgba(255, 255, 255, 0); transition: background 500ms var(--ease); }
+  .shelf-hl.is-dim { background: rgba(255, 255, 255, 0.72); }
+  .shelf-hl[data-step="1"] { left: 3.8%; width: 30.7%; }
+  .shelf-hl[data-step="2"] { left: 34.9%; width: 30%; }
+  .shelf-hl[data-step="3"] { left: 65.3%; width: 30.8%; }
+  .yours { padding: 40px 0 140px; text-align: center; }
+  .yours .heading-lg { margin-top: 12px; }
+  .yours .body-lg { margin: 16px auto 0; }
+  .fineprint { margin-top: 20px; font-size: var(--t-small); color: var(--ink-3); }
 
   /* ---------- Section 5: team ---------- */
   .team { position: relative; padding: 140px 0; min-height: 100vh; display: flex; align-items: center; overflow: hidden; }
@@ -445,10 +509,27 @@
     .nav { padding-left: 16px; }
     .nav-links { display: none; }
     .hero { min-height: 0; padding-top: 112px; }
-    .signals { padding: 80px 0 96px; }
-    .signals-grid { grid-template-columns: 1fr; gap: 40px; }
-    .quiz { min-height: 0; padding: 40px 0 8px; }
-    .signals::before { left: 0; top: auto; height: 62%; }
+    .body-talk { padding: 80px 0; }
+    .body-grid { grid-template-columns: 1fr; gap: 32px; }
+    .quiz { max-width: none; }
+
+    .enter { height: 200vh; }
+
+    .markers-media { position: relative; height: 60vh; }
+    .markers-inner { min-height: 0; padding-top: 0; padding-bottom: 64px; display: block; }
+    .markers-title { padding-top: 80px; text-align: left; }
+    .markers::before, .markers::after { display: none; }
+    .markers-cols { flex-direction: column; align-items: stretch; margin-top: 32px; }
+    .marker-col { width: auto; }
+
+    .moonshot { height: auto; }
+    .moon-sticky { position: static; height: auto; padding-top: 96px; overflow: visible; }
+    .moon-frame { --w: 100%; padding: 0 var(--gutter); }
+    .moon-visual { margin: 0 calc(-1 * var(--gutter)); width: calc(100% + 2 * var(--gutter)); }
+    .moon-cards { height: auto; display: grid; gap: 12px; margin-top: 16px; }
+    .moon-card { position: static; width: auto !important; opacity: 1; transform: none; }
+    .moon-cards { order: 2; }
+    .yours { padding: 56px 0 96px; }
 
     /* The story unpins on small screens: each step is its own block */
     .story { height: auto; }
@@ -464,12 +545,11 @@
       content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 80px;
       background: linear-gradient(rgba(255,255,255,0), #fff);
     }
-    .frame-text, .frame--right .frame-text, .frame-text--right, .frame--split .frame-text { position: relative; left: auto; right: auto; top: auto; transform: none; width: auto; padding: 8px var(--gutter) 0; }
+    .frame-text, .frame--right .frame-text, .frame-text--right, .frame--quiz .frame-text { position: relative; left: auto; right: auto; top: auto; transform: none; width: auto; padding: 8px var(--gutter) 0; }
     .frame-text--right { margin-top: 40px; }
     .frame .frame-text > * { animation: none; }
     .stats { gap: 24px; }
 
-    .moonshot { padding: 96px 0 80px; }
     .team { padding: 80px 0; }
     .team { min-height: 0; display: block; padding-top: 0; }
     .team-grid { grid-template-columns: 1fr; }
@@ -478,7 +558,6 @@
 
     .waitlist { min-height: 0; display: block; padding-bottom: 80px; }
     .waitlist-media { position: relative; height: 56vh; }
-    .moonshot-visual { aspect-ratio: auto; height: 52vh; }
     .waitlist-media::after {
       content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 80px;
       background: linear-gradient(rgba(255,255,255,0), #fff);
@@ -493,7 +572,7 @@
   <nav class="nav" aria-label="Main">
     <a class="nav-logo" href="#top" aria-label="my magma home"><img src="assets/magma-logo.png" alt="magma"></a>
     <ul class="nav-links">
-      <li><a href="#signals">Your signals</a></li>
+      <li><a href="#enter">How it works</a></li>
       <li><a href="#biomarkers">Biomarkers</a></li>
       <li><a href="#moonshot">The moonshot</a></li>
       <li><a href="#team">Team</a></li>
@@ -504,87 +583,75 @@
   <!-- 1. Hero: the entrance -->
   <header class="hero" id="top">
     <img class="hero-logo" src="assets/magma-logo.png" alt="magma">
-    <h1 class="hero-line">Catch the crash before it happens.</h1>
+    <h1 class="hero-line">What's happening below the surface.</h1>
     <p class="label">Continuous biomarker monitoring</p>
     <div class="hero-cta"><a class="btn btn-primary" href="#waitlist">Join the waitlist</a></div>
     <img class="hero-magma" src="assets/magma-hero.png" alt="" width="1983" height="793">
   </header>
 
   <main>
-    <!-- 2. Your signals + quiz -->
-    <section class="signals" id="signals">
-      <div class="wrap signals-grid">
-        <div class="reveal">
-          <p class="label">Your signals</p>
-          <h2 class="heading-lg">Below the surface, your body is always talking.</h2>
-          <p class="body-lg">Every day your body makes energy, carries oxygen and repairs itself, and it all leaves small signals in your blood. Follow them over time and you see what's changing, long before you feel it.</p>
-        </div>
-
-        <div class="quiz reveal" id="quiz" aria-live="polite">
-          <div class="quiz-top">
-            <p class="quiz-count" id="quizCount">1 / 3</p>
-          </div>
-          <div class="quiz-bar" aria-hidden="true"><span id="quizBar"></span></div>
-
-          <div class="quiz-step is-active" data-key="q1">
-            <p class="quiz-q">Would you want to know if something in your body was shifting, before you felt it?</p>
-            <div class="quiz-options">
-              <button type="button" class="pill" aria-pressed="false">Yes, definitely</button>
-              <button type="button" class="pill" aria-pressed="false">Maybe, if it was effortless</button>
-              <button type="button" class="pill" aria-pressed="false">I'm not sure</button>
-            </div>
-          </div>
-
-          <div class="quiz-step" data-key="q2">
-            <p class="quiz-q">Have you ever found out about something in your health later than you'd have liked?</p>
-            <div class="quiz-options">
-              <button type="button" class="pill" aria-pressed="false">Yes</button>
-              <button type="button" class="pill" aria-pressed="false">Someone close to me has</button>
-              <button type="button" class="pill" aria-pressed="false">No</button>
-              <button type="button" class="pill" aria-pressed="false">I'd rather not say</button>
-            </div>
-          </div>
-
-          <div class="quiz-step" data-key="q3">
-            <p class="quiz-q">When was the last time you had a health check?</p>
-            <div class="quiz-options">
-              <button type="button" class="pill" aria-pressed="false">In the last 6 months</button>
-              <button type="button" class="pill" aria-pressed="false">6 to 12 months ago</button>
-              <button type="button" class="pill" aria-pressed="false">1 to 3 years ago</button>
-              <button type="button" class="pill" aria-pressed="false">Longer, or I can't remember</button>
-            </div>
-          </div>
-
-          <div class="quiz-step" data-key="email">
-            <p class="quiz-q" id="quizInvite">Thank you. Want to be the first to know when mymagma is ready?</p>
-            <p class="quiz-context" id="quizContext"></p>
-            <form class="email-form" novalidate>
-              <label class="label" for="quizEmail" style="position:absolute;left:-9999px">Email</label>
-              <input id="quizEmail" type="email" name="email" placeholder="Your email" autocomplete="email" required>
-              <button class="btn btn-primary" type="submit">Join the waitlist</button>
-              <p class="form-error" role="alert"></p>
-            </form>
-            <p class="quiz-note">One email when we launch. Nothing else.</p>
-          </div>
-
-          <div class="quiz-step" data-key="done">
-            <p class="thanks-title">You're on the list.</p>
-            <p class="quiz-note">We'll let you know when mymagma is ready.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <!-- 3. Biomarkers: pinned story -->
-    <section class="story" id="biomarkers" aria-label="Biomarkers">
+    <section class="story" id="story" aria-label="The old way and the new way">
       <div class="story-sticky">
 
-        <article class="frame is-active" data-step="0">
+        <article class="frame frame--quiz is-active" data-step="0">
           <div class="frame-media"><img src="assets/photos/01-waiting-room.jpg" alt="" width="1536" height="1024"></div>
           <div class="frame-text">
             <p class="label">The old way</p>
             <h2 class="heading-lg">No more waiting rooms.</h2>
-            <p>Checking in on your health used to mean booking a GP, waiting, and a blood test. So most of us skip it until something feels wrong. There's no need for that anymore.</p>
+            <p>Checking in on your health used to mean booking a GP, waiting, and a blood test. So most of us skip it until something feels wrong.</p>
+      <div class="quiz" id="quiz" aria-live="polite">
+        <div class="quiz-top">
+          <p class="quiz-count" id="quizCount">1 / 3</p>
+        </div>
+        <div class="quiz-bar" aria-hidden="true"><span id="quizBar"></span></div>
+
+        <div class="quiz-step is-active" data-key="q1">
+          <p class="quiz-q">Would you want to know if something in your body was shifting, before you felt it?</p>
+          <div class="quiz-options">
+            <button type="button" class="pill" aria-pressed="false">Yes, definitely</button>
+            <button type="button" class="pill" aria-pressed="false">Maybe, if it was effortless</button>
+            <button type="button" class="pill" aria-pressed="false">I'm not sure</button>
+          </div>
+        </div>
+
+        <div class="quiz-step" data-key="q2">
+          <p class="quiz-q">Have you ever found out about something in your health later than you'd have liked?</p>
+          <div class="quiz-options">
+            <button type="button" class="pill" aria-pressed="false">Yes</button>
+            <button type="button" class="pill" aria-pressed="false">Someone close to me has</button>
+            <button type="button" class="pill" aria-pressed="false">No</button>
+            <button type="button" class="pill" aria-pressed="false">I'd rather not say</button>
+          </div>
+        </div>
+
+        <div class="quiz-step" data-key="q3">
+          <p class="quiz-q">When was the last time you had a health check?</p>
+          <div class="quiz-options">
+            <button type="button" class="pill" aria-pressed="false">In the last 6 months</button>
+            <button type="button" class="pill" aria-pressed="false">6 to 12 months ago</button>
+            <button type="button" class="pill" aria-pressed="false">1 to 3 years ago</button>
+            <button type="button" class="pill" aria-pressed="false">Longer, or I can't remember</button>
+          </div>
+        </div>
+
+        <div class="quiz-step" data-key="email">
+          <p class="quiz-q" id="quizInvite">Thank you. Want to be the first to know when mymagma is ready?</p>
+          <p class="quiz-context" id="quizContext"></p>
+          <form class="email-form" novalidate>
+            <label class="label" for="quizEmail" style="position:absolute;left:-9999px">Email</label>
+            <input id="quizEmail" type="email" name="email" placeholder="Your email" autocomplete="email" required>
+            <button class="btn btn-primary" type="submit">Join the waitlist</button>
+            <p class="form-error" role="alert"></p>
+          </form>
+          <p class="quiz-note">One email when we launch. Nothing else.</p>
+        </div>
+
+        <div class="quiz-step" data-key="done">
+          <p class="thanks-title">You're on the list.</p>
+          <p class="quiz-note">We'll let you know when mymagma is ready.</p>
+        </div>
+      </div>
           </div>
         </article>
 
@@ -597,12 +664,67 @@
           </div>
         </article>
 
-        <article class="frame frame--split" data-step="2">
-          <div class="frame-media"><div class="ph ph--center"><span>Photo 3: person in the centre + iron and B12 screen</span></div></div>
-          <div class="frame-text frame-text--left">
+        <ol class="story-index" aria-hidden="true">
+          <li class="is-active"><span>01</span> The old way</li>
+          <li><span>02</span> The new way</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- 4. Enter magma: through the door -->
+    <section class="enter" id="enter" aria-label="How it works">
+      <div class="enter-sticky">
+        <div class="enter-stage">
+          <img src="assets/photos/storefront.jpg" alt="The magma store front, with a glowing magma ribbon along the wall and an open door" width="1376" height="768">
+          <h2 class="enter-word enter-how">How it works</h2>
+          <p class="enter-word enter-door">Enter</p>
+        </div>
+        <div class="enter-white"></div>
+      </div>
+    </section>
+
+    <!-- 5. Your body is always talking -->
+    <section class="body-talk" id="signals">
+      <div class="wrap body-grid">
+        <div class="reveal">
+          <p class="label">Your body</p>
+          <h2 class="heading-lg">Your body is always talking.</h2>
+        </div>
+        <ol class="points">
+          <li class="reveal"><p>Every part of you works by sending signals, and most of them travel through your blood.</p></li>
+          <li class="reveal"><p>Your body reads those signals all day. Now you can too.</p></li>
+          <li class="reveal"><p>Things rarely go wrong overnight. They drift slowly, long before you feel it. See the drift early and you can adjust, so you never drift far.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- 6. Iron and vitamin B12 -->
+    <section class="markers" id="biomarkers">
+      <div class="markers-media"><div class="ph ph--center"><span>Photo: person in the centre + iron and vitamin B12 screen</span></div></div>
+      <div class="wrap markers-inner">
+        <div class="markers-title reveal">
+          <p class="label">Where we start</p>
+          <h2 class="heading-lg">We start by monitoring iron and vitamin B12.</h2>
+        </div>
+        <div class="markers-cols">
+          <div class="marker-col reveal">
+            <p class="label">Vitamin B12</p>
+            <h3>Essential for your brain and your DNA.</h3>
+            <p>Vitamin B12 keeps your thinking clear and helps your body make DNA. When it runs low you can feel tired, foggy, low in mood, or tingling in your hands and feet. And being low for too long can cause irreversible damage.</p>
+            <div>
+              <div class="stats">
+                <div>
+                  <p class="stat-num">37%</p>
+                  <p class="stat-label">of adults are borderline low in vitamin B12</p>
+                </div>
+              </div>
+              <p class="source"><span class="placeholder-tag">Source and year to come</span></p>
+            </div>
+          </div>
+          <div class="marker-col reveal">
             <p class="label">Iron</p>
-            <h2 class="heading-lg">It drifts slowly.</h2>
-            <p>Iron carries oxygen around your body. It usually drifts over months, so the change is easy to miss.</p>
+            <h3>Essential for breathing.</h3>
+            <p>Iron collects oxygen from your lungs and carries it to every cell in your body. Low iron can leave you exhausted, breathless and foggy.</p>
             <div>
               <div class="stats">
                 <div>
@@ -617,41 +739,51 @@
               <p class="source"><span class="placeholder-tag">Source and year to come</span></p>
             </div>
           </div>
-          <div class="frame-text frame-text--right">
-            <p class="label">B12</p>
-            <h2 class="heading-lg">It shifts quietly.</h2>
-            <p>B12 is the vitamin your body uses for energy and nerve function. What you eat shapes it. my magma flags the trend. Your GP confirms.</p>
-            <div>
-              <div class="stats">
-                <div>
-                  <p class="stat-num">37%</p>
-                  <p class="stat-label">of adults are borderline low in B12</p>
-                </div>
-              </div>
-              <p class="source"><span class="placeholder-tag">Source and year to come</span></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. The moonshot: the product wall -->
+    <section class="moonshot" id="moonshot">
+      <div class="moon-sticky">
+        <div class="moon-head wrap">
+          <p class="label">The moonshot</p>
+          <h2 class="heading-lg">One device. Every biomarker.</h2>
+        </div>
+        <div class="moon-frame">
+          <div class="moon-cards">
+            <div class="moon-card" data-step="1">
+              <p class="label">1 · The Core</p>
+              <p>The heart of my magma. Worn on your arm, it does the reading. Everything starts here.</p>
+            </div>
+            <div class="moon-card" data-step="2">
+              <p class="label">2 · Sensors</p>
+              <p>Click in the biomarkers you care about. Each colour is a different marker. Start with iron and vitamin B12 and add more as they launch.</p>
+            </div>
+            <div class="moon-card" data-step="3">
+              <p class="label">3 · Accessories</p>
+              <p>Make it feel like jewellery. Finishes that attach to the core and turn a health device into something you want to wear.</p>
             </div>
           </div>
-        </article>
-
-        <ol class="story-index" aria-hidden="true">
-          <li class="is-active"><span>01</span> The old way</li>
-          <li><span>02</span> The new way</li>
-          <li><span>03</span> Iron and B12</li>
-        </ol>
+          <div class="moon-visual">
+            <img src="assets/photos/store-shelves.jpg" alt="A white product wall with three columns: core devices, sensors and accessories" width="1376" height="768" loading="lazy">
+            <div class="shelf-hl" data-step="1"></div>
+            <div class="shelf-hl" data-step="2"></div>
+            <div class="shelf-hl" data-step="3"></div>
+          </div>
+        </div>
       </div>
     </section>
 
-    <!-- 4. The moonshot -->
-    <section class="moonshot" id="moonshot">
+    <section class="yours">
       <div class="wrap reveal">
-        <p class="label">The moonshot</p>
-        <h2 class="heading-lg">One device. Every biomarker. Nothing to do.</h2>
-        <p class="body-lg">We're starting with iron and B12. Where we're going is one device that measures all your biomarkers, passively, every day. So your health is never the reason you hold back.</p>
+        <h2 class="heading-lg">Make it yours.</h2>
+        <p class="body-lg">One core. The sensors you need. The finish you love.</p>
+        <p class="fineprint">Concept render. Final design may differ.</p>
       </div>
-      <div class="moonshot-visual reveal"><img src="assets/photos/store-shelves.jpg" alt="" width="1376" height="768" loading="lazy"></div>
     </section>
 
-    <!-- 5. Team -->
+    <!-- 8. Team -->
     <section class="team" id="team">
       <div class="team-portrait" aria-hidden="true"><div class="ph"><span>Founder photo (to come)</span></div></div>
       <div class="wrap team-grid">
@@ -667,7 +799,7 @@
       </div>
     </section>
 
-    <!-- 6. Waitlist -->
+    <!-- 9. Waitlist -->
     <section class="waitlist" id="waitlist">
       <div class="waitlist-media"><img src="assets/photos/store-counter.jpg" alt="" width="1376" height="768" loading="lazy"></div>
       <div class="wrap waitlist-inner">
@@ -815,8 +947,8 @@
   // ---- Letter-by-letter highlight: text fills in as you read, then stays ----
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const hlTargets = Array.from(document.querySelectorAll(
-    '.hero-line, .signals .heading-lg, .signals .body-lg, .frame-text .heading-lg, .frame-text > p:not(.label), ' +
-    '.moonshot .heading-lg, .moonshot .body-lg, .team .heading-lg, .waitlist .heading-lg'
+    '.hero-line, .frame-text .heading-lg, .frame-text > p:not(.label), .body-talk .heading-lg, .points p, ' +
+    '.markers .heading-lg, .marker-col h3, .moon-head .heading-lg, .yours .heading-lg, .team .heading-lg, .waitlist .heading-lg'
   ));
 
   const highlights = hlTargets.map(el => {
@@ -922,6 +1054,50 @@
   }
   window.addEventListener('scroll', playFirstStep, { passive: true });
   playFirstStep();
+
+  // ---- Enter magma: scrolling walks the camera through the door ----
+  const enter = document.querySelector('.enter');
+  const enterSticky = enter.querySelector('.enter-sticky');
+  function onEnter() {
+    const r = enter.getBoundingClientRect();
+    const travel = enter.offsetHeight - window.innerHeight;
+    const p = Math.min(Math.max(-r.top / travel, 0), 1);
+    const t = Math.min(Math.max((p - 0.08) / 0.84, 0), 1);
+    const zoom = reduceMotion ? 1 : 1 + Math.pow(t, 2.2) * 11;
+    enterSticky.style.setProperty('--zoom', zoom.toFixed(3));
+    enterSticky.style.setProperty('--words', Math.max(0, 1 - t * 4).toFixed(3));
+    enterSticky.style.setProperty('--white', Math.min(Math.max((p - 0.8) / 0.2, 0), 1).toFixed(3));
+  }
+  window.addEventListener('scroll', onEnter, { passive: true });
+  window.addEventListener('resize', onEnter);
+  onEnter();
+
+  // ---- The moonshot: each shelf lights up as its card appears ----
+  const moon = document.querySelector('.moonshot');
+  const moonCards = Array.from(moon.querySelectorAll('.moon-card'));
+  const shelves = Array.from(moon.querySelectorAll('.shelf-hl'));
+  let moonStep = -1;
+  function onMoon() {
+    if (!pinned.matches) {
+      moonCards.forEach(c => c.classList.add('is-on', 'is-current'));
+      return;
+    }
+    const r = moon.getBoundingClientRect();
+    const travel = moon.offsetHeight - window.innerHeight;
+    const p = Math.min(Math.max(-r.top / travel, 0), 1);
+    const step = p < 0.1 ? 0 : Math.min(3, 1 + Math.floor((p - 0.1) / 0.27));
+    if (step === moonStep) return;
+    moonStep = step;
+    moonCards.forEach(c => {
+      const n = +c.dataset.step;
+      c.classList.toggle('is-on', n <= step);
+      c.classList.toggle('is-current', n === step);
+    });
+    shelves.forEach(h => h.classList.toggle('is-dim', step > 0 && +h.dataset.step !== step));
+  }
+  window.addEventListener('scroll', onMoon, { passive: true });
+  window.addEventListener('resize', onMoon);
+  onMoon();
 </script>
 
 </body>
