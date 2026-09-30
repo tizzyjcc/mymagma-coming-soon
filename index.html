@@ -165,14 +165,43 @@
     object-position: 50% 50%;
   }
 
-  /* ---------- Your body is always talking ---------- */
-  .body-talk { padding: 140px 0; }
-  .body-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 560px); gap: 72px; align-items: start; }
-  .body-grid .heading-lg { margin-top: 16px; max-width: 11em; }
-  .points { list-style: none; display: grid; gap: 40px; counter-reset: pt; }
-  .points li { display: grid; grid-template-columns: 40px 1fr; gap: 8px; padding-top: 20px; border-top: 1px solid var(--line); }
-  .points li::before { counter-increment: pt; content: "0" counter(pt); font-size: var(--t-small); color: var(--ink-3); font-variant-numeric: tabular-nums; padding-top: 4px; }
-  .points p { font-size: var(--t-sub); line-height: 1.3; letter-spacing: -0.012em; text-wrap: pretty; }
+  /* ---------- Your body is always talking: the art wall ---------- */
+  .wall { position: relative; height: 360vh; }
+  .wall-sticky { position: sticky; top: 0; height: 100vh; overflow: hidden; background: #fff; }
+  /* The stage always shows the full wall width, so all three panels stay in view; text and highlights sit on it in % */
+  .wall-stage {
+    position: absolute; left: 50%; top: 50%;
+    width: 100vw;
+    height: calc(100vw * 1116 / 2000);
+    transform: translate(-50%, -50%);
+  }
+  .wall-stage > img { width: 100%; height: 100%; }
+  .wall-sticky::before, .wall-sticky::after {
+    content: ""; position: absolute; z-index: 3; left: 0; right: 0; height: 110px; pointer-events: none;
+  }
+  .wall-sticky::before { top: 0; background: linear-gradient(#fff, rgba(255,255,255,0)); }
+  .wall-sticky::after { bottom: 0; background: linear-gradient(rgba(255,255,255,0), #fff); }
+  .wall-head {
+    position: absolute; z-index: 4;
+    left: max(var(--gutter), calc((100vw - var(--max)) / 2 + var(--gutter)));
+    top: 26vh; width: min(380px, 30vw);
+  }
+  .wall-head .heading-lg { margin: 12px 0 16px; }
+  .wall-head > p:not(.label) { color: var(--ink-2); }
+  .panel-hl { position: absolute; top: 24.4%; height: 39.7%; background: rgba(244, 238, 230, 0); transition: background 500ms var(--ease); }
+  .panel-hl.is-dim { background: rgba(244, 238, 230, 0.66); }
+  .panel-hl[data-step="1"], .panel-text[data-step="1"] { left: 42.9%; width: 14.3%; }
+  .panel-hl[data-step="2"], .panel-text[data-step="2"] { left: 62.5%; width: 14.3%; }
+  .panel-hl[data-step="3"], .panel-text[data-step="3"] { left: 82%; width: 14.3%; }
+  .panel-text {
+    position: absolute; top: 67%;
+    opacity: 0; transform: translateY(12px);
+    transition: opacity 500ms var(--ease), transform 500ms var(--ease);
+  }
+  .panel-text.is-on { opacity: 0.45; transform: none; }
+  .panel-text.is-current { opacity: 1; }
+  .panel-text h3 { font-size: var(--t-body); font-weight: 500; line-height: 1.3; margin: 8px 0 6px; }
+  .panel-text p:not(.label) { font-size: var(--t-small); line-height: 1.45; color: var(--ink-2); }
 
   /* The quiz sits inside "the old way", on the soft side of the photo */
   .quiz {
@@ -406,10 +435,10 @@
     display: flex; flex-direction: column; align-items: center;
     padding-top: 104px; text-align: center;
   }
-  .moon-head .heading-lg { margin-top: 12px; }
+  .moon-head .body-lg { margin: 10px auto 0; }
   /* The frame crops the photo to the shelves (12–88% across, 22–86% down), so they fill the width */
-  .moon-frame { --w: min(92vw, calc((100vh - 340px) * 2.13)); width: var(--w); }
-  .moon-cards { position: relative; height: 150px; margin-top: 20px; }
+  .moon-frame { --w: min(92vw, calc((100vh - 360px) * 2.13)); width: var(--w); }
+  .moon-cards { position: relative; height: 160px; margin-top: 16px; }
   .moon-card {
     position: absolute; bottom: 12px;
     text-align: left;
@@ -438,10 +467,7 @@
   .shelf-hl[data-step="1"] { left: 3.8%; width: 30.7%; }
   .shelf-hl[data-step="2"] { left: 34.9%; width: 30%; }
   .shelf-hl[data-step="3"] { left: 65.3%; width: 30.8%; }
-  .yours { padding: 40px 0 140px; text-align: center; }
-  .yours .heading-lg { margin-top: 12px; }
-  .yours .body-lg { margin: 16px auto 0; }
-  .fineprint { margin-top: 20px; font-size: var(--t-small); color: var(--ink-3); }
+  .fineprint { position: absolute; right: 4%; bottom: 2%; font-size: 11px; color: var(--ink-3); }
 
   /* ---------- Section 5: team ---------- */
   .team { position: relative; padding: 140px 0; min-height: 100vh; display: flex; align-items: center; overflow: hidden; }
@@ -509,8 +535,13 @@
     .nav { padding-left: 16px; }
     .nav-links { display: none; }
     .hero { min-height: 0; padding-top: 112px; }
-    .body-talk { padding: 80px 0; }
-    .body-grid { grid-template-columns: 1fr; gap: 32px; }
+    .wall { height: auto; }
+    .wall-sticky { position: static; height: auto; overflow: visible; padding-top: 88px; }
+    .wall-sticky::before, .wall-sticky::after, .panel-hl { display: none; }
+    .wall-head { position: static; width: auto; padding: 0 var(--gutter); }
+    .wall-stage { position: relative; left: auto; top: auto; transform: none; width: 100%; height: auto; display: grid; gap: 28px; padding-bottom: 72px; }
+    .wall-stage > img { height: 52vh; object-fit: cover; object-position: 78% 50%; margin-top: 24px; }
+    .panel-text { position: static; width: auto !important; opacity: 1; transform: none; padding: 0 var(--gutter); }
     .quiz { max-width: none; }
 
     .enter { height: 200vh; }
@@ -529,7 +560,7 @@
     .moon-cards { height: auto; display: grid; gap: 12px; margin-top: 16px; }
     .moon-card { position: static; width: auto !important; opacity: 1; transform: none; }
     .moon-cards { order: 2; }
-    .yours { padding: 56px 0 96px; }
+    .fineprint { position: static; display: block; padding: 8px var(--gutter) 0; }
 
     /* The story unpins on small screens: each step is its own block */
     .story { height: auto; }
@@ -574,7 +605,7 @@
     <ul class="nav-links">
       <li><a href="#enter">How it works</a></li>
       <li><a href="#biomarkers">Biomarkers</a></li>
-      <li><a href="#moonshot">The moonshot</a></li>
+      <li><a href="#moonshot">Make it yours</a></li>
       <li><a href="#team">Team</a></li>
     </ul>
     <a class="btn btn-ghost" href="#waitlist">Join the waitlist</a>
@@ -683,18 +714,35 @@
       </div>
     </section>
 
-    <!-- 5. Your body is always talking -->
-    <section class="body-talk" id="signals">
-      <div class="wrap body-grid">
-        <div class="reveal">
+    <!-- 5. Your body is always talking: the art wall -->
+    <section class="wall" id="signals" aria-label="Your body is always talking">
+      <div class="wall-sticky">
+        <div class="wall-head">
           <p class="label">Your body</p>
           <h2 class="heading-lg">Your body is always talking.</h2>
+          <p>Every day your blood carries signals about how you're really doing, long before you feel them.</p>
         </div>
-        <ol class="points">
-          <li class="reveal"><p>Every part of you works by sending signals, and most of them travel through your blood.</p></li>
-          <li class="reveal"><p>Your body reads those signals all day. Now you can too.</p></li>
-          <li class="reveal"><p>Things rarely go wrong overnight. They drift slowly, long before you feel it. See the drift early and you can adjust, so you never drift far.</p></li>
-        </ol>
+        <div class="wall-stage">
+          <img src="assets/photos/art-wall.jpg" alt="A cream gallery wall with three glowing panels of blood cells, under a magma ribbon" width="2000" height="1116" loading="lazy">
+          <div class="panel-hl" data-step="1"></div>
+          <div class="panel-hl" data-step="2"></div>
+          <div class="panel-hl" data-step="3"></div>
+          <div class="panel-text" data-step="1">
+            <p class="label">Signals</p>
+            <h3>Your body runs on signals.</h3>
+            <p>Every part of you works by sending signals, and most of them travel through your blood.</p>
+          </div>
+          <div class="panel-text" data-step="2">
+            <p class="label">Measuring</p>
+            <h3>Your body reads them. Now you can too.</h3>
+            <p>Just as your body reads those signals all day, my magma measures them, against what's normal for you.</p>
+          </div>
+          <div class="panel-text" data-step="3">
+            <p class="label">Why monitor</p>
+            <h3>See the drift early.</h3>
+            <p>Things rarely go wrong overnight. They drift slowly, long before you feel it. See it early and adjust, so you never drift far.</p>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -743,22 +791,22 @@
       </div>
     </section>
 
-    <!-- 7. The moonshot: the product wall -->
+    <!-- 7. Make it yours: the product wall -->
     <section class="moonshot" id="moonshot">
       <div class="moon-sticky">
         <div class="moon-head wrap">
-          <p class="label">The moonshot</p>
-          <h2 class="heading-lg">One device. Every biomarker.</h2>
+          <h2 class="heading-lg">Make it yours.</h2>
+          <p class="body-lg">One core. The sensors you need. The finish you love.</p>
         </div>
         <div class="moon-frame">
           <div class="moon-cards">
             <div class="moon-card" data-step="1">
               <p class="label">1 · The Core</p>
-              <p>The heart of my magma. Worn on your arm, it does the reading. Everything starts here.</p>
+              <p>The heart of my magma. Worn on your arm, it's where everything connects. Everything starts here.</p>
             </div>
             <div class="moon-card" data-step="2">
               <p class="label">2 · Sensors</p>
-              <p>Click in the biomarkers you care about. Each colour is a different marker. Start with iron and vitamin B12 and add more as they launch.</p>
+              <p>Select the biomarkers you care about. Attach them to your core. The sensors do the reading, and each colour is a different marker. Start with iron and vitamin B12, and add more as they launch.</p>
             </div>
             <div class="moon-card" data-step="3">
               <p class="label">3 · Accessories</p>
@@ -770,16 +818,9 @@
             <div class="shelf-hl" data-step="1"></div>
             <div class="shelf-hl" data-step="2"></div>
             <div class="shelf-hl" data-step="3"></div>
+            <p class="fineprint">Concept render. Final design may differ.</p>
           </div>
         </div>
-      </div>
-    </section>
-
-    <section class="yours">
-      <div class="wrap reveal">
-        <h2 class="heading-lg">Make it yours.</h2>
-        <p class="body-lg">One core. The sensors you need. The finish you love.</p>
-        <p class="fineprint">Concept render. Final design may differ.</p>
       </div>
     </section>
 
@@ -947,8 +988,8 @@
   // ---- Letter-by-letter highlight: text fills in as you read, then stays ----
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const hlTargets = Array.from(document.querySelectorAll(
-    '.hero-line, .frame-text .heading-lg, .frame-text > p:not(.label), .body-talk .heading-lg, .points p, ' +
-    '.markers .heading-lg, .marker-col h3, .moon-head .heading-lg, .yours .heading-lg, .team .heading-lg, .waitlist .heading-lg'
+    '.hero-line, .frame-text .heading-lg, .frame-text > p:not(.label), .wall-head .heading-lg, ' +
+    '.markers .heading-lg, .marker-col h3, .moon-head .heading-lg, .team .heading-lg, .waitlist .heading-lg'
   ));
 
   const highlights = hlTargets.map(el => {
@@ -1098,6 +1139,33 @@
   window.addEventListener('scroll', onMoon, { passive: true });
   window.addEventListener('resize', onMoon);
   onMoon();
+
+  // ---- Your body is always talking: each panel lights up as its text appears ----
+  const wall = document.querySelector('.wall');
+  const wallTexts = Array.from(wall.querySelectorAll('.panel-text'));
+  const wallPanels = Array.from(wall.querySelectorAll('.panel-hl'));
+  let wallStep = -1;
+  function onWall() {
+    if (!pinned.matches) {
+      wallTexts.forEach(t => t.classList.add('is-on', 'is-current'));
+      return;
+    }
+    const r = wall.getBoundingClientRect();
+    const travel = wall.offsetHeight - window.innerHeight;
+    const p = Math.min(Math.max(-r.top / travel, 0), 1);
+    const step = p < 0.1 ? 0 : Math.min(3, 1 + Math.floor((p - 0.1) / 0.27));
+    if (step === wallStep) return;
+    wallStep = step;
+    wallTexts.forEach(t => {
+      const n = +t.dataset.step;
+      t.classList.toggle('is-on', n <= step);
+      t.classList.toggle('is-current', n === step);
+    });
+    wallPanels.forEach(h => h.classList.toggle('is-dim', step > 0 && +h.dataset.step !== step));
+  }
+  window.addEventListener('scroll', onWall, { passive: true });
+  window.addEventListener('resize', onWall);
+  onWall();
 </script>
 
 </body>
