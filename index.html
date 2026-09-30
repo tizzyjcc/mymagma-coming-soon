@@ -504,7 +504,6 @@
     html { scroll-behavior: auto; }
     *, *::before, *::after { animation: none !important; transition: none !important; }
     .reveal { opacity: 1; transform: none; }
-    .hl .ch { color: inherit; }
   }
 
   /* ---------- Phones and small tablets ---------- */
@@ -859,7 +858,8 @@
     <div class="wrap">
       <div class="footer-top">
         <p>&copy; 2026 Magma Health Pty Ltd</p>
-        <a class="footer-contact" href="mailto:t.canales.calleja@gmail.com?subject=Hello%20my%20magma">Contact us by email</a>
+        <!-- Add the my magma address when it exists: href="mailto:ADDRESS?subject=Hello%20my%20magma" -->
+        <a class="footer-contact">Contact us by email</a>
       </div>
       <div class="disclaimer">
         <p><strong>Demonstration of the vision only.</strong> This website is published by Magma Health Pty Ltd to show the vision for my magma. We are a pre-seed company at the pre-proof-of-concept stage. mymagma has not been built, tested or validated, is not available to buy, and is not a medical device approved or registered by the TGA or any other regulator.</p>
@@ -1034,50 +1034,51 @@
     h.playing = true;
     const start = performance.now();
     const from = h.shown;
-    const perChar = Math.min(22, 1400 / h.chars.length);
+    const perChar = Math.min(40, 1800 / h.chars.length);
     (function tick(now) {
       showUpTo(h, from + Math.floor((now - start) / perChar));
       if (h.shown < h.chars.length) requestAnimationFrame(tick);
     })(start);
   }
 
-  // Scroll-linked fill everywhere else: starts as the line enters, finishes around the middle of the screen.
+  // Scroll-linked fill everywhere else: starts as the line enters the bottom of the screen, fills as it rises.
   function fillOnScroll() {
     const vh = window.innerHeight;
     highlights.forEach(h => {
       if (h.shown >= h.chars.length || h.el.closest('.hero')) return;
       const r = h.el.getBoundingClientRect();
-      const progress = (vh * 0.92 - r.top) / (vh * 0.5);
+      const progress = (vh * 0.95 - r.top) / (vh * 0.6);
       if (progress > 0) showUpTo(h, Math.ceil(progress * h.chars.length));
     });
   }
 
 
   // Once scrolling stops, any title sitting fully in view finishes filling on its own.
-  let settleTimer;
-  function settle() {
-    const vh = window.innerHeight;
-    highlights.forEach(h => {
-      if (h.shown >= h.chars.length) return;
-      const r = h.el.getBoundingClientRect();
-      if (r.height && r.top >= 0 && r.bottom <= vh) play(h);
-    });
-  }
+  // Visibility comes from IntersectionObserver, which measures against the real screen,
+  // so this also works when the page is shown inside a frame that scrolls instead of the window.
+  let lastScroll = 0, settleTimer;
+  function settle() { highlights.forEach(h => { if (h.inView) play(h); }); }
+  const seen = new IntersectionObserver(entries => entries.forEach(e => {
+    const h = e.target._hl;
+    h.inView = e.intersectionRatio >= 0.95;
+    if (h.inView) setTimeout(() => { if (h.inView && performance.now() - lastScroll > 200) play(h); }, 260);
+  }), { threshold: [0, 0.95] });
+  highlights.forEach(h => { h.el._hl = h; seen.observe(h.el); });
+
   function onScrollHl() {
+    lastScroll = performance.now();
     fillOnScroll();
     clearTimeout(settleTimer);
-    settleTimer = setTimeout(settle, 180);
+    settleTimer = setTimeout(settle, 200);
   }
 
   const pinned = window.matchMedia('(min-width: 861px)');
 
-  if (reduceMotion) highlights.forEach(h => showUpTo(h, h.chars.length));
-  else {
-    highlights.filter(h => h.el.closest('.hero')).forEach(h => setTimeout(() => play(h), 400));
-    window.addEventListener('scroll', onScrollHl, { passive: true });
-    window.addEventListener('resize', onScrollHl);
-    onScrollHl();
-  }
+  // A colour fill, not movement, so it also runs when reduced motion is on.
+  highlights.filter(h => h.el.closest('.hero')).forEach(h => setTimeout(() => play(h), 400));
+  window.addEventListener('scroll', onScrollHl, { passive: true });
+  window.addEventListener('resize', onScrollHl);
+  fillOnScroll();
   // ---- Enter magma: scrolling walks the camera through the door ----
   const enter = document.querySelector('.enter');
   const enterSticky = enter.querySelector('.enter-sticky');
