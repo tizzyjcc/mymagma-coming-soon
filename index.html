@@ -191,7 +191,7 @@
     flex-direction: column;
     justify-content: center;
   }
-  .quiz-top { display: flex; justify-content: space-between; align-items: center; }
+  .quiz-top { display: flex; justify-content: flex-end; align-items: center; }
   .quiz-count { font-size: var(--t-small); color: var(--ink-3); }
   .quiz-bar { height: 2px; background: var(--line); border-radius: 2px; margin-top: 14px; overflow: hidden; }
   .quiz-bar span { display: block; height: 100%; width: 33.33%; background: var(--ink); transition: width 600ms var(--ease); }
@@ -488,7 +488,7 @@
     <img class="hero-logo" src="assets/magma-logo.png" alt="magma">
     <h1 class="hero-line">Catch the crash before it happens.</h1>
     <p class="label">Continuous biomarker monitoring</p>
-    <div class="hero-cta"><a class="btn btn-primary" href="#signals">Start with your signals</a></div>
+    <div class="hero-cta"><a class="btn btn-primary" href="#waitlist">Join the waitlist</a></div>
     <img class="hero-magma" src="assets/magma-hero.png" alt="" width="1983" height="793">
   </header>
 
@@ -504,7 +504,6 @@
 
         <div class="quiz reveal" id="quiz" aria-live="polite">
           <div class="quiz-top">
-            <p class="label">Three quick questions</p>
             <p class="quiz-count" id="quizCount">1 / 3</p>
           </div>
           <div class="quiz-bar" aria-hidden="true"><span id="quizBar"></span></div>
