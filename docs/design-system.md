@@ -19,12 +19,12 @@ applies wherever the brand guidelines are silent or marked [PENDING].
 - No blue, green, brown, black or dark backgrounds anywhere.
 
 ## Type
-- One family: Satoshi (400, 500, 700). IBM Plex Mono 400/500 only for numbers that are measurements or stats.
+- One family: Satoshi (400, 500, 700). IBM Plex Mono 400/500 only for biomarker readings (in the app screens). Population statistics on the page use Satoshi with tabular figures.
 - Headlines follow Superpower: weight 400, tight tracking, line-height compressing with size.
 | Token | Size (desktop / mobile) | Used for |
 |---|---|---|
 | `--t-display` | 44 / 32px, weight 400, line-height 1.1, tracking -0.02em | Hero line, section headlines |
-| `--t-sub` | 26 / 22px, weight 400, line-height 1.2 | Quiz questions, stat numbers (Plex Mono), thank-you lines |
+| `--t-sub` | 26 / 22px, weight 400, line-height 1.2 | Quiz questions, stat numbers (Satoshi 500, tabular), thank-you lines |
 | `--t-body` | 16px, weight 400, line-height 1.55 | Body copy, pills, inputs, buttons, story index |
 | `--t-small` | 13px | Labels (uppercase 500, tracked 0.1em), captions, sources, fine print, nav |
 - Four sizes in total. Per screen: at most three of display, sub and body, plus the small utility size (Superpower works the same way with its 11px utility text).

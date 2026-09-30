@@ -31,7 +31,7 @@
 
     --t-small: 13px;
     --t-body: 16px;
-    --t-sub: clamp(22px, 2.2vw, 26px);
+    --t-sub: clamp(21px, 1.7vw, 24px);
     --t-display: clamp(32px, 4vw, 44px);
 
     --gutter: 24px;
@@ -166,10 +166,18 @@
   }
 
   /* ---------- Section 2: signals + quiz ---------- */
-  .signals { padding: 120px 0 140px; }
+  .signals { position: relative; padding: 120px 0 140px; isolation: isolate; }
+  .signals::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: 0; bottom: 0; right: 0;
+    left: calc(50% + min(50vw, var(--max) / 2) - var(--gutter) - 520px - 56px);
+    background: linear-gradient(#fff, var(--blush) 18%, var(--blush) 78%, #fff);
+  }
   .signals-grid {
     display: grid;
-    grid-template-columns: 1fr minmax(0, 440px);
+    grid-template-columns: 1fr minmax(0, 520px);
     gap: 72px;
     align-items: center;
   }
@@ -182,16 +190,6 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-  }
-  /* Warm field behind the quiz, bleeding to the right edge of the page */
-  .quiz::before {
-    content: "";
-    position: absolute;
-    z-index: -1;
-    top: -120px; bottom: -140px;
-    left: -56px; right: calc(-50vw + 50%);
-    background: var(--blush);
-    border-radius: 16px 0 0 16px;
   }
   .quiz-top { display: flex; justify-content: space-between; align-items: center; }
   .quiz-count { font-size: var(--t-small); color: var(--ink-3); }
@@ -282,8 +280,8 @@
 
   .stats { display: flex; gap: 36px; margin-top: 28px; }
   .stat-num {
-    font-family: var(--mono);
     font-weight: 500;
+    font-variant-numeric: tabular-nums;
     font-size: var(--t-sub);
     line-height: 1.1;
     letter-spacing: -0.01em;
@@ -323,6 +321,7 @@
   }
   .story-index li span { font-variant-numeric: tabular-nums; }
   .story-index li.is-active { color: var(--ink); }
+  .story-index li { text-shadow: 0 0 14px rgba(255, 255, 255, 0.9), 0 0 2px rgba(255, 255, 255, 0.9); }
   .story-index li.is-active::before {
     content: "";
     width: 1px; height: 14px;
@@ -349,16 +348,16 @@
   }
 
   /* ---------- Section 4: the moonshot ---------- */
-  .moonshot { padding: 140px 0 120px; text-align: center; }
+  .moonshot { padding: 140px 0 80px; text-align: center; }
   .moonshot .heading-lg { margin: 16px auto 20px; max-width: 16em; }
   .moonshot .body-lg { margin: 0 auto; }
   .moonshot-visual {
-    margin-top: 24px;
+    margin-top: 8px;
     width: 100%;
-    height: clamp(220px, 34vw, 460px);
+    height: clamp(200px, 28vw, 400px);
     object-fit: cover;
   }
-  .moonshot-visual.ph { height: clamp(220px, 34vw, 460px); justify-content: center; align-items: center; padding: 0;
+  .moonshot-visual.ph { height: clamp(200px, 28vw, 400px); justify-content: center; align-items: center; padding: 0;
     background:
       radial-gradient(40% 18% at 20% 50%, rgba(192, 32, 53, 0.35), transparent 70%),
       radial-gradient(55% 30% at 62% 50%, rgba(216, 74, 16, 0.22), transparent 70%),
@@ -366,11 +365,15 @@
       #fff; }
 
   /* ---------- Section 5: team ---------- */
-  .team { padding: 140px 0; min-height: 100vh; display: flex; align-items: center; }
+  .team { position: relative; padding: 140px 0; min-height: 100vh; display: flex; align-items: center; overflow: hidden; }
   .team > .wrap { width: 100%; }
-  .team-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 72px; align-items: center; }
-  .team-portrait { aspect-ratio: 4 / 5; border-radius: 16px; overflow: hidden; }
-  .team-portrait .ph { padding: 0 0 24px; justify-content: center; }
+  .team-grid { display: grid; grid-template-columns: minmax(0, 520px); }
+  .team-portrait { position: absolute; top: 0; bottom: 0; right: 0; width: 46%; }
+  .team-portrait::before {
+    content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+    background: linear-gradient(90deg, #fff, rgba(255,255,255,0) 30%), linear-gradient(#fff, rgba(255,255,255,0) 16%, rgba(255,255,255,0) 84%, #fff);
+  }
+  .team-portrait .ph { padding: 0 6% 12%; }
   .team .heading-lg { margin-top: 16px; max-width: 11em; }
   .team-body { margin-top: 24px; }
   .team-body p { font-size: var(--t-body); line-height: 1.55; color: var(--ink-2); max-width: 34em; }
@@ -403,6 +406,12 @@
   }
   footer .wrap { display: flex; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
 
+  /* ---------- Letter-by-letter highlight ---------- */
+  .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .hl .w { white-space: nowrap; }
+  .hl .ch { color: rgba(26, 18, 18, 0.16); transition: color 240ms linear; }
+  .hl .ch.on { color: inherit; }
+
   /* ---------- Motion ---------- */
   @keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
   .reveal { opacity: 0; transform: translateY(18px); transition: opacity 800ms var(--ease), transform 800ms var(--ease); }
@@ -412,6 +421,7 @@
     html { scroll-behavior: auto; }
     *, *::before, *::after { animation: none !important; transition: none !important; }
     .reveal { opacity: 1; transform: none; }
+    .hl .ch { color: inherit; }
   }
 
   /* ---------- Phones and small tablets ---------- */
@@ -423,7 +433,7 @@
     .signals { padding: 80px 0 96px; }
     .signals-grid { grid-template-columns: 1fr; gap: 40px; }
     .quiz { min-height: 0; padding: 40px 0 8px; }
-    .quiz::before { top: 0; bottom: -48px; left: -16px; right: -16px; border-radius: 0; }
+    .signals::before { left: 0; top: auto; height: 62%; }
 
     /* The story unpins on small screens: each step is its own block */
     .story { height: auto; }
@@ -445,8 +455,10 @@
 
     .moonshot { padding: 96px 0 80px; }
     .team { padding: 80px 0; }
-    .team { min-height: 0; }
-    .team-grid { grid-template-columns: 1fr; gap: 40px; }
+    .team { min-height: 0; display: block; padding-top: 0; }
+    .team-grid { grid-template-columns: 1fr; }
+    .team-portrait { position: relative; width: 100%; height: 56vh; margin-bottom: 8px; }
+    .team-portrait::before { background: linear-gradient(#fff, rgba(255,255,255,0) 20%, rgba(255,255,255,0) 70%, #fff); }
 
     .waitlist { min-height: 0; display: block; padding-bottom: 80px; }
     .waitlist-media { position: relative; height: 56vh; }
@@ -476,7 +488,7 @@
     <img class="hero-logo" src="assets/magma-logo.png" alt="magma">
     <h1 class="hero-line">Catch the crash before it happens.</h1>
     <p class="label">Continuous biomarker monitoring</p>
-    <div class="hero-cta"><a class="btn btn-primary" href="#signals">See how it works</a></div>
+    <div class="hero-cta"><a class="btn btn-primary" href="#signals">Start with your signals</a></div>
     <img class="hero-magma" src="assets/magma-hero.png" alt="" width="1983" height="793">
   </header>
 
@@ -487,7 +499,7 @@
         <div class="reveal">
           <p class="label">Below the surface</p>
           <h2 class="heading-lg">Your body is always leaving signals.</h2>
-          <p class="body-lg">Every day your body is busy making energy, carrying oxygen and repairing itself. All of it leaves traces in your blood: small signals that shift long before you feel anything. Follow those signals over time and you see what's changing, measured against what's normal for you.</p>
+          <p class="body-lg">Every day your body makes energy, carries oxygen and repairs itself, and it all leaves small signals in your blood. Follow them over time and you see what's changing, long before you feel it.</p>
         </div>
 
         <div class="quiz reveal" id="quiz" aria-live="polite">
@@ -551,7 +563,7 @@
       <div class="story-sticky">
 
         <article class="frame is-active" data-step="0">
-          <div class="frame-media"><div class="ph"><span>Photo 2: waiting room</span></div></div>
+          <div class="frame-media"><img src="assets/photos/01-waiting-room.jpg" alt="" width="1536" height="1024"></div>
           <div class="frame-text">
             <p class="label">The old way</p>
             <h2 class="heading-lg">No more waiting rooms.</h2>
@@ -560,7 +572,7 @@
         </article>
 
         <article class="frame" data-step="1">
-          <div class="frame-media"><div class="ph"><span>Photo 3: breakfast + "All steady" screen</span></div></div>
+          <div class="frame-media"><img src="assets/photos/02-breakfast.jpg" alt="" width="1536" height="1024" loading="lazy"></div>
           <div class="frame-text">
             <p class="label">The new way</p>
             <h2 class="heading-lg">Get on with your life. We'll keep watch.</h2>
@@ -594,7 +606,7 @@
           <div class="frame-media"><div class="ph"><span>Photo 5: dinner with friends + B12 screen</span></div></div>
           <div class="frame-text">
             <p class="label">B12</p>
-            <h2 class="heading-lg">B12 powers your energy and nerves.</h2>
+            <h2 class="heading-lg">B12 shifts quietly, for years.</h2>
             <p>B12 is the vitamin your body uses for energy and nerve function. What you eat shapes it, and it can shift quietly for years. my magma flags the trend. Your GP confirms.</p>
             <div>
               <div class="stats">
@@ -629,6 +641,7 @@
 
     <!-- 5. Team -->
     <section class="team" id="team">
+      <div class="team-portrait" aria-hidden="true"><div class="ph"><span>Founder photo (to come)</span></div></div>
       <div class="wrap team-grid">
         <div class="reveal">
           <p class="label">Why we're building this</p>
@@ -639,7 +652,6 @@
           <p class="team-sign">Founder name <span>Founder, my magma</span></p>
         </div>
         </div>
-        <div class="team-portrait reveal"><div class="ph"><span>Founder photo (to come)</span></div></div>
       </div>
     </section>
 
@@ -788,11 +800,88 @@
   }, { threshold: 0.15 });
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
+  // ---- Letter-by-letter highlight: text fills in as you read, then stays ----
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const hlTargets = Array.from(document.querySelectorAll(
+    '.hero-line, .signals .heading-lg, .signals .body-lg, .frame-text .heading-lg, .frame-text > p:not(.label), ' +
+    '.moonshot .heading-lg, .moonshot .body-lg, .team .heading-lg, .waitlist .heading-lg'
+  ));
+
+  const highlights = hlTargets.map(el => {
+    const text = el.textContent;
+    const visual = document.createElement('span');
+    visual.setAttribute('aria-hidden', 'true');
+    const chars = [];
+    text.split(/(\s+)/).forEach(part => {
+      if (!part) return;
+      if (/^\s+$/.test(part)) { visual.appendChild(document.createTextNode(' ')); return; }
+      const word = document.createElement('span');
+      word.className = 'w';
+      for (const c of part) {
+        const ch = document.createElement('span');
+        ch.className = 'ch';
+        ch.textContent = c;
+        word.appendChild(ch);
+        chars.push(ch);
+      }
+      visual.appendChild(word);
+    });
+    const label = document.createElement('span');
+    label.className = 'sr-only';
+    label.textContent = text;
+    el.textContent = '';
+    el.append(label, visual);
+    el.classList.add('hl');
+    return { el, chars, shown: 0, inFrame: !!el.closest('.frame') };
+  });
+
+  function showUpTo(h, n) {
+    n = Math.min(h.chars.length, n);
+    for (let i = h.shown; i < n; i++) h.chars[i].classList.add('on');
+    h.shown = Math.max(h.shown, n);
+  }
+
+  // Timed fill, used for the hero on load and for each pinned story step as it appears.
+  function play(h) {
+    if (h.playing || h.shown >= h.chars.length) return;
+    h.playing = true;
+    const start = performance.now();
+    const perChar = Math.min(22, 1400 / h.chars.length);
+    (function tick(now) {
+      showUpTo(h, Math.floor((now - start) / perChar));
+      if (h.shown < h.chars.length) requestAnimationFrame(tick);
+    })(start);
+  }
+
+  // Scroll-linked fill everywhere else: starts as the line enters, finishes around the middle of the screen.
+  function fillOnScroll() {
+    const vh = window.innerHeight;
+    highlights.forEach(h => {
+      if (h.shown >= h.chars.length || h.el.closest('.hero')) return;
+      if (h.inFrame && pinned.matches) return;
+      const r = h.el.getBoundingClientRect();
+      const progress = (vh * 0.92 - r.top) / (vh * 0.5);
+      if (progress > 0) showUpTo(h, Math.ceil(progress * h.chars.length));
+    });
+  }
+
+  function playFrame(frame) {
+    highlights.filter(h => frame.contains(h.el)).forEach(play);
+  }
+
   // ---- Pinned story: the active step follows scroll progress ----
   const story = document.querySelector('.story');
   const frames = Array.from(story.querySelectorAll('.frame'));
   const indexItems = Array.from(story.querySelectorAll('.story-index li'));
   const pinned = window.matchMedia('(min-width: 861px)');
+
+  if (reduceMotion) highlights.forEach(h => showUpTo(h, h.chars.length));
+  else {
+    highlights.filter(h => h.el.closest('.hero')).forEach(h => setTimeout(() => play(h), 400));
+    window.addEventListener('scroll', fillOnScroll, { passive: true });
+    window.addEventListener('resize', fillOnScroll);
+    fillOnScroll();
+  }
   let active = 0;
 
   function onScroll() {
@@ -807,9 +896,20 @@
     active = step;
     frames[active].classList.add('is-active');
     indexItems[active].classList.add('is-active');
+    if (!reduceMotion) playFrame(frames[active]);
   }
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
+  // The first step plays once the pinned story reaches the top of the screen.
+  function playFirstStep() {
+    if (!pinned.matches || reduceMotion) return;
+    if (story.getBoundingClientRect().top <= window.innerHeight * 0.25) {
+      playFrame(frames[active]);
+      window.removeEventListener('scroll', playFirstStep);
+    }
+  }
+  window.addEventListener('scroll', playFirstStep, { passive: true });
+  playFirstStep();
 </script>
 
 </body>

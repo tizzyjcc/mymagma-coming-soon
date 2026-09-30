@@ -37,7 +37,7 @@ Screen B: [app screen style] Top label "This week" and date "Tue 14 Oct". A larg
 
 ## 4. Story step 03: Iron (life, getting away)
 Copy beside it: iron, what it does, why it drifts without you noticing. [stat placeholder]
-Scene A: [scene style] [phone rule] Packing for a weekend away: an open canvas bag on a bed with folded linen shirts, a paperback and sunglasses, one hand holding a phone just above the bag. Only hands and forearms visible. Afternoon sun through the window.
+Scene A: [scene style] [phone rule] Packing for a weekend away: an open canvas weekend travel bag on a bed with folded linen shirts, a paperback and sunglasses, one hand holding a phone just above the bag. Only hands and forearms visible. Afternoon sun through the window.
 Screen B: [app screen style] Title "Iron". A smooth crimson line over three months inside a pale rose band labelled "Your range", gently easing toward the lower edge. X-axis labels "Aug", "Sep", "Oct". A calm card below: "Your iron has been easing lower for 3 weeks. Might be worth a chat with your GP." No big numbers.
 
 ## 5. Story step 04: B12 (home, dinner with friends)
