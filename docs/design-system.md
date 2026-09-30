@@ -21,16 +21,15 @@ applies wherever the brand guidelines are silent or marked [PENDING].
 ## Type
 - One family: Satoshi (400, 500, 700). IBM Plex Mono 400/500 only for numbers that are measurements or stats.
 - Headlines follow Superpower: weight 400, tight tracking, line-height compressing with size.
-| Role | Size (desktop / mobile) | Weight | Line height | Tracking |
-|---|---|---|---|---|
-| display | 64 / 40px | 400 | 1.0 | -0.025em |
-| heading-lg | 44 / 32px | 400 | 1.1 | -0.02em |
-| heading | 30 / 24px | 400 | 1.2 | -0.013em |
-| body-lg | 18px | 400 | 1.45 | -0.009em |
-| body | 15–16px | 400 | 1.5 | -0.005em |
-| label | 12px | 500 | 1.4 | 0.12em, uppercase |
-| stat | 56 / 44px Plex Mono | 500 | 1.0 | -0.02em |
-- At most three type sizes per screen. Headlines at most 2 lines. Body copy 60–75 characters per line.
+| Token | Size (desktop / mobile) | Used for |
+|---|---|---|
+| `--t-display` | 44 / 32px, weight 400, line-height 1.1, tracking -0.02em | Hero line, section headlines |
+| `--t-sub` | 26 / 22px, weight 400, line-height 1.2 | Quiz questions, stat numbers (Plex Mono), thank-you lines |
+| `--t-body` | 16px, weight 400, line-height 1.55 | Body copy, pills, inputs, buttons, story index |
+| `--t-small` | 13px | Labels (uppercase 500, tracked 0.1em), captions, sources, fine print, nav |
+- Four sizes in total. Per screen: at most three of display, sub and body, plus the small utility size (Superpower works the same way with its 11px utility text).
+- Stat numbers sit at `--t-sub`, about 60% of the headline, so the headline stays the single focal point.
+- Headlines at most 2 lines. Body copy 60–75 characters per line.
 - Sentence case everywhere except labels.
 
 ## Shape and space

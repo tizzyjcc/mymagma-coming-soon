@@ -52,7 +52,7 @@ Chosen (brand visual): Photorealistic molten magma seen from above on a pure whi
 ## 7. Waitlist close (at home)
 Copy beside it: coming soon, leave your email.
 Scene A: [scene style] [phone rule] A slow Sunday morning in bed: hands holding a phone above a cream linen duvet, a cup of coffee on the bedside table, soft morning sun through sheer curtains. Only hands and forearms visible.
-Screen B: [app screen style] Centred, lots of white space. The lowercase word "magma" in a heavy, rounded, bold crimson font. Below it: "You're on the list." and in smaller grey text "We'll let you know when mymagma is ready."
+Screen B: [app screen style] Centred, lots of white space. The lowercase word "magma" in a heavy, rounded, bold crimson font. Below it: "Coming soon." and in smaller grey text "Your own baseline. Tracked every day."
 
 ## 8. Magma flow between sections
 Photorealistic thin ribbon of flowing molten magma seen from above, a single narrow band crossing a pure white 3:2 frame diagonally from top-left to bottom-right, gently curving. Viscous liquid lava with hair-thin golden fissure lines, deep crimson to orange-red to luminous rose. Organic irregular edges with small bubble-like drips. Everything else is pristine pure white #FFFFFF, no shadow, no texture.

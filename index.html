@@ -29,6 +29,11 @@
     --sans: 'Satoshi', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     --mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
 
+    --t-small: 13px;
+    --t-body: 16px;
+    --t-sub: clamp(22px, 2.2vw, 26px);
+    --t-display: clamp(32px, 4vw, 44px);
+
     --gutter: 24px;
     --max: 1200px;
     --ease: cubic-bezier(.2, .7, .2, 1);
@@ -40,7 +45,7 @@
 
   body {
     font-family: var(--sans);
-    font-size: 16px;
+    font-size: var(--t-body);
     line-height: 1.5;
     letter-spacing: -0.005em;
     color: var(--ink);
@@ -55,23 +60,24 @@
   .wrap { max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter); }
 
   .label {
-    font-size: 13px;
+    font-size: var(--t-small);
     font-weight: 500;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--ink-3);
   }
 
+  .heading-lg, .hero-line, .quiz-q, .thanks-title { text-wrap: balance; }
   .heading-lg {
-    font-size: clamp(32px, 4vw, 44px);
+    font-size: var(--t-display);
     font-weight: 400;
     line-height: 1.1;
     letter-spacing: -0.02em;
   }
 
   .body-lg {
-    font-size: 18px;
-    line-height: 1.5;
+    font-size: var(--t-body);
+    line-height: 1.55;
     letter-spacing: -0.009em;
     color: var(--ink-2);
     max-width: 34em;
@@ -85,7 +91,7 @@
     border: 0;
     border-radius: 9999px;
     padding: 14px 26px;
-    font-size: 15px;
+    font-size: var(--t-body);
     font-weight: 500;
     letter-spacing: -0.009em;
     cursor: pointer;
@@ -112,7 +118,7 @@
     justify-content: space-between;
     gap: 16px;
     padding: 8px 8px 8px 20px;
-    background: rgba(255, 255, 255, 0.82);
+    background: rgba(255, 255, 255, 0.94);
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
     border: 1px solid var(--line);
@@ -122,12 +128,12 @@
   .nav-logo img { height: 22px; width: auto; }
   .nav-links { display: flex; gap: 28px; list-style: none; }
   .nav-links a {
-    font-size: 14px;
+    font-size: var(--t-small);
     color: var(--ink-2);
     text-decoration: none;
   }
   .nav-links a:hover { color: var(--ink); }
-  .nav .btn { padding: 10px 18px; font-size: 14px; }
+  .nav .btn { padding: 10px 18px; font-size: var(--t-small); }
   .btn-ghost { background: transparent; color: var(--ink); box-shadow: inset 0 0 0 1px var(--line); }
   .btn-ghost:hover { background: var(--blush); }
 
@@ -143,9 +149,9 @@
   .hero-logo { width: clamp(220px, 28vw, 360px); height: auto; margin: 0 auto; }
   .hero-line {
     margin-top: 20px;
-    font-size: clamp(24px, 3vw, 34px);
+    font-size: var(--t-display);
     font-weight: 400;
-    line-height: 1.15;
+    line-height: 1.1;
     letter-spacing: -0.02em;
     color: var(--ink);
   }
@@ -157,7 +163,6 @@
     height: clamp(180px, 30vw, 420px);
     object-fit: cover;
     object-position: 50% 50%;
-    mix-blend-mode: multiply;
   }
 
   /* ---------- Section 2: signals + quiz ---------- */
@@ -171,22 +176,33 @@
   .signals .heading-lg { margin: 16px 0 24px; max-width: 12em; }
 
   .quiz {
-    border-top: 1px solid var(--line);
-    padding-top: 24px;
-    min-height: 420px;
+    position: relative;
+    isolation: isolate;
+    min-height: 440px;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+  }
+  /* Warm field behind the quiz, bleeding to the right edge of the page */
+  .quiz::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: -120px; bottom: -140px;
+    left: -56px; right: calc(-50vw + 50%);
+    background: var(--blush);
+    border-radius: 16px 0 0 16px;
   }
   .quiz-top { display: flex; justify-content: space-between; align-items: center; }
-  .quiz-count { font-size: 13px; color: var(--ink-3); }
+  .quiz-count { font-size: var(--t-small); color: var(--ink-3); }
   .quiz-bar { height: 2px; background: var(--line); border-radius: 2px; margin-top: 14px; overflow: hidden; }
   .quiz-bar span { display: block; height: 100%; width: 33.33%; background: var(--ink); transition: width 600ms var(--ease); }
   .quiz-step { margin-top: 28px; display: none; animation: rise 600ms var(--ease) both; }
   .quiz-step.is-active { display: block; }
   .quiz-q {
-    font-size: 22px;
+    font-size: var(--t-sub);
     font-weight: 400;
-    line-height: 1.25;
+    line-height: 1.2;
     letter-spacing: -0.012em;
     margin-bottom: 22px;
   }
@@ -198,14 +214,14 @@
     border: 1px solid var(--line);
     border-radius: 9999px;
     padding: 13px 20px;
-    font-size: 15px;
+    font-size: var(--t-body);
     cursor: pointer;
     transition: border-color 150ms ease, background 150ms ease;
   }
-  .pill { background: var(--blush); }
   .pill:hover { border-color: var(--ink-3); }
   .pill[aria-pressed="true"] { border-color: var(--crimson); background: #fff; box-shadow: inset 0 0 0 1px var(--crimson); }
-  .quiz-note { margin-top: 16px; font-size: 13px; color: var(--ink-3); }
+  .quiz-note { margin-top: 16px; font-size: var(--t-small); color: var(--ink-3); }
+  .quiz-context { margin: -10px 0 18px; font-size: var(--t-body); color: var(--ink-2); }
 
   .email-form { display: flex; flex-direction: column; gap: 10px; }
   .email-form input {
@@ -214,12 +230,12 @@
     background: #fff;
     border-radius: 9999px;
     padding: 14px 20px;
-    font-size: 15px;
+    font-size: var(--t-body);
   }
   .email-form input::placeholder { color: var(--ink-3); }
   .email-form .btn { justify-content: center; }
-  .form-error { font-size: 13px; color: var(--crimson); min-height: 1.2em; }
-  .thanks-title { font-size: 22px; line-height: 1.25; letter-spacing: -0.012em; }
+  .form-error { font-size: var(--t-small); color: var(--crimson); min-height: 1.2em; }
+  .thanks-title { font-size: var(--t-sub); line-height: 1.2; letter-spacing: -0.012em; }
 
   /* ---------- Section 3: the pinned story ---------- */
   .story { position: relative; height: 400vh; }
@@ -258,7 +274,7 @@
     width: min(480px, 40vw);
   }
   .frame-text .heading-lg { margin: 14px 0 18px; }
-  .frame-text > p:not(.label) { font-size: 17px; line-height: 1.5; color: var(--ink-2); max-width: 27em; }
+  .frame-text > p:not(.label) { font-size: var(--t-body); line-height: 1.55; color: var(--ink-2); max-width: 28em; }
   .frame.is-active .frame-text > * { animation: rise 800ms var(--ease) both; }
   .frame.is-active .frame-text > *:nth-child(2) { animation-delay: 80ms; }
   .frame.is-active .frame-text > *:nth-child(3) { animation-delay: 160ms; }
@@ -268,16 +284,16 @@
   .stat-num {
     font-family: var(--mono);
     font-weight: 500;
-    font-size: clamp(32px, 4vw, 44px);
+    font-size: var(--t-sub);
     line-height: 1.1;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.01em;
     color: var(--ink);
   }
-  .stat-label { margin-top: 8px; font-size: 13px; line-height: 1.4; color: var(--ink-2); max-width: 13em; }
-  .source { margin-top: 14px; font-size: 13px; color: var(--ink-3); }
+  .stat-label { margin-top: 8px; font-size: var(--t-small); line-height: 1.4; color: var(--ink-2); max-width: 13em; }
+  .source { margin-top: 14px; font-size: var(--t-small); color: var(--ink-3); }
   .placeholder-tag {
     display: inline-block;
-    font-size: 13px;
+    font-size: var(--t-small);
     color: var(--ink-3);
     border: 1px dashed var(--ink-3);
     border-radius: 4px;
@@ -297,8 +313,8 @@
     text-align: right;
   }
   .story-index li {
-    font-size: 13px;
-    color: rgba(26, 18, 18, 0.38);
+    font-size: var(--t-body);
+    color: rgba(26, 18, 18, 0.45);
     transition: color 600ms var(--ease);
     display: flex;
     justify-content: flex-end;
@@ -324,7 +340,7 @@
       linear-gradient(100deg, #FFFFFF 0%, #FFF8F2 38%, #F6E4D6 70%, #EFD3C0 100%);
   }
   .ph span {
-    font-size: 13px;
+    font-size: var(--t-small);
     color: var(--ink-2);
     background: rgba(255, 255, 255, 0.7);
     border: 1px dashed var(--ink-3);
@@ -350,13 +366,17 @@
       #fff; }
 
   /* ---------- Section 5: team ---------- */
-  .team { padding: 120px 0; }
-  .team-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 72px; align-items: start; }
+  .team { padding: 140px 0; min-height: 100vh; display: flex; align-items: center; }
+  .team > .wrap { width: 100%; }
+  .team-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 72px; align-items: center; }
+  .team-portrait { aspect-ratio: 4 / 5; border-radius: 16px; overflow: hidden; }
+  .team-portrait .ph { padding: 0 0 24px; justify-content: center; }
   .team .heading-lg { margin-top: 16px; max-width: 11em; }
-  .team-body p { font-size: 18px; line-height: 1.55; color: var(--ink-2); max-width: 34em; }
+  .team-body { margin-top: 24px; }
+  .team-body p { font-size: var(--t-body); line-height: 1.55; color: var(--ink-2); max-width: 34em; }
   .team-body p + p { margin-top: 18px; }
-  .team-sign { margin-top: 28px; font-size: 15px; color: var(--ink); }
-  .team-sign span { display: block; font-size: 13px; color: var(--ink-3); }
+  .team-sign { margin-top: 28px; color: var(--ink); }
+  .team-sign span { display: block; font-size: var(--t-small); color: var(--ink-3); }
 
   /* ---------- Section 6: waitlist ---------- */
   .waitlist { position: relative; min-height: 100vh; display: flex; align-items: center; overflow: hidden; }
@@ -373,7 +393,7 @@
   .waitlist .body-lg { margin-bottom: 28px; }
   .waitlist .email-form { flex-direction: row; }
   .waitlist .email-form input { flex: 1; }
-  .trust { margin-top: 14px; font-size: 12px; color: var(--ink-3); }
+  .trust { margin-top: 14px; font-size: var(--t-small); color: var(--ink-3); }
 
   footer {
     padding: 40px 0 48px;
@@ -402,7 +422,8 @@
     .hero { min-height: 0; padding-top: 112px; }
     .signals { padding: 80px 0 96px; }
     .signals-grid { grid-template-columns: 1fr; gap: 40px; }
-    .quiz { padding: 24px; min-height: 0; }
+    .quiz { min-height: 0; padding: 40px 0 8px; }
+    .quiz::before { top: 0; bottom: -48px; left: -16px; right: -16px; border-radius: 0; }
 
     /* The story unpins on small screens: each step is its own block */
     .story { height: auto; }
@@ -410,6 +431,10 @@
     .story-sticky::before, .story-sticky::after, .story-index { display: none; }
     .frame { position: relative; opacity: 1; padding-bottom: 64px; }
     .frame-media { position: relative; height: 62vh; }
+    .frame-media::before, .waitlist-media::before {
+      content: ""; position: absolute; z-index: 1; left: 0; right: 0; top: 0; height: 80px;
+      background: linear-gradient(#fff, rgba(255,255,255,0));
+    }
     .frame-media::after {
       content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 80px;
       background: linear-gradient(rgba(255,255,255,0), #fff);
@@ -420,7 +445,8 @@
 
     .moonshot { padding: 96px 0 80px; }
     .team { padding: 80px 0; }
-    .team-grid { grid-template-columns: 1fr; gap: 24px; }
+    .team { min-height: 0; }
+    .team-grid { grid-template-columns: 1fr; gap: 40px; }
 
     .waitlist { min-height: 0; display: block; padding-bottom: 80px; }
     .waitlist-media { position: relative; height: 56vh; }
@@ -451,7 +477,7 @@
     <h1 class="hero-line">Catch the crash before it happens.</h1>
     <p class="label">Continuous biomarker monitoring</p>
     <div class="hero-cta"><a class="btn btn-primary" href="#signals">See how it works</a></div>
-    <img class="hero-magma" src="assets/magma-hero-reference.png" alt="" width="1983" height="793">
+    <img class="hero-magma" src="assets/magma-hero.png" alt="" width="1983" height="793">
   </header>
 
   <main>
@@ -502,6 +528,7 @@
 
           <div class="quiz-step" data-key="email">
             <p class="quiz-q" id="quizInvite">Thank you. Want to be the first to know when mymagma is ready?</p>
+            <p class="quiz-context" id="quizContext"></p>
             <form class="email-form" novalidate>
               <label class="label" for="quizEmail" style="position:absolute;left:-9999px">Email</label>
               <input id="quizEmail" type="email" name="email" placeholder="Your email" autocomplete="email" required>
@@ -606,23 +633,24 @@
         <div class="reveal">
           <p class="label">Why we're building this</p>
           <h2 class="heading-lg">Built by someone who lived it.</h2>
-        </div>
-        <div class="team-body reveal">
+        <div class="team-body">
           <p><span class="placeholder-tag">Founder story to come</span> What went unnoticed in my own health, what it took to find it, and why it shouldn't be that hard.</p>
           <p><span class="placeholder-tag">To come</span> More than ten years preparing to build a medical technology company.</p>
           <p class="team-sign">Founder name <span>Founder, my magma</span></p>
         </div>
+        </div>
+        <div class="team-portrait reveal"><div class="ph"><span>Founder photo (to come)</span></div></div>
       </div>
     </section>
 
     <!-- 6. Waitlist -->
     <section class="waitlist" id="waitlist">
-      <div class="waitlist-media"><div class="ph"><span>Photo 7: slow morning in bed + "You're on the list" screen</span></div></div>
+      <div class="waitlist-media"><div class="ph"><span>Photo 7: slow morning in bed + "Coming soon" screen</span></div></div>
       <div class="wrap waitlist-inner">
         <div class="waitlist-copy reveal">
-          <p class="label">Coming soon</p>
-          <h2 class="heading-lg">What's happening below the surface.</h2>
-          <p class="body-lg">Live your life. Join the waitlist and be the first to know when mymagma is ready.</p>
+          <p class="label">The waitlist</p>
+          <h2 class="heading-lg">Coming soon. Be the first to know.</h2>
+          <p class="body-lg">Live your life with a safety net. Leave your email and we'll tell you when mymagma is ready.</p>
           <form class="email-form" id="waitlistForm" novalidate>
             <label for="waitlistEmail" style="position:absolute;left:-9999px">Email</label>
             <input id="waitlistEmail" type="email" name="email" placeholder="Your email" autocomplete="email" required>
@@ -694,6 +722,22 @@
     "I'm not sure": 'Fair enough. Stay close and see what it can show you. Want to be first to know when it\'s ready?'
   };
 
+  const lateLines = {
+    'Yes': 'Finding out late is more common than it should be.',
+    'Someone close to me has': 'Finding out late is more common than it should be.'
+  };
+  const checkLines = {
+    'In the last 6 months': 'You already keep an eye on things. This fills the months in between.',
+    '6 to 12 months ago': 'A yearly check is a snapshot. This shows the trend in between.',
+    '1 to 3 years ago': 'No need to wait for the next check-up.',
+    "Longer, or I can't remember": 'No need to wait for the next check-up.'
+  };
+  function personalise() {
+    if (invites[answers.q1]) document.getElementById('quizInvite').textContent = invites[answers.q1];
+    const context = [lateLines[answers.q2], checkLines[answers.q3]].filter(Boolean).join(' ');
+    document.getElementById('quizContext').textContent = context;
+  }
+
   steps.slice(0, 3).forEach((step, i) => {
     step.querySelectorAll('.pill').forEach(btn => {
       btn.addEventListener('click', () => {
@@ -701,7 +745,7 @@
         btn.setAttribute('aria-pressed', 'true');
         answers[step.dataset.key] = btn.textContent.trim();
         send({ [step.dataset.key]: answers[step.dataset.key] });
-        if (i === 2 && invites[answers.q1]) document.getElementById('quizInvite').textContent = invites[answers.q1];
+        if (i === 2) personalise();
         setTimeout(() => show(i + 1), 350);
       });
     });
