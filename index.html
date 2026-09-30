@@ -236,7 +236,7 @@
   .thanks-title { font-size: var(--t-sub); line-height: 1.2; letter-spacing: -0.012em; }
 
   /* ---------- Section 3: the pinned story ---------- */
-  .story { position: relative; height: 400vh; }
+  .story { position: relative; height: 300vh; }
   .story-sticky {
     position: sticky;
     top: 0;
@@ -272,6 +272,25 @@
     width: min(480px, 40vw);
   }
   .frame-text .heading-lg { margin: 14px 0 18px; }
+  .frame--right .frame-text,
+  .frame-text--right {
+    left: auto;
+    right: max(var(--gutter), calc((100vw - var(--max)) / 2 + var(--gutter)));
+  }
+  .frame--split .frame-text { width: min(360px, 28vw); }
+  .frame--mirror .frame-media img { transform: scaleX(-1); }
+  .ph.ph--left {
+    justify-content: flex-start;
+    background:
+      radial-gradient(60% 70% at 28% 55%, rgba(216, 150, 110, 0.55), transparent 70%),
+      linear-gradient(260deg, #FFFFFF 0%, #FFF8F2 38%, #F6E4D6 70%, #EFD3C0 100%);
+  }
+  .ph.ph--center {
+    justify-content: center;
+    background:
+      radial-gradient(28% 70% at 50% 58%, rgba(216, 150, 110, 0.55), transparent 70%),
+      linear-gradient(90deg, #FFFFFF 0%, #FBEFE6 32%, #F2DCCB 50%, #FBEFE6 68%, #FFFFFF 100%);
+  }
   .frame-text > p:not(.label) { font-size: var(--t-body); line-height: 1.55; color: var(--ink-2); max-width: 28em; }
   .frame.is-active .frame-text > * { animation: rise 800ms var(--ease) both; }
   .frame.is-active .frame-text > *:nth-child(2) { animation-delay: 80ms; }
@@ -301,33 +320,27 @@
   .story-index {
     position: absolute;
     z-index: 4;
-    right: max(var(--gutter), calc((100vw - var(--max)) / 2 + var(--gutter)));
-    top: 50%;
-    transform: translateY(-50%);
+    left: 50%;
+    bottom: 64px;
+    transform: translateX(-50%);
     list-style: none;
     display: flex;
-    flex-direction: column;
-    gap: 12px;
-    text-align: right;
+    gap: 36px;
+    white-space: nowrap;
   }
   .story-index li {
     font-size: var(--t-body);
     color: rgba(26, 18, 18, 0.45);
     transition: color 600ms var(--ease);
     display: flex;
-    justify-content: flex-end;
     align-items: baseline;
-    gap: 14px;
+    gap: 10px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(26, 18, 18, 0.15);
+    text-shadow: 0 0 14px rgba(255, 255, 255, 0.9), 0 0 2px rgba(255, 255, 255, 0.9);
   }
   .story-index li span { font-variant-numeric: tabular-nums; }
-  .story-index li.is-active { color: var(--ink); }
-  .story-index li { text-shadow: 0 0 14px rgba(255, 255, 255, 0.9), 0 0 2px rgba(255, 255, 255, 0.9); }
-  .story-index li.is-active::before {
-    content: "";
-    width: 1px; height: 14px;
-    background: var(--ink);
-    align-self: center;
-  }
+  .story-index li.is-active { color: var(--ink); border-top-color: var(--ink); }
 
   /* Image placeholders until the ChatGPT images arrive */
   .ph {
@@ -384,14 +397,14 @@
   /* ---------- Section 6: waitlist ---------- */
   .waitlist { position: relative; min-height: 100vh; display: flex; align-items: center; overflow: hidden; }
   .waitlist-media { position: absolute; inset: 0; }
-  .waitlist-media img { width: 100%; height: 100%; object-fit: cover; object-position: 70% 50%; }
+  .waitlist-media img { width: 100%; height: 100%; object-fit: cover; object-position: 30% 50%; }
   .waitlist::before {
     content: "";
     position: absolute; left: 0; right: 0; top: 0; height: 96px; z-index: 1;
     background: linear-gradient(#fff, rgba(255,255,255,0));
   }
   .waitlist-inner { position: relative; z-index: 2; width: 100%; }
-  .waitlist-copy { max-width: 560px; }
+  .waitlist-copy { max-width: 560px; margin-left: auto; }
   .waitlist .heading-lg { margin: 14px 0 18px; }
   .waitlist .body-lg { margin-bottom: 28px; }
   .waitlist .email-form { flex-direction: row; }
@@ -449,7 +462,8 @@
       content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 80px;
       background: linear-gradient(rgba(255,255,255,0), #fff);
     }
-    .frame-text { position: relative; left: auto; top: auto; transform: none; width: auto; padding: 8px var(--gutter) 0; }
+    .frame-text, .frame--right .frame-text, .frame-text--right, .frame--split .frame-text { position: relative; left: auto; right: auto; top: auto; transform: none; width: auto; padding: 8px var(--gutter) 0; }
+    .frame-text--right { margin-top: 40px; }
     .frame .frame-text > * { animation: none; }
     .stats { gap: 24px; }
 
@@ -467,6 +481,7 @@
       background: linear-gradient(rgba(255,255,255,0), #fff);
     }
     .waitlist .email-form { flex-direction: column; }
+    .waitlist-copy { margin-left: 0; }
   }
 </style>
 </head>
@@ -570,7 +585,7 @@
           </div>
         </article>
 
-        <article class="frame" data-step="1">
+        <article class="frame frame--right frame--mirror" data-step="1">
           <div class="frame-media"><img src="assets/photos/02-breakfast.jpg" alt="" width="1536" height="1024" loading="lazy"></div>
           <div class="frame-text">
             <p class="label">The new way</p>
@@ -579,12 +594,12 @@
           </div>
         </article>
 
-        <article class="frame" data-step="2">
-          <div class="frame-media"><div class="ph"><span>Photo 4: packing a bag + iron screen</span></div></div>
-          <div class="frame-text">
+        <article class="frame frame--split" data-step="2">
+          <div class="frame-media"><div class="ph ph--center"><span>Photo 3: person in the centre + iron and B12 screen</span></div></div>
+          <div class="frame-text frame-text--left">
             <p class="label">Iron</p>
-            <h2 class="heading-lg">Iron drifts slowly. You notice late.</h2>
-            <p>Iron carries oxygen around your body. When it runs low you feel tired, foggy and cold, but it usually drifts over months, so the change is easy to miss.</p>
+            <h2 class="heading-lg">It drifts slowly.</h2>
+            <p>Iron carries oxygen around your body. It usually drifts over months, so the change is easy to miss.</p>
             <div>
               <div class="stats">
                 <div>
@@ -599,14 +614,10 @@
               <p class="source"><span class="placeholder-tag">Source and year to come</span></p>
             </div>
           </div>
-        </article>
-
-        <article class="frame" data-step="3">
-          <div class="frame-media"><div class="ph"><span>Photo 5: dinner with friends + B12 screen</span></div></div>
-          <div class="frame-text">
+          <div class="frame-text frame-text--right">
             <p class="label">B12</p>
-            <h2 class="heading-lg">B12 shifts quietly, for years.</h2>
-            <p>B12 is the vitamin your body uses for energy and nerve function. What you eat shapes it, and it can shift quietly for years. my magma flags the trend. Your GP confirms.</p>
+            <h2 class="heading-lg">It shifts quietly.</h2>
+            <p>B12 is the vitamin your body uses for energy and nerve function. What you eat shapes it. my magma flags the trend. Your GP confirms.</p>
             <div>
               <div class="stats">
                 <div>
@@ -620,10 +631,9 @@
         </article>
 
         <ol class="story-index" aria-hidden="true">
-          <li class="is-active">The old way <span>01</span></li>
-          <li>The new way <span>02</span></li>
-          <li>Iron <span>03</span></li>
-          <li>B12 <span>04</span></li>
+          <li class="is-active"><span>01</span> The old way</li>
+          <li><span>02</span> The new way</li>
+          <li><span>03</span> Iron and B12</li>
         </ol>
       </div>
     </section>
@@ -656,7 +666,7 @@
 
     <!-- 6. Waitlist -->
     <section class="waitlist" id="waitlist">
-      <div class="waitlist-media"><div class="ph"><span>Photo 7: slow morning in bed + "Coming soon" screen</span></div></div>
+      <div class="waitlist-media"><div class="ph ph--left"><span>Photo 6: slow morning in bed + "Coming soon" screen</span></div></div>
       <div class="wrap waitlist-inner">
         <div class="waitlist-copy reveal">
           <p class="label">The waitlist</p>
