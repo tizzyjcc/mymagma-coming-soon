@@ -257,26 +257,14 @@
   .form-error { font-size: var(--t-small); color: var(--crimson); min-height: 1.2em; }
   .thanks-title { font-size: var(--t-sub); line-height: 1.2; letter-spacing: -0.012em; }
 
-  /* ---------- Section 3: the pinned story ---------- */
-  .story { position: relative; height: 220vh; }
+  /* ---------- Section 3: the old way and the new way, two full-screen photos that scroll normally ---------- */
+  .frame { position: relative; height: 100vh; min-height: 680px; overflow: hidden; }
+  .frame--quiz { min-height: 760px; }
   .frame--quiz .frame-text { top: 15vh; }
-  .story-sticky {
-    position: sticky;
-    top: 0;
-    height: 100vh;
-    overflow: hidden;
-  }
-  .frame {
-    position: absolute;
-    inset: 0;
-    opacity: 0;
-    transition: opacity 900ms var(--ease);
-  }
-  .frame.is-active { opacity: 1; }
   .frame-media { position: absolute; inset: 0; }
   .frame-media img { width: 100%; height: 100%; object-fit: cover; object-position: 70% 50%; }
-  /* The photo melts into the white sections above and below */
-  .story-sticky::before, .story-sticky::after {
+  /* Each photo melts into white at its top and bottom edges */
+  .frame::before, .frame::after {
     content: "";
     position: absolute;
     left: 0; right: 0;
@@ -284,8 +272,8 @@
     z-index: 3;
     pointer-events: none;
   }
-  .story-sticky::before { top: 0; background: linear-gradient(#fff, rgba(255,255,255,0)); }
-  .story-sticky::after { bottom: 0; background: linear-gradient(rgba(255,255,255,0), #fff); }
+  .frame::before { top: 0; background: linear-gradient(#fff, rgba(255,255,255,0)); }
+  .frame::after { bottom: 0; background: linear-gradient(rgba(255,255,255,0), #fff); }
 
   .frame-text {
     position: absolute;
@@ -314,10 +302,6 @@
       linear-gradient(90deg, #FFFFFF 0%, #FBEFE6 32%, #F2DCCB 50%, #FBEFE6 68%, #FFFFFF 100%);
   }
   .frame-text > p:not(.label) { font-size: var(--t-body); line-height: 1.55; color: var(--ink-2); max-width: 28em; }
-  .frame.is-active .frame-text > * { animation: rise 800ms var(--ease) both; }
-  .frame.is-active .frame-text > *:nth-child(2) { animation-delay: 80ms; }
-  .frame.is-active .frame-text > *:nth-child(3) { animation-delay: 160ms; }
-  .frame.is-active .frame-text > *:nth-child(4) { animation-delay: 240ms; }
 
   .stats { display: flex; gap: 36px; margin-top: 28px; }
   .stat-num {
@@ -339,30 +323,6 @@
     padding: 1px 6px;
   }
 
-  .story-index {
-    position: absolute;
-    z-index: 4;
-    left: 50%;
-    bottom: 64px;
-    transform: translateX(-50%);
-    list-style: none;
-    display: flex;
-    gap: 36px;
-    white-space: nowrap;
-  }
-  .story-index li {
-    font-size: var(--t-body);
-    color: rgba(26, 18, 18, 0.45);
-    transition: color 600ms var(--ease);
-    display: flex;
-    align-items: baseline;
-    gap: 10px;
-    padding-top: 12px;
-    border-top: 1px solid rgba(26, 18, 18, 0.15);
-    text-shadow: 0 0 14px rgba(255, 255, 255, 0.9), 0 0 2px rgba(255, 255, 255, 0.9);
-  }
-  .story-index li span { font-variant-numeric: tabular-nums; }
-  .story-index li.is-active { color: var(--ink); border-top-color: var(--ink); }
 
   /* Image placeholders until the ChatGPT images arrive */
   .ph {
@@ -562,11 +522,9 @@
     .moon-cards { order: 2; }
     .fineprint { position: static; display: block; padding: 8px var(--gutter) 0; }
 
-    /* The story unpins on small screens: each step is its own block */
-    .story { height: auto; }
-    .story-sticky { position: static; height: auto; overflow: visible; }
-    .story-sticky::before, .story-sticky::after, .story-index { display: none; }
-    .frame { position: relative; opacity: 1; padding-bottom: 64px; }
+    /* On phones each step stacks: photo, then text */
+    .frame, .frame--quiz { height: auto; min-height: 0; overflow: visible; padding-bottom: 64px; }
+    .frame::before, .frame::after { display: none; }
     .frame-media { position: relative; height: 62vh; }
     .frame-media::before, .waitlist-media::before {
       content: ""; position: absolute; z-index: 1; left: 0; right: 0; top: 0; height: 80px;
@@ -578,7 +536,6 @@
     }
     .frame-text, .frame--right .frame-text, .frame-text--right, .frame--quiz .frame-text { position: relative; left: auto; right: auto; top: auto; transform: none; width: auto; padding: 8px var(--gutter) 0; }
     .frame-text--right { margin-top: 40px; }
-    .frame .frame-text > * { animation: none; }
     .stats { gap: 24px; }
 
     .team { padding: 80px 0; }
@@ -621,11 +578,10 @@
   </header>
 
   <main>
-    <!-- 3. Biomarkers: pinned story -->
+    <!-- 3. The old way, then the new way -->
     <section class="story" id="story" aria-label="The old way and the new way">
-      <div class="story-sticky">
 
-        <article class="frame frame--quiz is-active" data-step="0">
+        <article class="frame frame--quiz">
           <div class="frame-media"><img src="assets/photos/01-waiting-room.jpg" alt="" width="1536" height="1024"></div>
           <div class="frame-text">
             <p class="label">The old way</p>
@@ -686,7 +642,7 @@
           </div>
         </article>
 
-        <article class="frame frame--right frame--mirror" data-step="1">
+        <article class="frame frame--right frame--mirror">
           <div class="frame-media"><img src="assets/photos/02-breakfast.jpg" alt="" width="1536" height="1024" loading="lazy"></div>
           <div class="frame-text">
             <p class="label">The new way</p>
@@ -695,11 +651,6 @@
           </div>
         </article>
 
-        <ol class="story-index" aria-hidden="true">
-          <li class="is-active"><span>01</span> The old way</li>
-          <li><span>02</span> The new way</li>
-        </ol>
-      </div>
     </section>
 
     <!-- 4. Enter magma: through the door -->
@@ -1017,7 +968,7 @@
     el.textContent = '';
     el.append(label, visual);
     el.classList.add('hl');
-    return { el, chars, shown: 0, inFrame: !!el.closest('.frame') };
+    return { el, chars, shown: 0 };
   });
 
   function showUpTo(h, n) {
@@ -1026,7 +977,7 @@
     h.shown = Math.max(h.shown, n);
   }
 
-  // Timed fill, used for the hero on load and for each pinned story step as it appears.
+  // Timed fill, used for the hero on load.
   function play(h) {
     if (h.playing || h.shown >= h.chars.length) return;
     h.playing = true;
@@ -1043,21 +994,13 @@
     const vh = window.innerHeight;
     highlights.forEach(h => {
       if (h.shown >= h.chars.length || h.el.closest('.hero')) return;
-      if (h.inFrame && pinned.matches) return;
       const r = h.el.getBoundingClientRect();
       const progress = (vh * 0.92 - r.top) / (vh * 0.5);
       if (progress > 0) showUpTo(h, Math.ceil(progress * h.chars.length));
     });
   }
 
-  function playFrame(frame) {
-    highlights.filter(h => frame.contains(h.el)).forEach(play);
-  }
 
-  // ---- Pinned story: the active step follows scroll progress ----
-  const story = document.querySelector('.story');
-  const frames = Array.from(story.querySelectorAll('.frame'));
-  const indexItems = Array.from(story.querySelectorAll('.story-index li'));
   const pinned = window.matchMedia('(min-width: 861px)');
 
   if (reduceMotion) highlights.forEach(h => showUpTo(h, h.chars.length));
@@ -1067,35 +1010,6 @@
     window.addEventListener('resize', fillOnScroll);
     fillOnScroll();
   }
-  let active = 0;
-
-  function onScroll() {
-    if (!pinned.matches) return;
-    const rect = story.getBoundingClientRect();
-    const travel = story.offsetHeight - window.innerHeight;
-    const progress = Math.min(Math.max(-rect.top / travel, 0), 0.9999);
-    const step = Math.floor(progress * frames.length);
-    if (step === active) return;
-    frames[active].classList.remove('is-active');
-    indexItems[active].classList.remove('is-active');
-    active = step;
-    frames[active].classList.add('is-active');
-    indexItems[active].classList.add('is-active');
-    if (!reduceMotion) playFrame(frames[active]);
-  }
-  window.addEventListener('scroll', onScroll, { passive: true });
-  onScroll();
-  // The first step plays once the pinned story reaches the top of the screen.
-  function playFirstStep() {
-    if (!pinned.matches || reduceMotion) return;
-    if (story.getBoundingClientRect().top <= window.innerHeight * 0.25) {
-      playFrame(frames[active]);
-      window.removeEventListener('scroll', playFirstStep);
-    }
-  }
-  window.addEventListener('scroll', playFirstStep, { passive: true });
-  playFirstStep();
-
   // ---- Enter magma: scrolling walks the camera through the door ----
   const enter = document.querySelector('.enter');
   const enterSticky = enter.querySelector('.enter-sticky');
