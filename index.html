@@ -55,9 +55,9 @@
   .wrap { max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter); }
 
   .label {
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 500;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--ink-3);
   }
@@ -119,7 +119,6 @@
     border-radius: 9999px;
     transition: opacity 400ms var(--ease), transform 400ms var(--ease);
   }
-  .nav.is-hidden { opacity: 0; transform: translate(-50%, -12px); pointer-events: none; }
   .nav-logo img { height: 22px; width: auto; }
   .nav-links { display: flex; gap: 28px; list-style: none; }
   .nav-links a {
@@ -129,6 +128,8 @@
   }
   .nav-links a:hover { color: var(--ink); }
   .nav .btn { padding: 10px 18px; font-size: 14px; }
+  .btn-ghost { background: transparent; color: var(--ink); box-shadow: inset 0 0 0 1px var(--line); }
+  .btn-ghost:hover { background: var(--blush); }
 
   /* ---------- Hero: the store entrance ---------- */
   .hero {
@@ -149,12 +150,14 @@
     color: var(--ink);
   }
   .hero .label { margin-top: 18px; }
+  .hero-cta { margin-top: 28px; }
   .hero-magma {
     width: 100%;
     margin-top: clamp(24px, 4vw, 48px);
     height: clamp(180px, 30vw, 420px);
     object-fit: cover;
     object-position: 50% 50%;
+    mix-blend-mode: multiply;
   }
 
   /* ---------- Section 2: signals + quiz ---------- */
@@ -168,18 +171,16 @@
   .signals .heading-lg { margin: 16px 0 24px; max-width: 12em; }
 
   .quiz {
-    background: var(--blush);
-    border: 1px solid var(--line);
-    border-radius: 16px;
-    padding: 32px;
+    border-top: 1px solid var(--line);
+    padding-top: 24px;
     min-height: 420px;
     display: flex;
     flex-direction: column;
   }
   .quiz-top { display: flex; justify-content: space-between; align-items: center; }
-  .quiz-count { font-family: var(--mono); font-size: 12px; color: var(--ink-3); }
+  .quiz-count { font-size: 13px; color: var(--ink-3); }
   .quiz-bar { height: 2px; background: var(--line); border-radius: 2px; margin-top: 14px; overflow: hidden; }
-  .quiz-bar span { display: block; height: 100%; width: 33.33%; background: var(--crimson); transition: width 600ms var(--ease); }
+  .quiz-bar span { display: block; height: 100%; width: 33.33%; background: var(--ink); transition: width 600ms var(--ease); }
   .quiz-step { margin-top: 28px; display: none; animation: rise 600ms var(--ease) both; }
   .quiz-step.is-active { display: block; }
   .quiz-q {
@@ -201,6 +202,7 @@
     cursor: pointer;
     transition: border-color 150ms ease, background 150ms ease;
   }
+  .pill { background: var(--blush); }
   .pill:hover { border-color: var(--ink-3); }
   .pill[aria-pressed="true"] { border-color: var(--crimson); background: #fff; box-shadow: inset 0 0 0 1px var(--crimson); }
   .quiz-note { margin-top: 16px; font-size: 13px; color: var(--ink-3); }
@@ -252,12 +254,11 @@
     position: absolute;
     z-index: 4;
     left: max(var(--gutter), calc((100vw - var(--max)) / 2 + var(--gutter)));
-    top: 50%;
-    transform: translateY(-50%);
-    width: min(440px, 40vw);
+    top: 30vh;
+    width: min(480px, 40vw);
   }
   .frame-text .heading-lg { margin: 14px 0 18px; }
-  .frame-text > p:not(.label) { font-size: 17px; line-height: 1.5; color: var(--ink-2); }
+  .frame-text > p:not(.label) { font-size: 17px; line-height: 1.5; color: var(--ink-2); max-width: 27em; }
   .frame.is-active .frame-text > * { animation: rise 800ms var(--ease) both; }
   .frame.is-active .frame-text > *:nth-child(2) { animation-delay: 80ms; }
   .frame.is-active .frame-text > *:nth-child(3) { animation-delay: 160ms; }
@@ -267,17 +268,16 @@
   .stat-num {
     font-family: var(--mono);
     font-weight: 500;
-    font-size: clamp(36px, 3.6vw, 48px);
-    line-height: 1;
+    font-size: clamp(32px, 4vw, 44px);
+    line-height: 1.1;
     letter-spacing: -0.02em;
     color: var(--ink);
   }
   .stat-label { margin-top: 8px; font-size: 13px; line-height: 1.4; color: var(--ink-2); max-width: 13em; }
-  .source { margin-top: 14px; font-size: 12px; color: var(--ink-3); }
+  .source { margin-top: 14px; font-size: 13px; color: var(--ink-3); }
   .placeholder-tag {
     display: inline-block;
-    font-family: var(--mono);
-    font-size: 11px;
+    font-size: 13px;
     color: var(--ink-3);
     border: 1px dashed var(--ink-3);
     border-radius: 4px;
@@ -297,7 +297,7 @@
     text-align: right;
   }
   .story-index li {
-    font-size: 14px;
+    font-size: 13px;
     color: rgba(26, 18, 18, 0.38);
     transition: color 600ms var(--ease);
     display: flex;
@@ -305,7 +305,7 @@
     align-items: baseline;
     gap: 14px;
   }
-  .story-index li span { font-family: var(--mono); font-size: 12px; }
+  .story-index li span { font-variant-numeric: tabular-nums; }
   .story-index li.is-active { color: var(--ink); }
   .story-index li.is-active::before {
     content: "";
@@ -324,8 +324,7 @@
       linear-gradient(100deg, #FFFFFF 0%, #FFF8F2 38%, #F6E4D6 70%, #EFD3C0 100%);
   }
   .ph span {
-    font-family: var(--mono);
-    font-size: 12px;
+    font-size: 13px;
     color: var(--ink-2);
     background: rgba(255, 255, 255, 0.7);
     border: 1px dashed var(--ink-3);
@@ -338,7 +337,7 @@
   .moonshot .heading-lg { margin: 16px auto 20px; max-width: 16em; }
   .moonshot .body-lg { margin: 0 auto; }
   .moonshot-visual {
-    margin-top: 56px;
+    margin-top: 24px;
     width: 100%;
     height: clamp(220px, 34vw, 460px);
     object-fit: cover;
@@ -351,7 +350,7 @@
       #fff; }
 
   /* ---------- Section 5: team ---------- */
-  .team { padding: 120px 0; border-top: 1px solid var(--line); }
+  .team { padding: 120px 0; }
   .team-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 72px; align-items: start; }
   .team .heading-lg { margin-top: 16px; max-width: 11em; }
   .team-body p { font-size: 18px; line-height: 1.55; color: var(--ink-2); max-width: 34em; }
@@ -369,7 +368,7 @@
     background: linear-gradient(#fff, rgba(255,255,255,0));
   }
   .waitlist-inner { position: relative; z-index: 2; width: 100%; }
-  .waitlist-copy { max-width: 440px; }
+  .waitlist-copy { max-width: 560px; }
   .waitlist .heading-lg { margin: 14px 0 18px; }
   .waitlist .body-lg { margin-bottom: 28px; }
   .waitlist .email-form { flex-direction: row; }
@@ -400,6 +399,7 @@
     :root { --gutter: 16px; }
     .nav { padding-left: 16px; }
     .nav-links { display: none; }
+    .hero { min-height: 0; padding-top: 112px; }
     .signals { padding: 80px 0 96px; }
     .signals-grid { grid-template-columns: 1fr; gap: 40px; }
     .quiz { padding: 24px; min-height: 0; }
@@ -434,7 +434,7 @@
 </head>
 <body>
 
-  <nav class="nav is-hidden" aria-label="Main">
+  <nav class="nav" aria-label="Main">
     <a class="nav-logo" href="#top" aria-label="my magma home"><img src="assets/magma-logo.png" alt="magma"></a>
     <ul class="nav-links">
       <li><a href="#signals">Your signals</a></li>
@@ -442,7 +442,7 @@
       <li><a href="#moonshot">The moonshot</a></li>
       <li><a href="#team">Team</a></li>
     </ul>
-    <a class="btn btn-primary" href="#waitlist">Join the waitlist</a>
+    <a class="btn btn-ghost" href="#waitlist">Join the waitlist</a>
   </nav>
 
   <!-- 1. Hero: the entrance -->
@@ -450,6 +450,7 @@
     <img class="hero-logo" src="assets/magma-logo.png" alt="magma">
     <h1 class="hero-line">Catch the crash before it happens.</h1>
     <p class="label">Continuous biomarker monitoring</p>
+    <div class="hero-cta"><a class="btn btn-primary" href="#signals">See how it works</a></div>
     <img class="hero-magma" src="assets/magma-hero-reference.png" alt="" width="1983" height="793">
   </header>
 
@@ -459,7 +460,7 @@
       <div class="wrap signals-grid">
         <div class="reveal">
           <p class="label">Below the surface</p>
-          <h2 class="heading-lg">Your body is always talking. We're learning to listen.</h2>
+          <h2 class="heading-lg">Your body is always leaving signals.</h2>
           <p class="body-lg">Every day your body is busy making energy, carrying oxygen and repairing itself. All of it leaves traces in your blood: small signals that shift long before you feel anything. Follow those signals over time and you see what's changing, measured against what's normal for you.</p>
         </div>
 
@@ -500,7 +501,7 @@
           </div>
 
           <div class="quiz-step" data-key="email">
-            <p class="quiz-q">Thank you. Want to be the first to know when mymagma is ready?</p>
+            <p class="quiz-q" id="quizInvite">Thank you. Want to be the first to know when mymagma is ready?</p>
             <form class="email-form" novalidate>
               <label class="label" for="quizEmail" style="position:absolute;left:-9999px">Email</label>
               <input id="quizEmail" type="email" name="email" placeholder="Your email" autocomplete="email" required>
@@ -536,7 +537,7 @@
           <div class="frame-text">
             <p class="label">The new way</p>
             <h2 class="heading-lg">Get on with your life. We'll keep watch.</h2>
-            <p>my magma follows your levels every day, quietly, in the background. It learns what's normal for you, not a population average. While everything is steady, you won't hear from us.</p>
+            <p>my magma follows your levels every day in the background and learns what's normal for you. While everything is steady, you won't hear from us.</p>
           </div>
         </article>
 
@@ -607,7 +608,7 @@
           <h2 class="heading-lg">Built by someone who lived it.</h2>
         </div>
         <div class="team-body reveal">
-          <p><span class="placeholder-tag">Founder story to come</span> The deficiency that went unnoticed, what it took to find it, and why it shouldn't be that hard.</p>
+          <p><span class="placeholder-tag">Founder story to come</span> What went unnoticed in my own health, what it took to find it, and why it shouldn't be that hard.</p>
           <p><span class="placeholder-tag">To come</span> More than ten years preparing to build a medical technology company.</p>
           <p class="team-sign">Founder name <span>Founder, my magma</span></p>
         </div>
@@ -620,8 +621,8 @@
       <div class="wrap waitlist-inner">
         <div class="waitlist-copy reveal">
           <p class="label">Coming soon</p>
-          <h2 class="heading-lg">Live your life. Know what's happening below the surface.</h2>
-          <p class="body-lg">Join the waitlist and be the first to know when mymagma is ready.</p>
+          <h2 class="heading-lg">What's happening below the surface.</h2>
+          <p class="body-lg">Live your life. Join the waitlist and be the first to know when mymagma is ready.</p>
           <form class="email-form" id="waitlistForm" novalidate>
             <label for="waitlistEmail" style="position:absolute;left:-9999px">Email</label>
             <input id="waitlistEmail" type="email" name="email" placeholder="Your email" autocomplete="email" required>
@@ -686,12 +687,21 @@
     bar.style.width = (Math.min(current + 1, 3) / 3 * 100) + '%';
   }
 
+  const answers = {};
+  const invites = {
+    'Yes, definitely': 'Then you\'re who we\'re building this for. Want to be first to know when mymagma is ready?',
+    'Maybe, if it was effortless': 'That\'s the idea: nothing to book, nothing to do. Want to be first to know when it\'s ready?',
+    "I'm not sure": 'Fair enough. Stay close and see what it can show you. Want to be first to know when it\'s ready?'
+  };
+
   steps.slice(0, 3).forEach((step, i) => {
     step.querySelectorAll('.pill').forEach(btn => {
       btn.addEventListener('click', () => {
         step.querySelectorAll('.pill').forEach(b => b.setAttribute('aria-pressed', 'false'));
         btn.setAttribute('aria-pressed', 'true');
-        send({ [step.dataset.key]: btn.textContent.trim() });
+        answers[step.dataset.key] = btn.textContent.trim();
+        send({ [step.dataset.key]: answers[step.dataset.key] });
+        if (i === 2 && invites[answers.q1]) document.getElementById('quizInvite').textContent = invites[answers.q1];
         setTimeout(() => show(i + 1), 350);
       });
     });
@@ -709,6 +719,7 @@
       }
       errorEl.textContent = '';
       send({ email: value });
+      store.set('mm_joined', '1');
       onDone();
     });
   }
@@ -716,16 +727,14 @@
   wireEmail(steps[3].querySelector('form'), steps[3].querySelector('.form-error'), () => show(4));
 
   const waitlistForm = document.getElementById('waitlistForm');
-  wireEmail(waitlistForm, document.getElementById('waitlistError'), () => {
+  const joined = () => {
+    if (!document.body.contains(waitlistForm)) return;
     waitlistForm.outerHTML = '<p class="thanks-title">You\'re on the list. We\'ll let you know when mymagma is ready.</p>';
-  });
-
-  // ---- Floating nav appears once the hero is scrolled past ----
-  const nav = document.querySelector('.nav');
-  const hero = document.querySelector('.hero');
-  new IntersectionObserver(([entry]) => {
-    nav.classList.toggle('is-hidden', entry.isIntersecting);
-  }, { threshold: 0.35 }).observe(hero);
+  };
+  wireEmail(waitlistForm, document.getElementById('waitlistError'), joined);
+  // Someone who joined through the quiz is not asked again at the close.
+  steps[3].querySelector('form').addEventListener('submit', () => { if (store.get('mm_joined')) joined(); });
+  if (store.get('mm_joined')) joined();
 
   // ---- Reveal on scroll ----
   const io = new IntersectionObserver(entries => {
