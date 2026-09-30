@@ -13,9 +13,9 @@
 const HEADERS = [
   'Submitted at',
   'Visitor ID',
-  'Q1: Would you want to know if something in your body was shifting before you felt it?',
+  'Q1: When was the last time you had a health check?',
   "Q2: Have you ever found out about something in your health later than you'd have liked?",
-  'Q3: When was the last time you had a health check?',
+  'Q3: Would you want to know if something in your body was shifting before you felt it?',
   'Waitlist email',
   'Page',
 ];

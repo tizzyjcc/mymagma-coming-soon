@@ -166,8 +166,9 @@
   }
 
   /* ---------- Your body is always talking: the art wall ---------- */
-  .wall { position: relative; height: 360vh; }
-  .wall-sticky { position: sticky; top: 0; height: 100vh; overflow: hidden; background: #fff; }
+  /* The wall starts while the door zoom is still pinned and fades in over it (see onWall) */
+  .wall { position: relative; height: 410vh; margin-top: -150vh; z-index: 2; pointer-events: none; }
+  .wall-sticky { position: sticky; top: 0; height: 100vh; overflow: hidden; background: #fff; opacity: var(--fade, 0); pointer-events: auto; }
   /* The stage always shows the full wall width, so all three panels stay in view; text and highlights sit on it in % */
   .wall-stage {
     position: absolute; left: 50%; top: 50%;
@@ -212,7 +213,10 @@
     margin-top: 28px;
     max-width: 440px;
   }
-  .quiz-top { display: flex; justify-content: flex-end; align-items: center; }
+  .quiz-top { display: flex; justify-content: flex-end; align-items: center; min-height: 20px; }
+  .quiz-back { margin-right: auto; background: none; border: 0; padding: 0; font-size: var(--t-small); color: var(--ink-2); cursor: pointer; transition: color 150ms; }
+  .quiz-back:hover { color: var(--crimson); }
+  .quiz-back[hidden] { display: none; }
   .quiz-count { font-size: var(--t-small); color: var(--ink-3); }
   .quiz-bar { height: 2px; background: var(--line); border-radius: 2px; margin-top: 14px; overflow: hidden; }
   .quiz-bar span { display: block; height: 100%; width: 33.33%; background: var(--ink); transition: width 600ms var(--ease); }
@@ -289,6 +293,16 @@
     right: max(var(--gutter), calc((100vw - var(--max)) / 2 + var(--gutter)));
   }
   .frame--mirror .frame-media img { transform: scaleX(-1); }
+  /* The two photos blend straight into each other, with no white band between them */
+  .frame--quiz::after { display: none; }
+  .frame--mirror { margin-top: -32vh; pointer-events: none; }
+  .frame--mirror .frame-text { pointer-events: auto; top: calc(32vh + 30vh); }
+  .frame--mirror::before { display: none; }
+  .frame--mirror { height: calc(100vh + 32vh); }
+  .frame--mirror .frame-media {
+    -webkit-mask-image: linear-gradient(rgba(0,0,0,0), #000 32vh);
+            mask-image: linear-gradient(rgba(0,0,0,0), #000 32vh);
+  }
   .ph.ph--left {
     justify-content: flex-start;
     background:
@@ -389,7 +403,7 @@
   .marker-col > p:not(.label) { color: var(--ink-2); }
 
   /* ---------- The moonshot: the product wall, one shelf at a time ---------- */
-  .moonshot { position: relative; height: 380vh; }
+  .moonshot { position: relative; height: 480vh; }
   .moon-sticky {
     position: sticky; top: 0; height: 100vh; overflow: hidden;
     display: flex; flex-direction: column; align-items: center;
@@ -398,9 +412,9 @@
   .moon-head .body-lg { margin: 10px auto 0; }
   /* The frame crops the photo to the shelves (12–88% across, 22–86% down), so they fill the width */
   .moon-frame { --w: min(92vw, calc((100vh - 360px) * 2.13)); width: var(--w); }
-  .moon-cards { position: relative; height: 160px; margin-top: 16px; }
+  .moon-cards { position: relative; height: 128px; margin-top: 16px; }
   .moon-card {
-    position: absolute; bottom: 12px;
+    position: absolute; top: 0; bottom: 12px;
     text-align: left;
     background: rgba(255, 255, 255, 0.96);
     border: 1px solid var(--line);
@@ -432,13 +446,9 @@
   /* ---------- Section 5: team ---------- */
   .team { position: relative; padding: 140px 0; min-height: 100vh; display: flex; align-items: center; overflow: hidden; }
   .team > .wrap { width: 100%; }
-  .team-grid { display: grid; grid-template-columns: minmax(0, 520px); }
-  .team-portrait { position: absolute; top: 0; bottom: 0; right: 0; width: 46%; }
-  .team-portrait::before {
-    content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
-    background: linear-gradient(90deg, #fff, rgba(255,255,255,0) 30%), linear-gradient(#fff, rgba(255,255,255,0) 16%, rgba(255,255,255,0) 84%, #fff);
-  }
-  .team-portrait .ph { padding: 0 6% 12%; }
+  .team-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 72px; align-items: start; }
+  .team-story { padding-top: 30px; }
+  .team-story .team-body { margin-top: 0; }
   .team .heading-lg { margin-top: 16px; max-width: 11em; }
   .team-body { margin-top: 40px; }
   .team-body p { font-size: var(--t-body); line-height: 1.55; color: var(--ink-2); max-width: 34em; }
@@ -459,16 +469,30 @@
   .team-sign span { display: block; font-size: var(--t-small); color: var(--ink-3); }
 
   /* ---------- Section 6: waitlist ---------- */
-  .waitlist { position: relative; min-height: 100vh; display: flex; align-items: center; overflow: hidden; }
-  .waitlist-media { position: absolute; inset: 0; }
-  .waitlist-media img { width: 100%; height: 100%; object-fit: cover; object-position: 20% 50%; }
+  .waitlist { position: relative; height: 100vh; overflow: hidden; }
+  .waitlist-media { position: absolute; inset: 0; overflow: hidden; }
+  /* Sized like object-fit: cover and anchored right, so the white wall (right 44% of the photo) stays in view */
+  .waitlist-stage {
+    position: absolute; right: 0; top: 50%;
+    width: max(100vw, calc(100vh * 1376 / 768));
+    height: max(100vh, calc(100vw * 768 / 1376));
+    transform: translateY(-50%);
+  }
+  .waitlist-stage img { width: 100%; height: 100%; }
   .waitlist::before {
     content: "";
     position: absolute; left: 0; right: 0; top: 0; height: 96px; z-index: 1;
     background: linear-gradient(#fff, rgba(255,255,255,0));
   }
-  .waitlist-inner { position: relative; z-index: 2; width: 100%; }
-  .waitlist-copy { max-width: 480px; margin-left: auto; }
+  /* The copy sits on the wall: 60% across and 18% down the stage */
+  .waitlist-copy {
+    --W: max(100vw, calc(100vh * 1376 / 768));
+    --H: max(100vh, calc(100vw * 768 / 1376));
+    position: absolute; z-index: 2;
+    left: calc(100vw - 0.4 * var(--W));
+    top: calc(50% - 0.32 * var(--H));
+    width: min(460px, calc(0.34 * var(--W)));
+  }
   .waitlist .heading-lg { margin: 14px 0 18px; }
   .waitlist .body-lg { margin-bottom: 28px; }
   .waitlist .email-form { flex-direction: row; }
@@ -512,7 +536,8 @@
     .nav { padding-left: 16px; }
     .nav-links { display: none; }
     .hero { min-height: 0; padding-top: 112px; }
-    .wall { height: auto; }
+    .wall { height: auto; margin-top: 0; pointer-events: auto; }
+    .wall-sticky { opacity: 1; }
     .wall-sticky { position: static; height: auto; overflow: visible; padding-top: 88px; }
     .wall-sticky::before, .wall-sticky::after, .panel-hl { display: none; }
     .wall-head { position: static; width: auto; padding: 0 var(--gutter); }
@@ -553,22 +578,25 @@
     }
     .frame-text, .frame--right .frame-text, .frame-text--right, .frame--quiz .frame-text { position: relative; left: auto; right: auto; top: auto; transform: none; width: auto; padding: 8px var(--gutter) 0; }
     .frame-text--right { margin-top: 40px; }
+    .frame--mirror { margin-top: 0; pointer-events: auto; }
     .stats { gap: 24px; }
 
     .team { padding: 80px 0; }
-    .team { min-height: 0; display: block; padding-top: 0; }
+    .team { min-height: 0; display: block; }
     .team-grid { grid-template-columns: 1fr; }
-    .team-portrait { position: relative; width: 100%; height: 56vh; margin-bottom: 8px; }
-    .team-portrait::before { background: linear-gradient(#fff, rgba(255,255,255,0) 20%, rgba(255,255,255,0) 70%, #fff); }
+    .team-grid { gap: 40px; }
+    .team-story { padding-top: 0; }
 
-    .waitlist { min-height: 0; display: block; padding-bottom: 80px; }
+    .waitlist { height: auto; padding-bottom: 80px; }
     .waitlist-media { position: relative; height: 56vh; }
+    .waitlist-stage { position: static; width: 100%; height: 100%; transform: none; }
+    .waitlist-stage img { object-fit: cover; object-position: 80% 50%; }
     .waitlist-media::after {
       content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 80px;
       background: linear-gradient(rgba(255,255,255,0), #fff);
     }
     .waitlist .email-form { flex-direction: column; }
-    .waitlist-copy { margin-left: 0; }
+    .waitlist-copy { position: static; width: auto; padding: 0 var(--gutter); }
   }
 </style>
 </head>
@@ -603,19 +631,21 @@
           <div class="frame-text">
             <p class="label">The old way</p>
             <h2 class="heading-lg">No more waiting rooms.</h2>
-            <p>Checking in on your health used to mean booking a GP, waiting, and a blood test. So most of us skip it until something feels wrong.</p>
+            <p>Checking in on your health used to mean booking a doctor's appointment, waiting, and getting a blood test. So most of us skip it until something feels wrong.</p>
       <div class="quiz" id="quiz" aria-live="polite">
         <div class="quiz-top">
+          <button type="button" class="quiz-back" id="quizBack" hidden>&larr; Back</button>
           <p class="quiz-count" id="quizCount">1 / 3</p>
         </div>
         <div class="quiz-bar" aria-hidden="true"><span id="quizBar"></span></div>
 
         <div class="quiz-step is-active" data-key="q1">
-          <p class="quiz-q">Would you want to know if something in your body was shifting, before you felt it?</p>
+          <p class="quiz-q">When was the last time you had a health check?</p>
           <div class="quiz-options">
-            <button type="button" class="pill" aria-pressed="false">Yes, definitely</button>
-            <button type="button" class="pill" aria-pressed="false">Maybe, if it was effortless</button>
-            <button type="button" class="pill" aria-pressed="false">I'm not sure</button>
+            <button type="button" class="pill" aria-pressed="false">In the last 6 months</button>
+            <button type="button" class="pill" aria-pressed="false">6 to 12 months ago</button>
+            <button type="button" class="pill" aria-pressed="false">1 to 3 years ago</button>
+            <button type="button" class="pill" aria-pressed="false">Longer, or I can't remember</button>
           </div>
         </div>
 
@@ -630,12 +660,11 @@
         </div>
 
         <div class="quiz-step" data-key="q3">
-          <p class="quiz-q">When was the last time you had a health check?</p>
+          <p class="quiz-q">Would you want to know if something in your body was shifting, before you felt it?</p>
           <div class="quiz-options">
-            <button type="button" class="pill" aria-pressed="false">In the last 6 months</button>
-            <button type="button" class="pill" aria-pressed="false">6 to 12 months ago</button>
-            <button type="button" class="pill" aria-pressed="false">1 to 3 years ago</button>
-            <button type="button" class="pill" aria-pressed="false">Longer, or I can't remember</button>
+            <button type="button" class="pill" aria-pressed="false">Yes, definitely</button>
+            <button type="button" class="pill" aria-pressed="false">Maybe, if it was effortless</button>
+            <button type="button" class="pill" aria-pressed="false">I'm not sure</button>
           </div>
         </div>
 
@@ -648,7 +677,6 @@
             <button class="btn btn-primary" type="submit">Join the waitlist</button>
             <p class="form-error" role="alert"></p>
           </form>
-          <p class="quiz-note">One email when we launch. Nothing else.</p>
         </div>
 
         <div class="quiz-step" data-key="done">
@@ -688,7 +716,7 @@
         <div class="wall-head">
           <p class="label">Your body</p>
           <h2 class="heading-lg">Your body is always talking.</h2>
-          <p>Every day your blood carries signals about how you're really doing, long before you feel them.</p>
+          <p>Every day your blood cells communicate with each other through signals.</p>
         </div>
         <div class="wall-stage">
           <img src="assets/photos/art-wall.jpg" alt="A cream gallery wall with three glowing panels of blood cells, under a magma ribbon" width="2000" height="1116" loading="lazy">
@@ -698,17 +726,17 @@
           <div class="panel-text" data-step="1">
             <p class="label">Signals</p>
             <h3>Your body runs on signals.</h3>
-            <p>Every part of you works by sending signals, and most of them travel through your blood.</p>
+            <p>The signals travel through your blood.</p>
           </div>
           <div class="panel-text" data-step="2">
             <p class="label">Measuring</p>
             <h3>Your body reads them. Now you can too.</h3>
-            <p>Just as your body reads those signals all day, my magma measures them, against what's normal for you.</p>
+            <p>Just as your body reads those signals, mymagma aims to measure them as well.</p>
           </div>
           <div class="panel-text" data-step="3">
             <p class="label">Why monitor</p>
             <h3>See the drift early.</h3>
-            <p>Things rarely go wrong overnight. They drift slowly, long before you feel it. See it early and adjust, so you never drift far.</p>
+            <p>Things rarely go wrong overnight. They drift slowly, long before you feel it. We monitor so you can see changes early and adjust before symptoms appear.</p>
           </div>
         </div>
       </div>
@@ -774,7 +802,7 @@
             </div>
             <div class="moon-card" data-step="2">
               <p class="label">2 · Sensors</p>
-              <p>Select the biomarkers you care about. Attach them to your core. The sensors do the reading, and each colour is a different marker. Start with iron and vitamin B12, and add more as they launch.</p>
+              <p>Select the biomarkers you care about. Attach them to your core. The sensors do the reading.</p>
             </div>
             <div class="moon-card" data-step="3">
               <p class="label">3 · Accessories</p>
@@ -794,9 +822,8 @@
 
     <!-- 8. Team -->
     <section class="team" id="team">
-      <div class="team-portrait" aria-hidden="true"><div class="ph"><span>Founder photo (to come)</span></div></div>
       <div class="wrap team-grid">
-        <div class="reveal">
+        <div class="team-intro reveal">
           <p class="label">Why we're building this</p>
           <h2 class="heading-lg">Built by someone who lived it.</h2>
           <p class="label team-sub team-sub--first">My deficiency inspired my magma</p>
@@ -807,13 +834,6 @@
             <div><p class="stat-num">No clear why</p><p class="stat-label">and still no support to manage it</p></div>
           </div>
 
-          <div class="team-body">
-            <p>I grew up in Argentina and moved to Australia at 18 to follow a pull toward scientific innovation. I chose a double degree in biotechnology and finance on purpose: enough science to innovate, and enough commercial grounding to make sure that innovation actually reaches people.</p>
-            <p>I started my career in a lab, then spent 6+ years in consulting, helping businesses scale across industries, including pharma, healthtech, telehealth and manufacturing. I've also been a commercial advisor to startups in the medtech space.</p>
-            <p>All along I was looking for ways to support innovation in the space: helping others build their ideas, and considering building my own. A few came close, like a diagnostic app powered by computer vision and a rapid at&#8209;home flu test. None felt personal enough.</p>
-            <p>Then my own health changed, and my frustration with the current system grew. That's when I knew what the next ten to twenty years were for, and I started my magma.</p>
-          </div>
-
           <p class="label team-sub">It wasn't just me</p>
           <p class="team-lead">Sharing my story surfaced the same pattern across friends and family.</p>
           <ul class="team-list">
@@ -821,6 +841,14 @@
             <li>Dismissed because some numbers look fine, while the symptoms say otherwise.</li>
             <li>Trust lost in the system: in doctors and in the benchmarks.</li>
           </ul>
+        </div>
+        <div class="team-story reveal">
+          <div class="team-body">
+            <p>I grew up in Argentina and moved to Australia at 18 to follow a pull toward scientific innovation. I chose a double degree in biotechnology and finance on purpose: enough science to innovate, and enough commercial grounding to make sure that innovation actually reaches people.</p>
+            <p>I started my career in a lab, then spent 6+ years in consulting, helping businesses scale across industries, including pharma, healthtech, telehealth and manufacturing. I've also been a commercial advisor to startups in the medtech space.</p>
+            <p>All along I was looking for ways to support innovation in the space: helping others build their ideas, and considering building my own. A few came close, like a diagnostic app powered by computer vision and a rapid at&#8209;home flu test. None felt personal enough.</p>
+            <p>Then my own health changed, and my frustration with the current system grew. That's when I knew what the next ten to twenty years were for, and I started my magma.</p>
+          </div>
 
           <ul class="team-creds" aria-label="Background">
             <li>Bachelor of Science in Biotechnology (Distinction)</li>
@@ -836,11 +864,10 @@
 
     <!-- 9. Waitlist -->
     <section class="waitlist" id="waitlist">
-      <div class="waitlist-media"><img src="assets/photos/store-counter.jpg" alt="" width="1376" height="768" loading="lazy"></div>
-      <div class="wrap waitlist-inner">
-        <div class="waitlist-copy reveal">
+      <div class="waitlist-media"><div class="waitlist-stage"><img src="assets/photos/store-counter.jpg" alt="" width="1376" height="768" loading="lazy"></div></div>
+      <div class="waitlist-copy reveal">
           <p class="label">The waitlist</p>
-          <h2 class="heading-lg">Coming soon. Be the first to know.</h2>
+          <h2 class="heading-lg">Coming soon.<br>Be the first to know.</h2>
           <p class="body-lg">Live your life with a safety net. Leave your email and we'll tell you when mymagma is ready.</p>
           <form class="email-form" id="waitlistForm" novalidate>
             <label for="waitlistEmail" style="position:absolute;left:-9999px">Email</label>
@@ -848,8 +875,6 @@
             <button class="btn btn-primary" type="submit">Join the waitlist</button>
           </form>
           <p class="form-error" id="waitlistError" role="alert"></p>
-          <p class="trust">One email when we launch. No spam, ever.</p>
-        </div>
       </div>
     </section>
   </main>
@@ -864,7 +889,7 @@
       <div class="disclaimer">
         <p><strong>Demonstration of the vision only.</strong> This website is published by Magma Health Pty Ltd to show the vision for my magma. We are a pre-seed company at the pre-proof-of-concept stage. mymagma has not been built, tested or validated, is not available to buy, and is not a medical device approved or registered by the TGA or any other regulator.</p>
         <p>Nothing on this website is a medical claim, medical advice, a diagnosis or an offer for sale. Product images are concept renders, and the final design, features and biomarkers may differ or may never be released. Statistics describe populations, not you. Joining the waitlist is not a purchase or pre-order and creates no obligation for you or for us. We only use your email and answers to tell you about my magma.</p>
-        <p>my magma is intended to show trends and will not diagnose. Always talk to your GP about your health.</p>
+        <p>my magma is intended to show trends and will not diagnose. Always talk to your doctor about your health.</p>
       </div>
     </div>
   </footer>
@@ -912,7 +937,12 @@
     const n = Math.min(current + 1, 3);
     count.textContent = current < 3 ? n + ' / 3' : '';
     bar.style.width = (Math.min(current + 1, 3) / 3 * 100) + '%';
+    // Back is offered on questions 2 and 3 and on the email step, not once someone has joined.
+    back.hidden = current === 0 || current > 3;
   }
+
+  const back = document.getElementById('quizBack');
+  back.addEventListener('click', () => { if (current > 0 && current <= 3) show(current - 1); });
 
   const answers = {};
   const invites = {
@@ -932,8 +962,8 @@
     "Longer, or I can't remember": 'No need to wait for the next check-up.'
   };
   function personalise() {
-    if (invites[answers.q1]) document.getElementById('quizInvite').textContent = invites[answers.q1];
-    const context = [lateLines[answers.q2], checkLines[answers.q3]].filter(Boolean).join(' ');
+    if (invites[answers.q3]) document.getElementById('quizInvite').textContent = invites[answers.q3];
+    const context = [checkLines[answers.q1], lateLines[answers.q2]].filter(Boolean).join(' ');
     document.getElementById('quizContext').textContent = context;
   }
 
@@ -995,13 +1025,14 @@
   ));
 
   const highlights = hlTargets.map(el => {
-    const text = el.textContent;
+    // A <br> in a title becomes a line break in the highlighted copy too.
+    const text = Array.from(el.childNodes).map(n => n.nodeName === 'BR' ? '\n' : n.textContent).join('');
     const visual = document.createElement('span');
     visual.setAttribute('aria-hidden', 'true');
     const chars = [];
     text.split(/(\s+)/).forEach(part => {
       if (!part) return;
-      if (/^\s+$/.test(part)) { visual.appendChild(document.createTextNode(' ')); return; }
+      if (/^\s+$/.test(part)) { visual.appendChild(part.includes('\n') ? document.createElement('br') : document.createTextNode(' ')); return; }
       const word = document.createElement('span');
       word.className = 'w';
       for (const c of part) {
@@ -1015,7 +1046,7 @@
     });
     const label = document.createElement('span');
     label.className = 'sr-only';
-    label.textContent = text;
+    label.textContent = text.replace(/\n/g, ' ');
     el.textContent = '';
     el.append(label, visual);
     el.classList.add('hl');
@@ -1090,7 +1121,8 @@
     const zoom = reduceMotion ? 1 : 1 + Math.pow(t, 2.2) * 6;
     enterSticky.style.setProperty('--zoom', zoom.toFixed(3));
     enterSticky.style.setProperty('--words', Math.max(0, 1 - t * 4).toFixed(3));
-    enterSticky.style.setProperty('--white', Math.min(Math.max((p - 0.7) / 0.25, 0), 1).toFixed(3));
+    const white = pinned.matches ? 0 : Math.min(Math.max((p - 0.7) / 0.25, 0), 1);
+    enterSticky.style.setProperty('--white', white.toFixed(3));
   }
   window.addEventListener('scroll', onEnter, { passive: true });
   window.addEventListener('resize', onEnter);
@@ -1109,15 +1141,16 @@
     const r = moon.getBoundingClientRect();
     const travel = moon.offsetHeight - window.innerHeight;
     const p = Math.min(Math.max(-r.top / travel, 0), 1);
-    const step = p < 0.1 ? 0 : Math.min(3, 1 + Math.floor((p - 0.1) / 0.27));
+    // 0: title and wall. 1 to 3: one card and one shelf at a time. 4: everything clear, held before moving on.
+    const step = p < 0.08 ? 0 : Math.min(4, 1 + Math.floor((p - 0.08) / 0.18));
     if (step === moonStep) return;
     moonStep = step;
     moonCards.forEach(c => {
       const n = +c.dataset.step;
       c.classList.toggle('is-on', n <= step);
-      c.classList.toggle('is-current', n === step);
+      c.classList.toggle('is-current', n === step || step === 4);
     });
-    shelves.forEach(h => h.classList.toggle('is-dim', step > 0 && +h.dataset.step !== step));
+    shelves.forEach(h => h.classList.toggle('is-dim', step > 0 && step < 4 && +h.dataset.step !== step));
   }
   window.addEventListener('scroll', onMoon, { passive: true });
   window.addEventListener('resize', onMoon);
@@ -1128,14 +1161,19 @@
   const wallTexts = Array.from(wall.querySelectorAll('.panel-text'));
   const wallPanels = Array.from(wall.querySelectorAll('.panel-hl'));
   let wallStep = -1;
+  const wallSticky = wall.querySelector('.wall-sticky');
   function onWall() {
     if (!pinned.matches) {
+      wallSticky.style.setProperty('--fade', 1);
       wallTexts.forEach(t => t.classList.add('is-on', 'is-current'));
       return;
     }
     const r = wall.getBoundingClientRect();
-    const travel = wall.offsetHeight - window.innerHeight;
-    const p = Math.min(Math.max(-r.top / travel, 0), 1);
+    // The first half screen of the wall overlaps the door zoom: the wall dissolves in over it.
+    const fadeLen = window.innerHeight * 0.5;
+    wallSticky.style.setProperty('--fade', Math.min(Math.max(-r.top / fadeLen, 0), 1).toFixed(3));
+    const travel = wall.offsetHeight - window.innerHeight - fadeLen;
+    const p = Math.min(Math.max((-r.top - fadeLen) / travel, 0), 1);
     const step = p < 0.1 ? 0 : Math.min(3, 1 + Math.floor((p - 0.1) / 0.27));
     if (step === wallStep) return;
     wallStep = step;
