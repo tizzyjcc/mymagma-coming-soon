@@ -158,8 +158,6 @@
   .hero .label { margin-top: 18px; }
   .hero-cta { margin-top: 28px; }
   .hero-magma {
-    position: relative;
-    z-index: 3;
     width: 100%;
     margin-top: clamp(24px, 4vw, 48px);
     height: clamp(180px, 30vw, 420px);
@@ -167,14 +165,8 @@
     object-position: 50% 50%;
   }
 
-  /* ---------- Magma flow between sections ---------- */
-  .flow { position: relative; height: 0; z-index: 2; pointer-events: none; }
-  .flow img { position: absolute; left: 0; width: 100%; }
-  /* Starts under the hero band, as if a thread of it runs on down the page */
-  .flow-a img { top: calc(-1 * clamp(70px, 9vw, 130px)); height: clamp(90px, 13vw, 190px); object-fit: fill; }
-
   /* ---------- Section 2: signals + quiz ---------- */
-  .signals { position: relative; padding: clamp(120px, 15vw, 220px) 0 140px; isolation: isolate; }
+  .signals { position: relative; padding: 120px 0 140px; isolation: isolate; }
   .signals::before {
     content: "";
     position: absolute;
@@ -512,10 +504,8 @@
     <h1 class="hero-line">Catch the crash before it happens.</h1>
     <p class="label">Continuous biomarker monitoring</p>
     <div class="hero-cta"><a class="btn btn-primary" href="#waitlist">Join the waitlist</a></div>
-    <img class="hero-magma" src="assets/magma-hero-cut.png" alt="" width="1983" height="793">
+    <img class="hero-magma" src="assets/magma-hero.png" alt="" width="1983" height="793">
   </header>
-
-  <div class="flow flow-a" aria-hidden="true"><img src="assets/flow/flow-a.png" alt="" width="1800" height="600"></div>
 
   <main>
     <!-- 2. Your signals + quiz -->

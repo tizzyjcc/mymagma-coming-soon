@@ -48,6 +48,7 @@ applies wherever the brand guidelines are silent or marked [PENDING].
 - Scenes: ordinary life at home and out (breakfast, a trip, dinner with friends). Never fitness: no running, gyms, sportswear, sweat, steps or performance. The feeling is living life with a safety net.
 - App screens are calm: reassurance first ("All steady"), trends inside a personal range, no scores or big performance numbers.
 - Each image matches the copy beside it.
+- Hidden magma: every photo carries one small, quiet magma detail in the background (a framed lava print, a lava-glaze mug, a lava-patterned throw). No magma ribbons or connectors cross the page.
 
 ## Voice (on-page)
 - Name is always "my magma", lowercase. The device is "mymagma".
