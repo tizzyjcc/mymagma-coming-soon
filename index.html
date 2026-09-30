@@ -440,10 +440,12 @@
   }
   .team-portrait .ph { padding: 0 6% 12%; }
   .team .heading-lg { margin-top: 16px; max-width: 11em; }
-  .team-body { margin-top: 24px; }
+  .team-body { margin-top: 40px; }
   .team-body p { font-size: var(--t-body); line-height: 1.55; color: var(--ink-2); max-width: 34em; }
   .team-body p + p { margin-top: 18px; }
   .team-sub { margin-top: 40px; }
+  .team-sub--first { margin-top: 32px; }
+  .team-stats .stat-label { max-width: none; }
   .team-stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 32px; margin-top: 16px; }
   .team-lead { margin-top: 14px; font-size: var(--t-body); line-height: 1.55; color: var(--ink); }
   .team-list { list-style: none; margin-top: 12px; }
@@ -798,18 +800,19 @@
         <div class="reveal">
           <p class="label">Why we're building this</p>
           <h2 class="heading-lg">Built by someone who lived it.</h2>
-          <div class="team-body">
-            <p>I grew up in Argentina and moved to Australia at 18 to follow a pull toward scientific innovation. I chose a double degree in biotechnology and finance on purpose: enough science to innovate, and enough commercial grounding to make sure that innovation actually reaches people.</p>
-            <p>I started in a lab, then spent more than six years consulting across pharma, healthtech, telehealth and manufacturing, and advised a medtech startup in Sydney. All along I was looking for the idea worth building. A few came close, like a diagnostic app powered by computer vision and a rapid at-home flu test. None felt personal enough.</p>
-            <p>Then my own health changed, and the answers never came. That's when I knew what the next ten to twenty years were for, and I started my magma.</p>
-          </div>
-
-          <p class="label team-sub">My deficiency inspired my magma</p>
+          <p class="label team-sub team-sub--first">My deficiency inspired my magma</p>
           <div class="team-stats">
             <div><p class="stat-num">3 years</p><p class="stat-label">of symptoms</p></div>
             <div><p class="stat-num">22</p><p class="stat-label">doctor appointments</p></div>
             <div><p class="stat-num">$2,385</p><p class="stat-label">out of pocket</p></div>
             <div><p class="stat-num">No clear why</p><p class="stat-label">and still no support to manage it</p></div>
+          </div>
+
+          <div class="team-body">
+            <p>I grew up in Argentina and moved to Australia at 18 to follow a pull toward scientific innovation. I chose a double degree in biotechnology and finance on purpose: enough science to innovate, and enough commercial grounding to make sure that innovation actually reaches people.</p>
+            <p>I started my career in a lab, then spent 6+ years in consulting, helping businesses scale across industries, including pharma, healthtech, telehealth and manufacturing. I've also been a commercial advisor to startups in the medtech space.</p>
+            <p>All along I was looking for ways to support innovation in the space: helping others build their ideas, and considering building my own. A few came close, like a diagnostic app powered by computer vision and a rapid at&#8209;home flu test. None felt personal enough.</p>
+            <p>Then my own health changed, and my frustration with the current system grew. That's when I knew what the next ten to twenty years were for, and I started my magma.</p>
           </div>
 
           <p class="label team-sub">It wasn't just me</p>
@@ -824,7 +827,7 @@
             <li>Bachelor of Science in Biotechnology (Distinction)</li>
             <li>Bachelor of Commerce in Finance (Distinction)</li>
             <li>6+ years consulting in pharma, manufacturing, healthtech and telehealth</li>
-            <li>Commercial advisor to a MedTech startup in Sydney</li>
+            <li>Commercial advisor to medtech startups</li>
           </ul>
 
           <p class="team-sign">Trinidad <span>Founder, my magma</span></p>
