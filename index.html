@@ -352,7 +352,7 @@
     width: max(100vw, calc(100vh * 1376 / 768));
     height: max(100vh, calc(100vw * 768 / 1376));
     transform: translate(-50%, -50%) scale(var(--zoom, 1));
-    transform-origin: 50% 59.4%;
+    transform-origin: 50% 59.2%;
     will-change: transform;
   }
   .enter-stage img { width: 100%; height: 100%; }
@@ -657,7 +657,7 @@
     <section class="enter" id="enter" aria-label="How it works">
       <div class="enter-sticky">
         <div class="enter-stage">
-          <img src="assets/photos/storefront.jpg" alt="The magma store front, with a glowing magma ribbon along the wall and an open door" width="1376" height="768">
+          <img src="assets/photos/storefront.jpg" alt="The magma store front, with a glowing magma ribbon along the wall and an open door" width="2000" height="1116">
           <h2 class="enter-word enter-how">How it works</h2>
           <p class="enter-word enter-door">Enter</p>
         </div>
@@ -1018,10 +1018,10 @@
     const travel = enter.offsetHeight - window.innerHeight;
     const p = Math.min(Math.max(-r.top / travel, 0), 1);
     const t = Math.min(Math.max((p - 0.08) / 0.84, 0), 1);
-    const zoom = reduceMotion ? 1 : 1 + Math.pow(t, 2.2) * 11;
+    const zoom = reduceMotion ? 1 : 1 + Math.pow(t, 2.2) * 6;
     enterSticky.style.setProperty('--zoom', zoom.toFixed(3));
     enterSticky.style.setProperty('--words', Math.max(0, 1 - t * 4).toFixed(3));
-    enterSticky.style.setProperty('--white', Math.min(Math.max((p - 0.8) / 0.2, 0), 1).toFixed(3));
+    enterSticky.style.setProperty('--white', Math.min(Math.max((p - 0.7) / 0.25, 0), 1).toFixed(3));
   }
   window.addEventListener('scroll', onEnter, { passive: true });
   window.addEventListener('resize', onEnter);
