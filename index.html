@@ -443,6 +443,16 @@
   .team-body { margin-top: 24px; }
   .team-body p { font-size: var(--t-body); line-height: 1.55; color: var(--ink-2); max-width: 34em; }
   .team-body p + p { margin-top: 18px; }
+  .team-sub { margin-top: 40px; }
+  .team-stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 32px; margin-top: 16px; }
+  .team-lead { margin-top: 14px; font-size: var(--t-body); line-height: 1.55; color: var(--ink); }
+  .team-list { list-style: none; margin-top: 12px; }
+  .team-list li { position: relative; padding-left: 18px; font-size: var(--t-body); line-height: 1.55; color: var(--ink-2); }
+  .team-list li + li { margin-top: 8px; }
+  .team-list li::before { content: ""; position: absolute; left: 0; top: 0.7em; width: 6px; height: 6px; border-radius: 50%; background: var(--line); }
+  .team-creds { list-style: none; margin-top: 36px; padding-top: 20px; border-top: 1px solid var(--line); }
+  .team-creds li { font-size: var(--t-small); line-height: 1.5; color: var(--ink-3); }
+  .team-creds li + li { margin-top: 4px; }
   .team-sign { margin-top: 28px; color: var(--ink); }
   .team-sign span { display: block; font-size: var(--t-small); color: var(--ink-3); }
 
@@ -469,7 +479,13 @@
     color: var(--ink-3);
     border-top: 1px solid var(--line);
   }
-  footer .wrap { display: flex; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+  .footer-top { display: flex; justify-content: space-between; align-items: baseline; gap: 24px; flex-wrap: wrap; }
+  .footer-contact { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--line); transition: color 150ms; }
+  .footer-contact:hover { color: var(--crimson); }
+  .disclaimer { margin-top: 24px; padding-top: 24px; border-top: 1px solid var(--line); max-width: 72em; }
+  .disclaimer p { font-size: 12px; line-height: 1.6; color: var(--ink-3); }
+  .disclaimer p + p { margin-top: 10px; }
+  .disclaimer strong { font-weight: 500; color: var(--ink-2); }
 
   /* ---------- Letter-by-letter highlight ---------- */
   .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
@@ -782,11 +798,36 @@
         <div class="reveal">
           <p class="label">Why we're building this</p>
           <h2 class="heading-lg">Built by someone who lived it.</h2>
-        <div class="team-body">
-          <p><span class="placeholder-tag">Founder story to come</span> What went unnoticed in my own health, what it took to find it, and why it shouldn't be that hard.</p>
-          <p><span class="placeholder-tag">To come</span> More than ten years preparing to build a medical technology company.</p>
-          <p class="team-sign">Founder name <span>Founder, my magma</span></p>
-        </div>
+          <div class="team-body">
+            <p>I grew up in Argentina and moved to Australia at 18 to follow a pull toward scientific innovation. I chose a double degree in biotechnology and finance on purpose: enough science to innovate, and enough commercial grounding to make sure that innovation actually reaches people.</p>
+            <p>I started in a lab, then spent more than six years consulting across pharma, healthtech, telehealth and manufacturing, and advised a medtech startup in Sydney. All along I was looking for the idea worth building. A few came close, like a diagnostic app powered by computer vision and a rapid at-home flu test. None felt personal enough.</p>
+            <p>Then my own health changed, and the answers never came. That's when I knew what the next ten to twenty years were for, and I started my magma.</p>
+          </div>
+
+          <p class="label team-sub">My deficiency inspired my magma</p>
+          <div class="team-stats">
+            <div><p class="stat-num">3 years</p><p class="stat-label">of symptoms</p></div>
+            <div><p class="stat-num">22</p><p class="stat-label">doctor appointments</p></div>
+            <div><p class="stat-num">$2,385</p><p class="stat-label">out of pocket</p></div>
+            <div><p class="stat-num">No clear why</p><p class="stat-label">and still no support to manage it</p></div>
+          </div>
+
+          <p class="label team-sub">It wasn't just me</p>
+          <p class="team-lead">Sharing my story surfaced the same pattern across friends and family.</p>
+          <ul class="team-list">
+            <li>The root cause goes unresolved, with no confidence it's being managed well.</li>
+            <li>Dismissed because some numbers look fine, while the symptoms say otherwise.</li>
+            <li>Trust lost in the system: in doctors and in the benchmarks.</li>
+          </ul>
+
+          <ul class="team-creds" aria-label="Background">
+            <li>Bachelor of Science in Biotechnology (Distinction)</li>
+            <li>Bachelor of Commerce in Finance (Distinction)</li>
+            <li>6+ years consulting in pharma, manufacturing, healthtech and telehealth</li>
+            <li>Commercial advisor to a MedTech startup in Sydney</li>
+          </ul>
+
+          <p class="team-sign">Trinidad <span>Founder, my magma</span></p>
         </div>
       </div>
     </section>
@@ -813,8 +854,15 @@
 
   <footer>
     <div class="wrap">
-      <p>&copy; 2026 my magma</p>
-      <p>my magma shows trends and does not diagnose. Always talk to your GP about your health.</p>
+      <div class="footer-top">
+        <p>&copy; 2026 Magma Health Pty Ltd</p>
+        <a class="footer-contact" href="mailto:t.canales.calleja@gmail.com?subject=Hello%20my%20magma">Contact us by email</a>
+      </div>
+      <div class="disclaimer">
+        <p><strong>Demonstration of the vision only.</strong> This website is published by Magma Health Pty Ltd to show the vision for my magma. We are a pre-seed company at the pre-proof-of-concept stage. mymagma has not been built, tested or validated, is not available to buy, and is not a medical device approved or registered by the TGA or any other regulator.</p>
+        <p>Nothing on this website is a medical claim, medical advice, a diagnosis or an offer for sale. Product images are concept renders, and the final design, features and biomarkers may differ or may never be released. Statistics describe populations, not you. Joining the waitlist is not a purchase or pre-order and creates no obligation for you or for us. We only use your email and answers to tell you about my magma.</p>
+        <p>my magma is intended to show trends and will not diagnose. Always talk to your GP about your health.</p>
+      </div>
     </div>
   </footer>
 
@@ -982,9 +1030,10 @@
     if (h.playing || h.shown >= h.chars.length) return;
     h.playing = true;
     const start = performance.now();
+    const from = h.shown;
     const perChar = Math.min(22, 1400 / h.chars.length);
     (function tick(now) {
-      showUpTo(h, Math.floor((now - start) / perChar));
+      showUpTo(h, from + Math.floor((now - start) / perChar));
       if (h.shown < h.chars.length) requestAnimationFrame(tick);
     })(start);
   }
@@ -1001,14 +1050,30 @@
   }
 
 
+  // Once scrolling stops, any title sitting fully in view finishes filling on its own.
+  let settleTimer;
+  function settle() {
+    const vh = window.innerHeight;
+    highlights.forEach(h => {
+      if (h.shown >= h.chars.length) return;
+      const r = h.el.getBoundingClientRect();
+      if (r.height && r.top >= 0 && r.bottom <= vh) play(h);
+    });
+  }
+  function onScrollHl() {
+    fillOnScroll();
+    clearTimeout(settleTimer);
+    settleTimer = setTimeout(settle, 180);
+  }
+
   const pinned = window.matchMedia('(min-width: 861px)');
 
   if (reduceMotion) highlights.forEach(h => showUpTo(h, h.chars.length));
   else {
     highlights.filter(h => h.el.closest('.hero')).forEach(h => setTimeout(() => play(h), 400));
-    window.addEventListener('scroll', fillOnScroll, { passive: true });
-    window.addEventListener('resize', fillOnScroll);
-    fillOnScroll();
+    window.addEventListener('scroll', onScrollHl, { passive: true });
+    window.addEventListener('resize', onScrollHl);
+    onScrollHl();
   }
   // ---- Enter magma: scrolling walks the camera through the door ----
   const enter = document.querySelector('.enter');
