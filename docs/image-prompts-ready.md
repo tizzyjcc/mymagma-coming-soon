@@ -54,10 +54,24 @@ Photorealistic editorial lifestyle photograph, 3:2 landscape, highest quality. W
 A single mobile app screen, flat UI design, portrait 9:19.5, shown straight on with no phone frame, no hand, no background. Clean white background, generous white space, warm near-black text (#1A1212), one accent colour only: crimson #C02035 for the trend line and one highlight. Modern geometric sans-serif for words, monospace for numbers. Soft rounded cards with 16px corners and pale rose (#F0E0E0) hairline outlines. No blue, no green, no icons other than simple line icons. Calm and premium, like a well-designed health app from a top design studio. All text must be spelled exactly as written below. Centred, lots of white space. The lowercase word "magma" in a heavy, rounded, bold crimson font. Below it: "Coming soon." and in smaller grey text "Your own baseline. Tracked every day."
 ```
 
-## 7. Magma flow between sections (optional)
-**Image**, save as `07-magma-flow.png`
+## 7. Magma flow connectors (links the hero to every section)
+Four thin magma ribbons that join the sections, like the magma running along the walls of your store image. Make them on a transparent background so they sit over photos and white alike.
+
+**Connector A**, save as `07a-flow.png` (hero into "your signals")
 ```
-Photorealistic thin ribbon of flowing molten magma seen from above, a single narrow band crossing a pure white 3:2 frame diagonally from top-left to bottom-right, gently curving. Viscous liquid lava with hair-thin golden fissure lines, deep crimson to orange-red to luminous rose. Organic irregular edges with small bubble-like drips. Everything else is pristine pure white #FFFFFF, no shadow, no texture.
+Photorealistic molten magma seen from above, a single thin flowing ribbon, about one tenth of the image height thick, on a fully TRANSPARENT background (PNG with alpha), no white, no shadow, no glow outside the ribbon. Viscous liquid lava with visible surface tension and hair-thin bright golden fissure lines. Colour runs from deep crimson where it enters, through vivid orange-red, to warm luminous rose where it leaves. No black or dark tones. Organic, irregular edges with small rounded bubble-like protrusions, like the edge of a lava flow, never a smooth tube. Wide 3:1 landscape, highest resolution. The ribbon enters at the top-left corner and flows down in one long, gentle S-curve, leaving at the bottom-right edge.
+```
+**Connector B**, save as `07b-flow.png` (biomarker story into the moonshot)
+```
+Photorealistic molten magma seen from above, a single thin flowing ribbon, about one tenth of the image height thick, on a fully TRANSPARENT background (PNG with alpha), no white, no shadow, no glow outside the ribbon. Viscous liquid lava with visible surface tension and hair-thin bright golden fissure lines. Colour runs from deep crimson where it enters, through vivid orange-red, to warm luminous rose where it leaves. No black or dark tones. Organic, irregular edges with small rounded bubble-like protrusions, like the edge of a lava flow, never a smooth tube. Wide 3:1 landscape, highest resolution. The ribbon enters at the top-right corner and sweeps down in one gentle curve, leaving at the bottom-left edge.
+```
+**Connector C**, save as `07c-flow.png` (moonshot into team, and team into waitlist)
+```
+Photorealistic molten magma seen from above, a single thin flowing ribbon, about one tenth of the image height thick, on a fully TRANSPARENT background (PNG with alpha), no white, no shadow, no glow outside the ribbon. Viscous liquid lava with visible surface tension and hair-thin bright golden fissure lines. Colour runs from deep crimson where it enters, through vivid orange-red, to warm luminous rose where it leaves. No black or dark tones. Organic, irregular edges with small rounded bubble-like protrusions, like the edge of a lava flow, never a smooth tube. Wide 3:1 landscape, highest resolution. The ribbon enters at the middle of the left edge, rises in a soft arc and leaves at the middle of the right edge.
+```
+**Closing strip**, save as `07d-strip.png` (bottom of the page, above the footer)
+```
+Photorealistic molten magma seen from above, a single thin flowing ribbon, about one tenth of the image height thick, on a fully TRANSPARENT background (PNG with alpha), no white, no shadow, no glow outside the ribbon. Viscous liquid lava with visible surface tension and hair-thin bright golden fissure lines. Colour runs from deep crimson where it enters, through vivid orange-red, to warm luminous rose where it leaves. No black or dark tones. Organic, irregular edges with small rounded bubble-like protrusions, like the edge of a lava flow, never a smooth tube. Wide 3:1 landscape, highest resolution. A long, almost straight horizontal band running edge to edge across the whole image, with an organic irregular top and bottom edge. Very wide 5:1 landscape.
 ```
 
 ## 8. Hero magma, higher resolution (optional)
