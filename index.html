@@ -364,18 +364,20 @@
   .moonshot { padding: 140px 0 80px; text-align: center; }
   .moonshot .heading-lg { margin: 16px auto 20px; max-width: 16em; }
   .moonshot .body-lg { margin: 0 auto; }
+  /* The shelf wall melts into the white page above and below */
   .moonshot-visual {
-    margin-top: 8px;
+    position: relative;
+    margin-top: 16px;
     width: 100%;
-    height: clamp(200px, 28vw, 400px);
-    object-fit: cover;
+    aspect-ratio: 1376 / 768;
+    max-height: 100vh;
+    overflow: hidden;
   }
-  .moonshot-visual.ph { height: clamp(200px, 28vw, 400px); justify-content: center; align-items: center; padding: 0;
-    background:
-      radial-gradient(40% 18% at 20% 50%, rgba(192, 32, 53, 0.35), transparent 70%),
-      radial-gradient(55% 30% at 62% 50%, rgba(216, 74, 16, 0.22), transparent 70%),
-      radial-gradient(40% 40% at 88% 50%, rgba(200, 72, 112, 0.18), transparent 70%),
-      #fff; }
+  .moonshot-visual img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 60%; }
+  .moonshot-visual::before {
+    content: ""; position: absolute; inset: 0; pointer-events: none;
+    background: linear-gradient(#fff, rgba(255,255,255,0) 22%, rgba(255,255,255,0) 82%, #fff);
+  }
 
   /* ---------- Section 5: team ---------- */
   .team { position: relative; padding: 140px 0; min-height: 100vh; display: flex; align-items: center; overflow: hidden; }
@@ -397,14 +399,14 @@
   /* ---------- Section 6: waitlist ---------- */
   .waitlist { position: relative; min-height: 100vh; display: flex; align-items: center; overflow: hidden; }
   .waitlist-media { position: absolute; inset: 0; }
-  .waitlist-media img { width: 100%; height: 100%; object-fit: cover; object-position: 30% 50%; }
+  .waitlist-media img { width: 100%; height: 100%; object-fit: cover; object-position: 20% 50%; }
   .waitlist::before {
     content: "";
     position: absolute; left: 0; right: 0; top: 0; height: 96px; z-index: 1;
     background: linear-gradient(#fff, rgba(255,255,255,0));
   }
   .waitlist-inner { position: relative; z-index: 2; width: 100%; }
-  .waitlist-copy { max-width: 560px; margin-left: auto; }
+  .waitlist-copy { max-width: 480px; margin-left: auto; }
   .waitlist .heading-lg { margin: 14px 0 18px; }
   .waitlist .body-lg { margin-bottom: 28px; }
   .waitlist .email-form { flex-direction: row; }
@@ -476,6 +478,7 @@
 
     .waitlist { min-height: 0; display: block; padding-bottom: 80px; }
     .waitlist-media { position: relative; height: 56vh; }
+    .moonshot-visual { aspect-ratio: auto; height: 52vh; }
     .waitlist-media::after {
       content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 80px;
       background: linear-gradient(rgba(255,255,255,0), #fff);
@@ -645,7 +648,7 @@
         <h2 class="heading-lg">One device. Every biomarker. Nothing to do.</h2>
         <p class="body-lg">We're starting with iron and B12. Where we're going is one device that measures all your biomarkers, passively, every day. So your health is never the reason you hold back.</p>
       </div>
-      <div class="moonshot-visual ph reveal"><span>Image 6: magma branching into veins</span></div>
+      <div class="moonshot-visual reveal"><img src="assets/photos/store-shelves.jpg" alt="" width="1376" height="768" loading="lazy"></div>
     </section>
 
     <!-- 5. Team -->
@@ -666,7 +669,7 @@
 
     <!-- 6. Waitlist -->
     <section class="waitlist" id="waitlist">
-      <div class="waitlist-media"><div class="ph ph--left"><span>Photo 6: slow morning in bed + "Coming soon" screen</span></div></div>
+      <div class="waitlist-media"><img src="assets/photos/store-counter.jpg" alt="" width="1376" height="768" loading="lazy"></div>
       <div class="wrap waitlist-inner">
         <div class="waitlist-copy reveal">
           <p class="label">The waitlist</p>
