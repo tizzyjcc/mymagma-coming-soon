@@ -387,8 +387,19 @@
 
   /* ---------- Iron and vitamin B12 ---------- */
   .markers { position: relative; min-height: 100vh; overflow: hidden; }
-  .markers-media { position: absolute; inset: 0; }
-  .markers-media img { width: 100%; height: 100%; object-fit: cover; }
+  /* The photo starts below the title, so the person's head never sits under it */
+  .markers-media { position: absolute; inset: 120px 0 0 0; }
+  .markers-media img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 0; }
+  .markers-media::before {
+    content: ""; position: absolute; left: 0; right: 0; top: 0; height: 120px;
+    background: linear-gradient(#fff, rgba(255,255,255,0));
+  }
+  /* A soft pool of light behind each column keeps the text clear where the magma ribbon runs */
+  .marker-col { position: relative; }
+  .marker-col::before {
+    content: ""; position: absolute; inset: -70px -90px; z-index: -1; pointer-events: none;
+    background: radial-gradient(closest-side, rgba(255,255,255,0.9), rgba(255,255,255,0.7) 55%, rgba(255,255,255,0));
+  }
   .markers::before, .markers::after {
     content: ""; position: absolute; z-index: 1; left: 0; right: 0; height: 120px; pointer-events: none;
   }
@@ -548,7 +559,8 @@
 
     .enter { height: 200vh; }
 
-    .markers-media { position: relative; height: 60vh; }
+    .markers-media { position: relative; inset: auto; height: 60vh; }
+    .marker-col::before { display: none; }
     .markers-inner { min-height: 0; padding-top: 0; padding-bottom: 64px; display: block; }
     .markers-title { padding-top: 80px; text-align: left; }
     .markers::before, .markers::after { display: none; }
@@ -744,7 +756,7 @@
 
     <!-- 6. Iron and vitamin B12 -->
     <section class="markers" id="biomarkers">
-      <div class="markers-media"><div class="ph ph--center"><span>Photo: person in the centre + iron and vitamin B12 screen</span></div></div>
+      <div class="markers-media"><img src="assets/photos/03-iron-b12.jpg" alt="Seen from behind, a person in a cream jumper checks their phone in front of a glowing magma ribbon" width="1672" height="941" loading="lazy"></div>
       <div class="wrap markers-inner">
         <div class="markers-title reveal">
           <p class="label">Where we start</p>
