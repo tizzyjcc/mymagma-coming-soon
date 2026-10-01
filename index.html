@@ -303,6 +303,7 @@
     right: max(var(--gutter), calc((100vw - var(--max)) / 2 + var(--gutter)));
   }
   /* 02-breakfast.jpg is saved already mirrored (phone on the left), so the app screen reads the right way round */
+  .frame--mirror .frame-media img { object-position: 55% 50%; }
   /* The two photos blend straight into each other, with no white band between them */
   .frame--quiz::after { display: none; }
   .frame--mirror { margin-top: -32vh; pointer-events: none; }
@@ -587,21 +588,10 @@
     .moon-cards { order: 2; }
     .fineprint { position: static; display: block; padding: 8px var(--gutter) 0; }
 
-    /* On phones each step stacks: photo, then text */
-    .frame, .frame--quiz { height: auto; min-height: 0; overflow: visible; padding-bottom: 64px; }
-    .frame::before, .frame::after { display: none; }
-    .frame-media { position: relative; height: 62vh; }
-    .frame-media::before, .waitlist-media::before {
+    .waitlist-media::before {
       content: ""; position: absolute; z-index: 1; left: 0; right: 0; top: 0; height: 80px;
       background: linear-gradient(#fff, rgba(255,255,255,0));
     }
-    .frame-media::after {
-      content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 80px;
-      background: linear-gradient(rgba(255,255,255,0), #fff);
-    }
-    .frame-text, .frame--right .frame-text, .frame-text--right, .frame--quiz .frame-text { position: relative; left: auto; right: auto; top: auto; transform: none; width: auto; padding: 8px var(--gutter) 0; }
-    .frame-text--right { margin-top: 40px; }
-    .frame--mirror { margin-top: 0; pointer-events: auto; }
     .stats { gap: 24px; }
 
     .team { padding: 80px 0; }
@@ -621,6 +611,31 @@
     .waitlist .email-form { flex-direction: column; }
     .waitlist-copy { position: static; width: auto; padding: 0 var(--gutter); }
   }
+
+  /* Tablets and narrow windows keep text on the photos; only phones stack photo, then text */
+  @media (min-width: 601px) and (max-width: 860px) {
+    .frame-text { width: min(440px, 48vw); }
+  }
+  @media (max-width: 600px) {
+    /* On phones each step stacks: photo, then text */
+    .frame, .frame--quiz { height: auto; min-height: 0; overflow: visible; padding-bottom: 64px; }
+    .frame::before, .frame::after { display: none; }
+    .frame-media { position: relative; height: 62vh; }
+    .frame-media::before {
+      content: ""; position: absolute; z-index: 1; left: 0; right: 0; top: 0; height: 80px;
+      background: linear-gradient(#fff, rgba(255,255,255,0));
+    }
+    .frame-media::after {
+      content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 80px;
+      background: linear-gradient(rgba(255,255,255,0), #fff);
+    }
+    .frame-text, .frame--right .frame-text, .frame-text--right, .frame--quiz .frame-text { position: relative; left: auto; right: auto; top: auto; transform: none; width: auto; padding: 8px var(--gutter) 0; }
+    .frame-text--right { margin-top: 40px; }
+    .frame--mirror { margin-top: 0; pointer-events: auto; }
+  }
+
+  /* The screen-reader copy of each highlighted title is skipped when copying text, so it isn't pasted twice */
+  .hl .sr-only { user-select: none; }
 </style>
 </head>
 <body>
