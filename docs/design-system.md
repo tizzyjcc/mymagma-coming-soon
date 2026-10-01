@@ -46,6 +46,7 @@ applies wherever the brand guidelines are silent or marked [PENDING].
 - Like Superpower, the product is the hero and people are secondary: in lifestyle photos the product is the my magma app on a phone.
 - The store images (storefront, product wall, magma counter) show the device as a concept render, labelled "Concept render. Final design may differ." The product wall explains modularity: core, sensors, accessories.
 - App screens are composited onto a plain black phone screen so UI text stays sharp.
+- Colour temperature: magma brand images (the hero, the product wall) are white-skewed, clean gallery white with the magma as the only strong colour. People and lifestyle photos may sit warmer, in oat and cream.
 - Scenes: ordinary life at home and out (breakfast, a trip, dinner with friends). Never fitness: no running, gyms, sportswear, sweat, steps or performance. The feeling is living life with a safety net.
 - App screens are calm: reassurance first ("All steady"), trends inside a personal range, no scores or big performance numbers.
 - Each image matches the copy beside it.

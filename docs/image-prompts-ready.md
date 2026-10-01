@@ -5,11 +5,11 @@
 Copy each block as it is. For app shots make two images: the scene with a black phone, then the app screen on its own. Save them with the file names shown and upload them here (or to `assets/photos/`). Choose the largest landscape size for scenes and the tallest portrait size for app screens.
 
 ## 0. Hero: the magma store wall (replaces the magma band)
-Attach `storefront.jpg` in ChatGPT as the style reference. The page puts the logo, "What's happening below the surface." and the "Join the waitlist" button centred in the top half, so the top half must be calm, empty wall.
+Attach `storefront.jpg` in ChatGPT as the style reference. The page puts the logo, "What's happening below the surface." and the "Join the waitlist" button centred in the top half, so the top half must be calm, empty wall. The hero must read as white, not cream: closer to the product wall (`store-shelves.jpg`) than to the art wall or the people photos. Attach `store-shelves.jpg` too as the colour reference.
 
 **Image**, save as `00-hero-wall.png`
 ```
-Use the attached image as the reference for the wall material, lighting and the magma ribbon. Match them exactly. Photorealistic architectural photograph, 16:9 landscape, highest resolution. A close, straight-on view of a smooth, softly curved cream plaster wall inside the magma store, warm and bright, lit by soft indirect light from a hidden cove along the top edge. One glowing ribbon of molten magma is set into the wall and flows across the lower third of the frame, entering at the left edge and leaving at the right edge in one slow, gentle wave, with hair-thin golden fissure lines, deep crimson to orange-red to warm rose. The top half of the frame is calm, empty cream plaster with nothing on it: no logo, no signs, no text, no objects, so a logo and headline can be placed there. No people, no door, no plants, no furniture, no dark floor. Calm, premium, warm, never dark.
+Use the first attached image (the storefront) as the reference for the wall shape and the magma ribbon, and the second attached image (the white product wall) as the reference for colour and brightness. Photorealistic architectural photograph, 16:9 landscape, highest resolution. A close, straight-on view of a smooth, softly curved wall inside the magma store. The wall is bright, clean gallery white (around #FAF8F6), not cream, beige, oat or sand: a neutral warm white with only the faintest warmth, lit by soft, even, daylight-balanced indirect light from a hidden cove along the top edge, with no yellow or orange cast on the wall. The magma ribbon is the only strong colour in the image. One glowing ribbon of molten magma is set into the wall and flows across the lower third of the frame, entering at the left edge and leaving at the right edge in one slow, gentle wave, with hair-thin golden fissure lines, deep crimson to orange-red to warm rose; its glow on the wall stays tight and close to the ribbon, not spreading a warm haze across the wall. The top half of the frame is calm, empty white wall with nothing on it: no logo, no signs, no text, no objects, so a logo and headline can be placed there. No people, no door, no plants, no furniture, no dark floor. Airy, bright, premium, never dark, never cream.
 ```
 
 ## 1. Waiting room (story 01, the old way). Done; add the magma detail with this edit.
@@ -39,7 +39,7 @@ A single mobile app screen, flat UI design, portrait 9:19.5, shown straight on w
 ```
 
 ## 3. Iron and vitamin B12 (person in the centre)
-Layout on the page: the headline "We start by monitoring iron and vitamin B12." runs across the top, vitamin B12 text sits on the left third and iron text on the right third. So the person must stand in the middle third, and the top quarter and both side thirds must be calm, empty and bright.
+Layout on the page: the headline "We start by monitoring iron and vitamin B12." runs across the top, iron text sits on the left third and vitamin B12 text on the right third. So the person must stand in the middle third, and the top quarter and both side thirds must be calm, empty and bright.
 
 **Scene (black phone)**, save as `03-iron-b12.png`
 ```
