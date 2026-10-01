@@ -138,13 +138,23 @@
   .btn-ghost:hover { background: var(--blush); }
 
   /* ---------- Hero: the store entrance ---------- */
+  /* The store wall fills the screen; logo, line and button sit on the empty top half, above the magma */
   .hero {
+    position: relative;
     min-height: 100svh;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    padding: 120px 0 40px;
+    justify-content: flex-start;
+    padding: clamp(120px, 17vh, 170px) var(--gutter) 40px;
     text-align: center;
+    overflow: hidden;
+  }
+  .hero > :not(.hero-bg) { position: relative; z-index: 1; }
+  .hero-bg { position: absolute; inset: 0; z-index: 0; }
+  .hero-bg img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 100%; }
+  .hero-bg::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 120px;
+    background: linear-gradient(rgba(255,255,255,0), #fff);
   }
   .hero-logo { width: clamp(220px, 28vw, 360px); height: auto; margin: 0 auto; }
   .hero-line {
@@ -157,13 +167,6 @@
   }
   .hero .label { margin-top: 18px; }
   .hero-cta { margin-top: 28px; }
-  .hero-magma {
-    width: 100%;
-    margin-top: clamp(24px, 4vw, 48px);
-    height: clamp(180px, 30vw, 420px);
-    object-fit: cover;
-    object-position: 50% 50%;
-  }
 
   /* ---------- Your body is always talking: the art wall ---------- */
   /* The wall starts while the door zoom is still pinned and fades in over it (see onWall) */
@@ -546,7 +549,7 @@
     :root { --gutter: 16px; }
     .nav { padding-left: 16px; }
     .nav-links { display: none; }
-    .hero { min-height: 0; padding-top: 112px; }
+    .hero { min-height: 100svh; padding-top: 112px; }
     .wall { height: auto; margin-top: 0; pointer-events: auto; }
     .wall-sticky { opacity: 1; }
     .wall-sticky { position: static; height: auto; overflow: visible; padding-top: 88px; }
@@ -627,11 +630,11 @@
 
   <!-- 1. Hero: the entrance -->
   <header class="hero" id="top">
+    <div class="hero-bg"><img src="assets/photos/00-hero-wall.jpg" alt="" width="1672" height="941" fetchpriority="high"></div>
     <img class="hero-logo" src="assets/magma-logo.png" alt="magma">
     <h1 class="hero-line">What's happening below the surface.</h1>
     <p class="label">Continuous biomarker monitoring</p>
     <div class="hero-cta"><a class="btn btn-primary" href="#waitlist">Join the waitlist</a></div>
-    <img class="hero-magma" src="assets/magma-hero.png" alt="" width="1983" height="793">
   </header>
 
   <main>
