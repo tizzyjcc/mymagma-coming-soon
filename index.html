@@ -338,7 +338,9 @@
     color: var(--ink);
   }
   .stat-label { margin-top: 8px; font-size: var(--t-small); line-height: 1.4; color: var(--ink-2); max-width: 13em; }
-  .source { margin-top: 14px; font-size: var(--t-small); color: var(--ink-3); }
+  .source { margin-top: 14px; font-size: var(--t-small); line-height: 1.45; color: var(--ink-3); max-width: 30em; }
+  .source a { color: inherit; text-decoration: underline; text-decoration-color: var(--line); text-underline-offset: 2px; }
+  .source a:hover { color: var(--crimson); }
   .placeholder-tag {
     display: inline-block;
     font-size: var(--t-small);
@@ -801,14 +803,14 @@
               <div class="stats">
                 <div>
                   <p class="stat-num">1 in 3</p>
-                  <p class="stat-label">women in Australia have insufficient iron</p>
+                  <p class="stat-label">young women in Australia have low iron stores</p>
                 </div>
                 <div>
                   <p class="stat-num">32%</p>
-                  <p class="stat-label">run low again within a year of treatment</p>
+                  <p class="stat-label">had anaemia return within a year when treatment stopped</p>
                 </div>
               </div>
-              <p class="source"><span class="placeholder-tag">Source and year to come</span></p>
+              <p class="source">Sources: <a href="https://pubmed.ncbi.nlm.nih.gov/31180165/" target="_blank" rel="noopener">Islam et al., 2020</a>, women aged 18 to 39; <a href="https://link.springer.com/article/10.1007/s11845-026-04549-y" target="_blank" rel="noopener">Irmak Kaya et al., 2026</a>, 12-month follow-up.</p>
             </div>
           </div>
           <div class="marker-col reveal">
@@ -819,10 +821,10 @@
               <div class="stats">
                 <div>
                   <p class="stat-num">37%</p>
-                  <p class="stat-label">of adults are borderline low in vitamin B12</p>
+                  <p class="stat-label">of adults are low or borderline in vitamin B12</p>
                 </div>
               </div>
-              <p class="source"><span class="placeholder-tag">Source and year to come</span></p>
+              <p class="source">Estimate based on studies from <a href="https://www.nature.com/articles/nrdp201740" target="_blank" rel="noopener">Green et al., 2017</a> and <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10221874/" target="_blank" rel="noopener">Vargas-Uricoechea et al., 2023</a>.</p>
             </div>
           </div>
         </div>
