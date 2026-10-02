@@ -563,15 +563,25 @@
     .hero-bg { width: 180vw; margin-left: calc(50% - 90vw); margin-top: calc(-0.24 * 180vw * 9 / 16); }
     .wall { height: auto; margin-top: 0; pointer-events: auto; }
     .wall-sticky { opacity: 1; }
-    .wall-sticky { position: static; height: auto; overflow: visible; padding-top: 88px; }
+    .wall-sticky { position: static; height: auto; overflow: visible; padding-top: 32px; }
     .wall-sticky::before, .wall-sticky::after, .panel-hl { display: none; }
     .wall-head { position: static; width: auto; padding: 0 var(--gutter); }
     .wall-stage { position: relative; left: auto; top: auto; transform: none; width: 100%; height: auto; display: grid; gap: 28px; padding-bottom: 72px; }
-    .wall-stage > img { height: 52vh; object-fit: cover; object-position: 78% 50%; margin-top: 24px; }
+    .wall-stage > img { height: 40vh; object-fit: cover; object-position: 100% 50%; margin-top: 24px; }
     .panel-text { position: static; width: auto !important; opacity: 1; transform: none; padding: 0 var(--gutter); }
     .quiz { max-width: none; }
 
     .enter { height: 200vh; }
+    /* Upright screens: show the storefront wide enough that the sign and the door both fit */
+    @media (max-aspect-ratio: 1/1) {
+      .enter-stage { width: 170vw; height: calc(170vw * 768 / 1376); }
+      /* the title sits on white above the photo, and the photo's top and bottom edges melt into white */
+      .enter-how { top: -16%; }
+      .enter-stage img {
+        -webkit-mask-image: linear-gradient(transparent 4%, #000 24%, #000 86%, transparent);
+                mask-image: linear-gradient(transparent 4%, #000 24%, #000 86%, transparent);
+      }
+    }
 
     .markers-media { position: relative; inset: auto; height: 60vh; }
     .marker-col::before { display: none; }
@@ -634,6 +644,7 @@
     .frame-text, .frame--right .frame-text, .frame-text--right, .frame--quiz .frame-text { position: relative; left: auto; right: auto; top: auto; transform: none; width: auto; padding: 8px var(--gutter) 0; }
     .frame-text--right { margin-top: 40px; }
     .frame--mirror { margin-top: 0; pointer-events: auto; }
+    .frame--mirror .frame-media { -webkit-mask-image: none; mask-image: none; }
   }
 
   /* The screen-reader copy of each highlighted title is skipped when copying text, so it isn't pasted twice */
@@ -1127,8 +1138,7 @@
     const zoom = reduceMotion ? 1 : 1 + Math.pow(t, 2.2) * 6;
     enterSticky.style.setProperty('--zoom', zoom.toFixed(3));
     enterSticky.style.setProperty('--words', Math.max(0, 1 - t * 4).toFixed(3));
-    const white = pinned.matches ? 0 : Math.min(Math.max((p - 0.7) / 0.25, 0), 1);
-    enterSticky.style.setProperty('--white', white.toFixed(3));
+    enterSticky.style.setProperty('--white', 0);
   }
   window.addEventListener('scroll', onEnter, { passive: true });
   window.addEventListener('resize', onEnter);
