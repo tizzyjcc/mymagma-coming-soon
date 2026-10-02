@@ -576,6 +576,7 @@
     @media (max-aspect-ratio: 1/1) {
       .enter-stage { width: 170vw; height: calc(170vw * 768 / 1376); }
       /* the title sits on white above the photo, and the photo's top and bottom edges melt into white */
+      .enter-stage { top: calc(118px + 170vw * 768 / 1376 / 2); }
       .enter-how { top: -16%; }
       .enter-stage img {
         -webkit-mask-image: linear-gradient(transparent 4%, #000 24%, #000 86%, transparent);
@@ -612,16 +613,15 @@
     .team-grid { gap: 40px; }
     .team-story { padding-top: 0; }
 
-    .waitlist { height: auto; padding-bottom: 80px; }
-    .waitlist-media { position: relative; height: 56vh; }
+    /* The copy sits on the white walls in the upper half of the photo, the form over the floor */
+    .waitlist { height: auto; min-height: 100svh; }
+    .waitlist-media { position: absolute; inset: 0; height: auto; }
     .waitlist-stage { position: static; width: 100%; height: 100%; transform: none; }
-    .waitlist-stage img { object-fit: cover; object-position: 80% 50%; }
-    .waitlist-media::after {
-      content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 80px;
-      background: linear-gradient(rgba(255,255,255,0), #fff);
-    }
+    .waitlist-stage img { object-fit: cover; object-position: 66% 50%; }
+    .waitlist-copy { position: relative; left: auto; top: auto; width: auto; padding: 108px var(--gutter) 64px; }
+    .waitlist .heading-lg { font-size: 28px; }
+    .waitlist .body-lg { font-size: 15px; }
     .waitlist .email-form { flex-direction: column; }
-    .waitlist-copy { position: static; width: auto; padding: 0 var(--gutter); }
   }
 
   /* Tablets and narrow windows keep text on the photos; only phones stack photo, then text */
@@ -629,22 +629,34 @@
     .frame-text { width: min(440px, 48vw); }
   }
   @media (max-width: 600px) {
-    /* On phones each step stacks: photo, then text */
-    .frame, .frame--quiz { height: auto; min-height: 0; overflow: visible; padding-bottom: 64px; }
-    .frame::before, .frame::after { display: none; }
-    .frame-media { position: relative; height: 62vh; }
+    /* On phones the text sits on the photo, smaller, over a soft light wash at the top of the picture */
+    .frame, .frame--quiz { height: auto; min-height: 100svh; overflow: hidden; padding: 92px 0 56px; }
+    .frame::before { display: none; }
+    .frame::after { display: block; height: 72px; }
+    .frame-media { position: absolute; inset: 0; height: auto; }
     .frame-media::before {
-      content: ""; position: absolute; z-index: 1; left: 0; right: 0; top: 0; height: 80px;
-      background: linear-gradient(#fff, rgba(255,255,255,0));
+      content: ""; position: absolute; z-index: 1; inset: 0;
+      background: linear-gradient(rgba(255,255,255,0.92) 0%, rgba(255,255,255,0.78) 34%, rgba(255,255,255,0.25) 62%, rgba(255,255,255,0) 78%);
     }
-    .frame-media::after {
-      content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 80px;
-      background: linear-gradient(rgba(255,255,255,0), #fff);
+    .frame--quiz .frame-media::before {
+      background: linear-gradient(rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.72) 30%, rgba(255,255,255,0.35) 60%, rgba(255,255,255,0.15) 100%);
     }
-    .frame-text, .frame--right .frame-text, .frame-text--right, .frame--quiz .frame-text { position: relative; left: auto; right: auto; top: auto; transform: none; width: auto; padding: 8px var(--gutter) 0; }
-    .frame-text--right { margin-top: 40px; }
-    .frame--mirror { margin-top: 0; pointer-events: auto; }
+    .frame-text, .frame--right .frame-text, .frame-text--right, .frame--quiz .frame-text, .frame--mirror .frame-text {
+      position: relative; z-index: 4; left: auto; right: auto; top: auto; transform: none; width: auto; padding: 0 var(--gutter);
+    }
+    .frame-text .heading-lg { font-size: 26px; margin: 10px 0 12px; }
+    .frame-text > p:not(.label) { font-size: 14px; line-height: 1.5; max-width: 30em; }
+    .frame--quiz .frame-media img { object-position: 62% 50%; }
+    /* The new way: the phone shows at the top, the text sits at the bottom on a light wash */
+    .frame--mirror { margin-top: 0; pointer-events: auto; height: auto; display: flex; flex-direction: column; justify-content: flex-end; padding-bottom: 36px; }
+    .frame--mirror .frame-media::before {
+      background: linear-gradient(rgba(255,255,255,0) 40%, rgba(255,255,255,0.75) 66%, rgba(255,255,255,0.92) 100%);
+    }
     .frame--mirror .frame-media { -webkit-mask-image: none; mask-image: none; }
+    .frame--mirror .frame-media img { object-position: 40% 50%; }
+    .quiz { margin-top: 20px; }
+    .quiz-q { font-size: 15px; }
+    .pill { padding: 9px 16px; font-size: 14px; }
   }
 
   /* The screen-reader copy of each highlighted title is skipped when copying text, so it isn't pasted twice */
