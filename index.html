@@ -1117,14 +1117,27 @@
     h.shown = 0;
   }
 
-  // Scroll-linked fill everywhere else: starts as the line enters the bottom of the screen, fills as it rises.
+  // Greys letters back out from the end, down to n.
+  function hideDownTo(h, n) {
+    n = Math.max(0, n);
+    for (let i = h.shown - 1; i >= n; i--) h.chars[i].classList.remove('on');
+    h.shown = Math.min(h.shown, n);
+  }
+
+  // Scroll-linked, both ways. Scrolling down, a line fills as it rises from the bottom of the screen.
+  // Scrolling up, it arrives already lit and greys out letter by letter as it sinks back down.
+  let lastY = window.scrollY, scrollingDown = true;
   function fillOnScroll() {
     const vh = window.innerHeight;
+    const y = window.scrollY;
+    if (y !== lastY) { scrollingDown = y > lastY; lastY = y; }
     highlights.forEach(h => {
-      if (h.shown >= h.chars.length || h.el.closest('.hero')) return;
+      if (h.el.closest('.hero')) return;
       const r = h.el.getBoundingClientRect();
-      const progress = (vh * 0.95 - r.top) / (vh * 0.6);
-      if (progress > 0) showUpTo(h, Math.ceil(progress * h.chars.length));
+      const progress = Math.min(Math.max((vh * 0.95 - r.top) / (vh * 0.6), 0), 1);
+      const target = Math.ceil(progress * h.chars.length);
+      if (scrollingDown) { if (target > h.shown) showUpTo(h, target); }
+      else if (target < h.shown) { h.run = (h.run || 0) + 1; h.playing = false; hideDownTo(h, target); }
     });
   }
 
@@ -1133,12 +1146,12 @@
   // Visibility comes from IntersectionObserver, which measures against the real screen,
   // so this also works when the page is shown inside a frame that scrolls instead of the window.
   let lastScroll = 0, settleTimer;
-  function settle() { highlights.forEach(h => { if (h.inView) play(h); }); }
+  function settle() { if (!scrollingDown) return; highlights.forEach(h => { if (h.inView) play(h); }); }
   const seen = new IntersectionObserver(entries => entries.forEach(e => {
     const h = e.target._hl;
     h.inView = e.intersectionRatio >= 0.95;
-    if (!e.isIntersecting) { reset(h); return; }
-    if (h.inView) setTimeout(() => { if (h.inView && performance.now() - lastScroll > 200) play(h); }, 260);
+    if (!e.isIntersecting) { if (e.boundingClientRect.top > 0) reset(h); return; }
+    if (h.inView) setTimeout(() => { if (h.inView && scrollingDown && performance.now() - lastScroll > 200) play(h); }, 260);
   }), { threshold: [0, 0.95] });
   highlights.forEach(h => { h.el._hl = h; seen.observe(h.el); });
 
