@@ -4,7 +4,120 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>my magma, What's happening below the surface.</title>
-<meta name="description" content="my magma is a wearable biosensor that continuously monitors your blood biomarkers, building your personal baseline so you see what's changing before you feel it. Starting with iron and B12.">
+<meta name="description" content="my magma is developing a device that tracks your biomarker levels over time, starting with iron and vitamin B12, so you can see changes before you feel them. Launching first in Australia.">
+<link rel="canonical" href="https://mymagma.health/">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="my magma">
+<meta property="og:locale" content="en_AU">
+<meta property="og:url" content="https://mymagma.health/">
+<meta property="og:title" content="my magma, What's happening below the surface.">
+<meta property="og:description" content="my magma is developing a device that tracks your biomarker levels over time, starting with iron and vitamin B12, so you can see changes before you feel them. Launching first in Australia.">
+<meta property="og:image" content="https://mymagma.health/assets/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The my magma logo above a glowing ribbon of magma on white">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="my magma, What's happening below the surface.">
+<meta name="twitter:description" content="my magma is developing a device that tracks your biomarker levels over time, starting with iron and vitamin B12, so you can see changes before you feel them. Launching first in Australia.">
+<meta name="twitter:image" content="https://mymagma.health/assets/og-image.jpg">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://mymagma.health/#organization",
+      "name": "my magma",
+      "alternateName": [
+        "mymagma",
+        "Magma Health"
+      ],
+      "legalName": "Magma Health Pty Ltd",
+      "url": "https://mymagma.health/",
+      "logo": "https://mymagma.health/assets/magma-logo.png",
+      "description": "my magma is an Australian health technology company developing a device that tracks your biomarker levels over time, starting with iron and vitamin B12. It is pre-seed and not yet available.",
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "AU"
+      },
+      "areaServed": {
+        "@type": "Country",
+        "name": "Australia"
+      },
+      "founder": {
+        "@type": "Person",
+        "name": "Trinidad"
+      },
+      "knowsAbout": [
+        "Biomarker monitoring",
+        "Iron",
+        "Vitamin B12",
+        "Health technology"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://mymagma.health/#website",
+      "url": "https://mymagma.health/",
+      "name": "my magma",
+      "publisher": {
+        "@id": "https://mymagma.health/#organization"
+      },
+      "inLanguage": "en-AU"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Can I buy mymagma?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Not yet. We are a pre-seed company at the pre-proof-of-concept stage, so mymagma is still being developed. Join the waitlist and we'll let you know when it's ready."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Where will mymagma launch?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We are launching first in Australia."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What will mymagma measure?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We plan to start with iron and vitamin B12, with more biomarkers to follow."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How is it different from a blood test?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A blood test gives you one reading at one moment. mymagma aims to follow your levels over time and learn what's normal for you. We aim for accuracy comparable to blood tests, but this is yet to be validated."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Will it replace my doctor?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. my magma is intended to show trends and will not diagnose. Always talk to your doctor about your health."
+      }
+    }
+  ]
+}
+</script>
 
 <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
@@ -172,7 +285,7 @@
     letter-spacing: -0.02em;
     color: var(--ink);
   }
-  .hero .label { margin-top: 18px; }
+  .hero-sub { margin: 16px auto 0; max-width: 34em; font-size: var(--t-body); line-height: 1.5; color: var(--ink-2); text-wrap: balance; }
   .hero-cta { margin-top: 28px; }
 
   /* ---------- Your body is always talking: the art wall ---------- */
@@ -518,10 +631,29 @@
     width: min(460px, calc(0.34 * var(--W)));
   }
   .waitlist .heading-lg { margin: 14px 0 18px; }
-  .waitlist .body-lg { margin-bottom: 28px; }
+  .waitlist .body-lg { margin-bottom: 8px; }
+  .launch-note { margin-bottom: 24px; font-size: var(--t-small); font-style: italic; color: var(--ink-3); }
   .waitlist .email-form { flex-direction: row; }
   .waitlist .email-form input { flex: 1; }
   .trust { margin-top: 14px; font-size: var(--t-small); color: var(--ink-3); }
+
+  /* ---------- About band ---------- */
+  .about-band { padding: 96px 0; background: var(--blush); }
+  .about-inner { max-width: 760px; text-align: center; }
+  .about-text { margin-top: 14px; font-size: var(--t-sub); line-height: 1.45; letter-spacing: -0.01em; color: var(--ink); text-wrap: balance; }
+
+  /* ---------- Questions ---------- */
+  .faq { padding: 112px 0 96px; }
+  .faq-inner { max-width: 760px; }
+  .faq .heading-lg { margin: 12px 0 28px; }
+  .faq-item { border-top: 1px solid var(--line); }
+  .faq-item:last-child { border-bottom: 1px solid var(--line); }
+  .faq-item summary { list-style: none; cursor: pointer; padding: 20px 36px 20px 0; position: relative; font-size: var(--t-body); font-weight: 500; color: var(--ink); }
+  .faq-item summary::-webkit-details-marker { display: none; }
+  .faq-item summary::after { content: "+"; position: absolute; right: 4px; top: 50%; transform: translateY(-50%); font-size: 20px; font-weight: 400; color: var(--ink-3); transition: transform 300ms var(--ease); }
+  .faq-item[open] summary::after { transform: translateY(-50%) rotate(45deg); }
+  .faq-item p { padding: 0 36px 22px 0; color: var(--ink-2); max-width: 40em; }
+  .faq-item summary:hover { color: var(--crimson); }
 
   footer {
     padding: 40px 0 48px;
@@ -627,6 +759,9 @@
     .waitlist .heading-lg { font-size: 24px; }
     .waitlist .body-lg { font-size: 14px; }
     .waitlist .email-form { flex-direction: column; }
+    .about-band { padding: 64px 0; }
+    .about-text { font-size: 18px; }
+    .faq { padding: 72px 0 64px; }
   }
 
   /* Tablets and narrow windows keep text on the photos; only phones stack photo, then text */
@@ -694,7 +829,7 @@
     </div>
     <img class="hero-logo" src="assets/magma-logo.png" alt="magma">
     <h1 class="hero-line">What's happening below the surface.</h1>
-    <p class="label">Continuous biomarker monitoring</p>
+    <p class="hero-sub">my magma is developing a device that tracks your biomarker levels over time, so you can see changes before you feel them.</p>
     <div class="hero-cta"><a class="btn btn-primary" href="#waitlist">Join the waitlist</a></div>
   </header>
 
@@ -703,7 +838,7 @@
     <section class="story" id="story" aria-label="The old way and the new way">
 
         <article class="frame frame--quiz">
-          <div class="frame-media"><img src="assets/photos/01-waiting-room.jpg" alt="" width="1536" height="1024"></div>
+          <div class="frame-media"><img src="assets/photos/01-waiting-room.jpg" alt="Hands resting on a lap, holding a paper queue ticket in a doctor's waiting room" width="1536" height="1024"></div>
           <div class="frame-text">
             <p class="label">The old way</p>
             <h2 class="heading-lg">No more waiting rooms.</h2>
@@ -764,7 +899,7 @@
         </article>
 
         <article class="frame frame--right frame--mirror">
-          <div class="frame-media"><img src="assets/photos/02-breakfast.jpg" alt="" width="1536" height="1024" loading="lazy"></div>
+          <div class="frame-media"><img src="assets/photos/02-breakfast.jpg" alt="A hand holding a phone with the my magma app's weekly summary, at a sunny breakfast table" width="1536" height="1024" loading="lazy"></div>
           <div class="frame-text">
             <p class="label">The new way</p>
             <h2 class="heading-lg">Get on with your life. We'll keep watch.</h2>
@@ -896,19 +1031,55 @@
       </div>
     </section>
 
+    <!-- 8. About -->
+    <section class="about-band" id="about" aria-label="About my magma">
+      <div class="wrap about-inner reveal">
+        <p class="label">About us</p>
+        <p class="about-text">my magma was founded by Trinidad out of her own frustration with the current health system: years of symptoms, many appointments, and no clear answers. With a background in biotechnology and commercial strategy, she is building the tool she wished she had. my magma is developed by Magma Health Pty Ltd, an Australian health technology company.</p>
+      </div>
+    </section>
+
     <!-- 9. Waitlist -->
     <section class="waitlist" id="waitlist">
-      <div class="waitlist-media"><div class="waitlist-stage"><img src="assets/photos/store-counter.jpg" alt="" width="1376" height="768" loading="lazy"></div></div>
+      <div class="waitlist-media"><div class="waitlist-stage"><img src="assets/photos/store-counter.jpg" alt="The magma store counter, with a glowing magma ribbon, tablets and white stools" width="1376" height="768" loading="lazy"></div></div>
       <div class="waitlist-copy reveal">
           <p class="label">The waitlist</p>
           <h2 class="heading-lg">Coming soon.<br>Be the first to know.</h2>
           <p class="body-lg">Live your life with a safety net. Leave your email and we'll tell you when mymagma is ready.</p>
+          <p class="launch-note">Launching first in Australia.</p>
           <form class="email-form" id="waitlistForm" novalidate>
             <label for="waitlistEmail" style="position:absolute;left:-9999px">Email</label>
             <input id="waitlistEmail" type="email" name="email" placeholder="Your email" autocomplete="email" required>
             <button class="btn btn-primary" type="submit">Join the waitlist</button>
           </form>
           <p class="form-error" id="waitlistError" role="alert"></p>
+      </div>
+    </section>
+    <!-- 10. Questions -->
+    <section class="faq" id="faq" aria-labelledby="faqTitle">
+      <div class="wrap faq-inner">
+        <p class="label">Questions</p>
+        <h2 class="heading-lg" id="faqTitle">Good to know.</h2>
+        <details class="faq-item">
+          <summary>Can I buy mymagma?</summary>
+          <p>Not yet. We are a pre-seed company at the pre-proof-of-concept stage, so mymagma is still being developed. Join the waitlist and we'll let you know when it's ready.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Where will mymagma launch?</summary>
+          <p>We are launching first in Australia.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What will mymagma measure?</summary>
+          <p>We plan to start with iron and vitamin B12, with more biomarkers to follow.</p>
+        </details>
+        <details class="faq-item">
+          <summary>How is it different from a blood test?</summary>
+          <p>A blood test gives you one reading at one moment. mymagma aims to follow your levels over time and learn what's normal for you. We aim for accuracy comparable to blood tests, but this is yet to be validated.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Will it replace my doctor?</summary>
+          <p>No. my magma is intended to show trends and will not diagnose. Always talk to your doctor about your health.</p>
+        </details>
       </div>
     </section>
   </main>
