@@ -541,7 +541,7 @@
   .marker-col > p:not(.label) { color: var(--ink-2); }
 
   /* ---------- The moonshot: the product wall, one shelf at a time ---------- */
-  .moonshot { position: relative; height: 480vh; }
+  .moonshot { position: relative; height: 400vh; }
   .moon-sticky {
     position: sticky; top: 0; height: 100vh; overflow: hidden;
     display: flex; flex-direction: column; align-items: center;
@@ -1380,7 +1380,7 @@
     const travel = moon.offsetHeight - window.innerHeight;
     const p = Math.min(Math.max(-r.top / travel, 0), 1);
     // 0: title and wall. 1 to 3: one card and one shelf at a time. 4: everything clear, held before moving on.
-    const step = p < 0.08 ? 0 : Math.min(4, 1 + Math.floor((p - 0.08) / 0.18));
+    const step = p < 0.08 ? 0 : Math.min(4, 1 + Math.floor((p - 0.08) / 0.2));
     if (step === moonStep) return;
     moonStep = step;
     moonCards.forEach(c => {
