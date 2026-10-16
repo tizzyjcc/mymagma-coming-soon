@@ -930,8 +930,8 @@
 
 <script>
   // Google Apps Script web app URL (see integrations/google-sheet-webhook.gs).
-  // Empty until the script is deployed: answers are then kept only in this browser.
-  const SHEET_ENDPOINT = '';
+  // Quiz answers and waitlist emails go to the Google Sheet "my magma — website quiz and waitlist".
+  const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbwkrtM1m1ipHJLLFpEx2vcWb4s7QQlMeJYmhP6NoQmt_hMLhEzBhHYggVmjYm1idojz/exec';
 
   const store = {
     get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
