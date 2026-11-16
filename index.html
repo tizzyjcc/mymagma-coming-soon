@@ -640,7 +640,8 @@
   /* ---------- About band ---------- */
   .about-band { padding: 96px 0; background: var(--blush); }
   .about-head, .about-inner { max-width: 960px; }
-  .about-head .heading-lg { margin-bottom: 36px; }
+  .about-head .label { margin-bottom: 28px; }
+  .about-title { margin-bottom: 4px; }
   .about-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; }
   .about-text { margin-top: 12px; font-size: var(--t-body); line-height: 1.6; color: var(--ink-2); max-width: 30em; }
 
@@ -817,7 +818,10 @@
     .frame--mirror .frame-media img { position: absolute; top: 15%; height: 100%; object-position: 46% 0; -webkit-mask-image: linear-gradient(transparent, #000 14%); mask-image: linear-gradient(transparent, #000 14%); }
     .quiz { margin-top: 20px; }
     .quiz-q { font-size: 15px; }
-    .pill { padding: 9px 16px; font-size: 14px; }
+    .pill { padding: 9px 16px; font-size: 14px; width: auto; }
+    .quiz-options { align-items: flex-start; }
+    .quiz-bar, .quiz-top { max-width: 300px; }
+    .quiz .email-form { max-width: 270px; }
   }
 
   /* The screen-reader copy of each highlighted title is skipped when copying text, so it isn't pasted twice */
@@ -1053,15 +1057,15 @@
     <!-- 8. About -->
     <section class="about-band" id="about" aria-labelledby="aboutTitle">
       <div class="wrap about-head reveal">
-        <h2 class="heading-lg" id="aboutTitle">About us</h2>
+        <h2 class="label" id="aboutTitle">About us</h2>
       </div>
       <div class="wrap about-inner">
         <div class="about-col reveal">
-          <p class="label">Our story</p>
+          <h3 class="heading-lg about-title">Our story</h3>
           <p class="about-text">my magma was founded by Trini out of her own frustration with the current health system: years of symptoms, many appointments, and no clear answers. She is building the tool she wished she had.</p>
         </div>
         <div class="about-col reveal">
-          <p class="label">Expertise</p>
+          <h3 class="heading-lg about-title">Expertise</h3>
           <p class="about-text">Trini holds a Bachelor of Science in Biotechnology and a Bachelor of Commerce in Finance, both with distinction. She has spent 6+ years in consulting, helping businesses in pharma, healthtech and telehealth scale, and has advised medtech startups.</p>
         </div>
       </div>
@@ -1281,7 +1285,7 @@
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const hlTargets = Array.from(document.querySelectorAll(
     '.hero-line, .frame-text .heading-lg, .frame-text > p:not(.label), .wall-head .heading-lg, ' +
-    '.markers .heading-lg, .marker-col h3, .moon-head .heading-lg, .about-head .heading-lg, .partners .heading-lg, .waitlist .heading-lg'
+    '.markers .heading-lg, .marker-col h3, .moon-head .heading-lg, .about-title, .partners .heading-lg, .waitlist .heading-lg'
   ));
 
   const highlights = hlTargets.map(el => {
