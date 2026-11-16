@@ -642,6 +642,18 @@
   .about-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; max-width: 960px; }
   .about-text { margin-top: 12px; font-size: var(--t-body); line-height: 1.6; color: var(--ink-2); max-width: 30em; }
 
+  /* ---------- Working with clinicians ---------- */
+  .partners { padding: 120px 0; }
+  .partners-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 80px; align-items: center; }
+  .partners .heading-lg { margin: 12px 0 18px; }
+  .partners-lead { font-size: var(--t-sub); line-height: 1.4; letter-spacing: -0.01em; color: var(--ink); max-width: 24em; }
+  .partners-body { margin-top: 18px; color: var(--ink-2); max-width: 30em; }
+  .partners-btn { margin-top: 28px; }
+  .partners-row { padding: 30px 0; border-top: 1px solid var(--line); }
+  .partners-row:last-child { border-bottom: 1px solid var(--line); }
+  .partners-row h3 { font-size: var(--t-sub); font-weight: 400; letter-spacing: -0.01em; color: var(--ink); }
+  .partners-row p { margin-top: 8px; color: var(--ink-2); max-width: 34em; }
+
   /* ---------- Questions ---------- */
   .faq { padding: 112px 0 96px; }
   .faq-inner { max-width: 760px; }
@@ -761,6 +773,9 @@
     .waitlist .email-form { flex-direction: column; }
     .about-band { padding: 64px 0; }
     .about-inner { grid-template-columns: 1fr; gap: 32px; }
+    .partners { padding: 72px 0; }
+    .partners-grid { grid-template-columns: 1fr; gap: 36px; }
+    .partners-lead { font-size: 18px; }
     .faq { padding: 72px 0 64px; }
   }
 
@@ -1045,6 +1060,30 @@
       </div>
     </section>
 
+    <!-- 8b. Working with clinicians -->
+    <section class="partners" id="clinicians" aria-labelledby="partnersTitle">
+      <div class="wrap partners-grid">
+        <div class="partners-intro reveal">
+          <p class="label">Work with us</p>
+          <h2 class="heading-lg" id="partnersTitle">Building with clinicians and researchers.</h2>
+          <p class="partners-lead">A device like this is only worth building if doctors trust what it shows.</p>
+          <p class="partners-body">We'd love to hear from clinicians, for example GPs, haematologists, dietitians and pharmacists. Reach out and tell us what you think!</p>
+          <!-- Add the contact link when the my magma address or form exists -->
+          <a class="btn btn-ghost partners-btn">Get in touch</a>
+        </div>
+        <div class="partners-list reveal">
+          <div class="partners-row">
+            <h3>Clinical advice</h3>
+            <p>Clinicians with experience in nutritional deficiencies, haematology or phlebotomy. We'd love to hear your perspective, your concerns, and anything you'd like us to keep in mind while we build this.</p>
+          </div>
+          <div class="partners-row">
+            <h3>Regulatory and quality support</h3>
+            <p>Consultants experienced with medical device approvals in Australia (TGA) and quality systems.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- 9. Waitlist -->
     <section class="waitlist" id="waitlist">
       <div class="waitlist-media"><div class="waitlist-stage"><img src="assets/photos/store-counter.jpg" alt="The magma store counter, with a glowing magma ribbon, tablets and white stools" width="1376" height="768" loading="lazy"></div></div>
@@ -1231,7 +1270,7 @@
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const hlTargets = Array.from(document.querySelectorAll(
     '.hero-line, .frame-text .heading-lg, .frame-text > p:not(.label), .wall-head .heading-lg, ' +
-    '.markers .heading-lg, .marker-col h3, .moon-head .heading-lg, .team .heading-lg, .waitlist .heading-lg'
+    '.markers .heading-lg, .marker-col h3, .moon-head .heading-lg, .team .heading-lg, .partners .heading-lg, .waitlist .heading-lg'
   ));
 
   const highlights = hlTargets.map(el => {
