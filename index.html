@@ -580,6 +580,7 @@
   .shelf-hl[data-step="2"] { left: 34.9%; width: 30%; }
   .shelf-hl[data-step="3"] { left: 65.3%; width: 30.8%; }
   .fineprint { position: absolute; right: 4%; bottom: 2%; font-size: 11px; color: var(--ink-3); }
+  .moon-crop, .fineprint-mob { display: none; }
 
   /* ---------- Section 5: team ---------- */
   .team { position: relative; padding: 140px 0; min-height: 100vh; display: flex; align-items: center; overflow: hidden; }
@@ -751,6 +752,18 @@
     .moon-cards { height: auto; display: grid; gap: 12px; margin-top: 16px; }
     .moon-card { position: static; width: auto !important; opacity: 1; transform: none; }
     .moon-cards { order: 2; }
+    .moon-visual { display: none; }
+    .fineprint-mob { display: block; order: 3; padding: 10px 0 0; text-align: left; }
+    /* each crop is one column of store-shelves.jpg: the lower shelves and the display piece */
+    .moon-crop {
+      display: block; margin: 14px -16px -14px; aspect-ratio: 4 / 3;
+      border-radius: 0 0 15px 15px;
+      background: url("assets/photos/store-shelves.jpg") no-repeat;
+      background-size: 429% auto;
+    }
+    .moon-crop[data-step="1"] { background-position: 19.4% 74%; }
+    .moon-crop[data-step="2"] { background-position: 50.2% 74%; }
+    .moon-crop[data-step="3"] { background-position: 80.3% 74%; }
     .fineprint { position: static; display: block; padding: 8px var(--gutter) 0; }
 
     .waitlist-media::before {
@@ -1033,16 +1046,20 @@
             <div class="moon-card" data-step="1">
               <p class="label">1 · The Core</p>
               <p>The heart of my magma. Worn on your arm, it's where everything connects. Everything starts here.</p>
+              <div class="moon-crop" data-step="1" aria-hidden="true"></div>
             </div>
             <div class="moon-card" data-step="2">
               <p class="label">2 · Sensors</p>
               <p>Select the biomarkers you care about. Attach them to your core. The sensors do the reading.</p>
+              <div class="moon-crop" data-step="2" aria-hidden="true"></div>
             </div>
             <div class="moon-card" data-step="3">
               <p class="label">3 · Accessories</p>
               <p>Make it feel like jewellery. Finishes that attach to the core and turn a health device into something you want to wear.</p>
+              <div class="moon-crop" data-step="3" aria-hidden="true"></div>
             </div>
           </div>
+          <p class="fineprint fineprint-mob">Concept render. Final design may differ.</p>
           <div class="moon-visual">
             <img src="assets/photos/store-shelves.jpg" alt="A white product wall with three columns: core devices, sensors and accessories" width="1376" height="768" loading="lazy">
             <div class="shelf-hl" data-step="1"></div>
